@@ -9,7 +9,7 @@
 import UIKit
 import Messages
 
-class MessagesViewController: MSMessagesAppViewController {
+class LanguageSelectorViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

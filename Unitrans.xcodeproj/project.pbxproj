@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */; };
 		216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAA21DA8E4D50041FA8F /* Assets.xcassets */; };
 		216BFAAA1DA8E4D50041FA8F /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 216BFAA91DA8E4D50041FA8F /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216BFAAE1DA8E4D50041FA8F /* Messages.framework */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.release.xcconfig"; sourceTree = "<group>"; };
 		145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
+		213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		216BFA9F1DA8E4D50041FA8F /* Unitrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unitrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		216BFAA21DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAA41DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				21EBEA941DA8E664000C744A /* LanguageManager.swift */,
 				21EBEA961DA8E66A000C744A /* ConnectionManager.swift */,
 				21EBEA981DA8E701000C744A /* DSError.swift */,
+				213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */,
 				21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */,
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
 				21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */,
@@ -460,7 +464,7 @@
 			baseConfigurationReference = B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -477,7 +481,7 @@
 			baseConfigurationReference = 145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -495,7 +499,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
@@ -512,7 +516,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
