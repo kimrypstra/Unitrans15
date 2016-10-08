@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		215EB5001DA8EBD3006E1F9E /* update-version.sh in Resources */ = {isa = PBXBuildFile; fileRef = 215EB4FF1DA8EBD3006E1F9E /* update-version.sh */; };
 		216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAA21DA8E4D50041FA8F /* Assets.xcassets */; };
 		216BFAAA1DA8E4D50041FA8F /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 216BFAA91DA8E4D50041FA8F /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216BFAAE1DA8E4D50041FA8F /* Messages.framework */; };
 		216BFAB21DA8E4D50041FA8F /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BFAB11DA8E4D50041FA8F /* MessagesViewController.swift */; };
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
+		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
+		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
+		21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA961DA8E66A000C744A /* ConnectionManager.swift */; };
+		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
+		C3F7C2B66E9AC4A80D18821D /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBD1D88B51057C10D00501 /* Pods_MessagesExtension.framework */; };
+		C9F806844C9E2EC61188B127 /* Pods_Unitrans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D623D89BED7536F861CB0E /* Pods_Unitrans.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +47,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.release.xcconfig"; sourceTree = "<group>"; };
+		145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
+		215EB4FF1DA8EBD3006E1F9E /* update-version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "update-version.sh"; sourceTree = "<group>"; };
 		216BFA9F1DA8E4D50041FA8F /* Unitrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unitrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		216BFAA21DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAA41DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +59,14 @@
 		216BFAB41DA8E4D50041FA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		216BFAB61DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
+		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		21EBEA961DA8E66A000C744A /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
+		57DBD1D88B51057C10D00501 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		714C3EC78DA4F0C80F7D7733 /* Pods-Unitrans.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.debug.xcconfig"; sourceTree = "<group>"; };
+		B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		B5D623D89BED7536F861CB0E /* Pods_Unitrans.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unitrans.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +75,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */,
+				C3F7C2B66E9AC4A80D18821D /* Pods_MessagesExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFCF6E5B8F847A5D88597D15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9F806844C9E2EC61188B127 /* Pods_Unitrans.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,10 +93,12 @@
 		216BFA981DA8E4D40041FA8F = {
 			isa = PBXGroup;
 			children = (
+				215EB4FF1DA8EBD3006E1F9E /* update-version.sh */,
 				216BFAA11DA8E4D50041FA8F /* Unitrans */,
 				216BFAB01DA8E4D50041FA8F /* MessagesExtension */,
 				216BFAAD1DA8E4D50041FA8F /* Frameworks */,
 				216BFAA01DA8E4D50041FA8F /* Products */,
+				C397788703D82C09B62CF706 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				216BFAAE1DA8E4D50041FA8F /* Messages.framework */,
+				57DBD1D88B51057C10D00501 /* Pods_MessagesExtension.framework */,
+				B5D623D89BED7536F861CB0E /* Pods_Unitrans.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -106,8 +137,31 @@
 				216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */,
 				216BFAB61DA8E4D50041FA8F /* Assets.xcassets */,
 				216BFAB81DA8E4D50041FA8F /* Info.plist */,
+				21EBEA911DA8E614000C744A /* Supporting Files */,
 			);
 			path = MessagesExtension;
+			sourceTree = "<group>";
+		};
+		21EBEA911DA8E614000C744A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
+				21EBEA941DA8E664000C744A /* LanguageManager.swift */,
+				21EBEA961DA8E66A000C744A /* ConnectionManager.swift */,
+				21EBEA981DA8E701000C744A /* DSError.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C397788703D82C09B62CF706 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */,
+				145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */,
+				714C3EC78DA4F0C80F7D7733 /* Pods-Unitrans.debug.xcconfig */,
+				02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,8 +171,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 216BFABF1DA8E4D50041FA8F /* Build configuration list for PBXNativeTarget "Unitrans" */;
 			buildPhases = (
+				C4ACFBE11B07D5A821CDCF02 /* [CP] Check Pods Manifest.lock */,
 				216BFA9D1DA8E4D50041FA8F /* Resources */,
 				216BFABE1DA8E4D50041FA8F /* Embed App Extensions */,
+				DFCF6E5B8F847A5D88597D15 /* Frameworks */,
+				BD083E81A8931F6234A22D43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 216BFABB1DA8E4D50041FA8F /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
+				096BCBF488990BD63C50D50B /* [CP] Check Pods Manifest.lock */,
 				216BFAA51DA8E4D50041FA8F /* Sources */,
 				216BFAA61DA8E4D50041FA8F /* Frameworks */,
 				216BFAA71DA8E4D50041FA8F /* Resources */,
+				B05082966413F9761F86307A /* [CP] Copy Pods Resources */,
+				215EB5011DA8EBF4006E1F9E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -160,11 +220,13 @@
 					216BFA9E1DA8E4D50041FA8F = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YBCCTWH2WW;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					216BFAA81DA8E4D50041FA8F = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YBCCTWH2WW;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -193,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				215EB5001DA8EBD3006E1F9E /* update-version.sh in Resources */,
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,12 +271,92 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		096BCBF488990BD63C50D50B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		215EB5011DA8EBF4006E1F9E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh \"update-version.sh\"";
+		};
+		B05082966413F9761F86307A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD083E81A8931F6234A22D43 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4ACFBE11B07D5A821CDCF02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		216BFAA51DA8E4D50041FA8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */,
+				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
+				21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */,
 				216BFAB21DA8E4D50041FA8F /* MessagesViewController.swift in Sources */,
+				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,8 +475,10 @@
 		};
 		216BFABC1DA8E4D50041FA8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -341,13 +486,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		216BFABD1DA8E4D50041FA8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -355,34 +503,41 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		216BFAC01DA8E4D50041FA8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 714C3EC78DA4F0C80F7D7733 /* Pods-Unitrans.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		216BFAC11DA8E4D50041FA8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -405,6 +560,7 @@
 				216BFABD1DA8E4D50041FA8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		216BFABF1DA8E4D50041FA8F /* Build configuration list for PBXNativeTarget "Unitrans" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +569,7 @@
 				216BFAC11DA8E4D50041FA8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
