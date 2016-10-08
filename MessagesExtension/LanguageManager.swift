@@ -122,18 +122,15 @@ class LanguageManager {
     ]
     
     func getLocalizedLanguageNames() -> [String] {
+        // Returns all language names (translated)
+        
         let array = Array(localizedLanguages.keys)
         return array.sorted()
     }
     
     func nameFromCode(_ code: String, localized: Bool) -> String? {
-        // given a language code, eg: tr
-        // take that code and look up the english version of it's name 
-        // take baseLanguages and reverse it 
-        //
+        // For getting the corresponding name for a language code, either in english or translated
         
-        // return the name
-
         var languages = [String : String]()
         if localized {
             languages = localizedLanguages
@@ -141,8 +138,19 @@ class LanguageManager {
             languages = englishLanguages
         }
         
+        var returnString: String?
+        
+        for item in languages {
+            if item.value == code {
+                returnString = item.key
+            }
+        }
+        
+        return returnString
+        
+        /*
         let arrayOfLanguageNames = Array(languages.keys)
-        var flipped = [String: String]()
+        var flipped = [String : String]()
         for languageName in arrayOfLanguageNames {
             if let languageCode = languages[languageName] {
                 // returns languages in english only
@@ -155,21 +163,27 @@ class LanguageManager {
             print("Error!")
             return "Error!"
         }
+         */
         
     }
     
-    func codeForLanguage(_ name: String) -> String? {
-        var returnValue: String? = ""
+    func codeFromLanguageName(_ name: String) -> String? {
+        // Returns the language code for a given language name
+        
+        var returnValue: String?
         if let languageCode = localizedLanguages[name] {
             returnValue = languageCode
         }
         return returnValue
     }
     
-    func sanitiseEmoji(_ text: String) -> String {
+    func sanitiseEmoji(_ text: String) -> String? {
+        // Takes in a string, and if it contains emoji, puts a single space between it and any normal characters so that the translator can read the words properly
         
         let characterSet = NSMutableCharacterSet(range: NSRange(location: 0x1F300, length: 0x1F700 - 0x1F300))
         var emojiPresent = false
+        
+        // First, split the string into characters as String (text.characters returns CharacterViews, not Strings)
         let arrayOfCharacters = text.characters
         var arrayOfCharactersAsString = [String]()
         for char in arrayOfCharacters {
@@ -177,6 +191,7 @@ class LanguageManager {
             arrayOfCharactersAsString.append(charString)
         }
         
+        // Second, inspect each character to see if it is an emoji
         var index = 0
         for char in arrayOfCharactersAsString {
             if char.rangeOfCharacter(from: characterSet as CharacterSet) != nil {
@@ -196,11 +211,8 @@ class LanguageManager {
             index += 1
         }
         
-        for letter in arrayOfCharactersAsString {
-            print("Letter: \(letter)")
-        }
-        
-        var sanitised = ""
+        // If emoji were detected, return the sanitised string. Otherwise, spit out the same old text passed in originally.
+        var sanitised: String?
         if emojiPresent {
             let array = arrayOfCharactersAsString.flatMap { $0.characters }
             sanitised = String(array)

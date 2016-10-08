@@ -9,6 +9,13 @@ import Foundation
 
 class ConnectionManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
+    /*
+    This needs to be updated with the following capabilities: 
+    - Reachability
+    - Detect the whether the returned text is from Google or Microsoft (the actual routing will be done server-side
+    */
+    
+    
     private let baseURL = "http://api.disordersoftware.com/unitrans/api.php?action=translate"
 
     func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, completion: @escaping (NSDictionary?, Error?) -> ()){

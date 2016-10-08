@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		215EB5001DA8EBD3006E1F9E /* update-version.sh in Resources */ = {isa = PBXBuildFile; fileRef = 215EB4FF1DA8EBD3006E1F9E /* update-version.sh */; };
 		216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAA21DA8E4D50041FA8F /* Assets.xcassets */; };
 		216BFAAA1DA8E4D50041FA8F /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 216BFAA91DA8E4D50041FA8F /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216BFAAE1DA8E4D50041FA8F /* Messages.framework */; };
-		216BFAB21DA8E4D50041FA8F /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BFAB11DA8E4D50041FA8F /* MessagesViewController.swift */; };
+		216BFAB21DA8E4D50041FA8F /* LanguageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216BFAB11DA8E4D50041FA8F /* LanguageSelectorViewController.swift */; };
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
@@ -49,13 +48,12 @@
 /* Begin PBXFileReference section */
 		02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.release.xcconfig"; sourceTree = "<group>"; };
 		145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
-		215EB4FF1DA8EBD3006E1F9E /* update-version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "update-version.sh"; sourceTree = "<group>"; };
 		216BFA9F1DA8E4D50041FA8F /* Unitrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unitrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		216BFAA21DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAA41DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		216BFAA91DA8E4D50041FA8F /* MessagesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessagesExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		216BFAAE1DA8E4D50041FA8F /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		216BFAB11DA8E4D50041FA8F /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		216BFAB11DA8E4D50041FA8F /* LanguageSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectorViewController.swift; sourceTree = "<group>"; };
 		216BFAB41DA8E4D50041FA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		216BFAB61DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 		216BFA981DA8E4D40041FA8F = {
 			isa = PBXGroup;
 			children = (
-				215EB4FF1DA8EBD3006E1F9E /* update-version.sh */,
 				216BFAA11DA8E4D50041FA8F /* Unitrans */,
 				216BFAB01DA8E4D50041FA8F /* MessagesExtension */,
 				216BFAAD1DA8E4D50041FA8F /* Frameworks */,
@@ -133,7 +130,7 @@
 		216BFAB01DA8E4D50041FA8F /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
-				216BFAB11DA8E4D50041FA8F /* MessagesViewController.swift */,
+				216BFAB11DA8E4D50041FA8F /* LanguageSelectorViewController.swift */,
 				216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */,
 				216BFAB61DA8E4D50041FA8F /* Assets.xcassets */,
 				216BFAB81DA8E4D50041FA8F /* Info.plist */,
@@ -196,7 +193,6 @@
 				216BFAA61DA8E4D50041FA8F /* Frameworks */,
 				216BFAA71DA8E4D50041FA8F /* Resources */,
 				B05082966413F9761F86307A /* [CP] Copy Pods Resources */,
-				215EB5011DA8EBF4006E1F9E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -255,7 +251,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				215EB5001DA8EBD3006E1F9E /* update-version.sh in Resources */,
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,19 +281,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		215EB5011DA8EBF4006E1F9E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "sh \"update-version.sh\"";
 		};
 		B05082966413F9761F86307A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -355,7 +337,7 @@
 				21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */,
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
 				21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */,
-				216BFAB21DA8E4D50041FA8F /* MessagesViewController.swift in Sources */,
+				216BFAB21DA8E4D50041FA8F /* LanguageSelectorViewController.swift in Sources */,
 				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,10 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let languageManager = LanguageManager()
+        print(languageManager.nameFromCode("en", localized: true)!)
+        
         // Do any additional setup after loading the view.
     }
     
