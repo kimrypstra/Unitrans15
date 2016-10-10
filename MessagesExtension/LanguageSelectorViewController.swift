@@ -9,16 +9,52 @@
 import UIKit
 import Messages
 
-class LanguageSelectorViewController: MSMessagesAppViewController {
+class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewDelegate {
+    
+    //IBOutlets
+    @IBOutlet weak var pickerIndicators: DSPickerIndicators!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var stackView: UIStackView!
+    
+    //Manager Classes
+    let languageManager = LanguageManager()
+    let connectionManager = ConnectionManager()
+    
+    //Constants
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let languageManager = LanguageManager()
-        print(languageManager.nameFromCode("en", localized: true)!)
-        
+        setUpStackView()
+        pickerIndicators.setUpChevrons()
         // Do any additional setup after loading the view.
     }
+    
+    func setUpStackView() {
+        let languages = languageManager.getLocalizedLanguageNames()
+        containerViewHeight.constant = CGFloat(languageManager.languageCount()) * scrollViewHeight.constant
+        
+        for number in 0...languages.count - 1 {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: scrollViewHeight.constant))
+            label.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
+            label.textColor = UIColor.white.withAlphaComponent(0.8)
+            label.numberOfLines = 2
+            label.text = "\(languages[number])\n\(languageManager.getNativeLanguageName(name: languages[number]))"
+            label.textAlignment = .center
+            label.addTextSpacing(spacing: 3)
+            stackView.addArrangedSubview(label)
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        //This takes the targeted end-point of the scroll and adjusts it so that it hits a 'page', but without using the aggressive pagination of a page-enabled scroll view
+        targetContentOffset.pointee.y = scrollViewHeight.constant * round(targetContentOffset.pointee.y / scrollViewHeight.constant)
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -121,11 +121,30 @@ class LanguageManager {
         "Yucatec Maya"	:	"yua"
     ]
     
+    let languagesTranslatedToOwnLanguage = [
+        "Japanese" : "日本語"
+    ]
+    
+    func getNativeLanguageName(name: String) -> String {
+        // Returns the language name given in it's OWN language
+        
+        let nativeName = languagesTranslatedToOwnLanguage[name]
+        if nativeName != nil {
+            return nativeName!
+        } else {
+            return "You should finish this list"
+        }
+    }
+    
     func getLocalizedLanguageNames() -> [String] {
         // Returns all language names (translated)
         
         let array = Array(localizedLanguages.keys)
         return array.sorted()
+    }
+    
+    func languageCount() -> Int {
+        return localizedLanguages.count
     }
     
     func nameFromCode(_ code: String, localized: Bool) -> String? {
