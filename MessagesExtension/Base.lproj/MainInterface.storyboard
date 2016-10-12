@@ -70,23 +70,35 @@
                                         </connections>
                                     </scrollView>
                                     <view contentMode="scaleToFill" restorationIdentifier="Indicators" translatesAutoresizingMaskIntoConstraints="NO" id="rM0-gu-TIz">
-                                        <rect key="frame" x="157" y="190" width="100" height="100"/>
+                                        <rect key="frame" x="157" y="24" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="5OF-Gt-eF6"/>
                                             <constraint firstAttribute="width" constant="100" id="qqE-PQ-Lvi"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" restorationIdentifier="BottomIndicators" translatesAutoresizingMaskIntoConstraints="NO" id="JWp-CX-966">
+                                        <rect key="frame" x="157" y="182" width="100" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="IHX-yd-Llr"/>
+                                            <constraint firstAttribute="width" constant="100" id="axU-PA-yjB"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="rM0-gu-TIz" firstAttribute="top" secondItem="kvm-g3-RQJ" secondAttribute="bottom" constant="8" id="L7m-f8-P3u"/>
+                                    <constraint firstItem="JWp-CX-966" firstAttribute="centerX" secondItem="rM0-gu-TIz" secondAttribute="centerX" id="1e5-aT-uki"/>
+                                    <constraint firstItem="JWp-CX-966" firstAttribute="height" secondItem="rM0-gu-TIz" secondAttribute="height" id="JRT-5Q-jQX"/>
                                     <constraint firstItem="Nwm-l7-MPH" firstAttribute="leading" secondItem="Yht-BQ-FnC" secondAttribute="leading" constant="30" id="P7K-AU-xpw"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="centerX" secondItem="Yht-BQ-FnC" secondAttribute="centerX" id="Wwh-De-Hfl"/>
                                     <constraint firstItem="Nwm-l7-MPH" firstAttribute="top" secondItem="Yht-BQ-FnC" secondAttribute="top" constant="30" id="Y3z-3G-dCS"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="width" secondItem="Yht-BQ-FnC" secondAttribute="width" id="d7P-Y7-ILI"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="centerY" secondItem="Yht-BQ-FnC" secondAttribute="centerY" constant="10.5" id="kht-71-smW"/>
+                                    <constraint firstItem="rM0-gu-TIz" firstAttribute="bottom" secondItem="kvm-g3-RQJ" secondAttribute="top" id="mAz-8H-oG7"/>
+                                    <constraint firstItem="JWp-CX-966" firstAttribute="width" secondItem="rM0-gu-TIz" secondAttribute="width" id="okb-cf-25r"/>
                                     <constraint firstItem="rM0-gu-TIz" firstAttribute="centerX" secondItem="kvm-g3-RQJ" secondAttribute="centerX" id="rRf-qc-Q0B"/>
+                                    <constraint firstItem="JWp-CX-966" firstAttribute="top" secondItem="kvm-g3-RQJ" secondAttribute="bottom" id="w3f-Cs-utB"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -116,12 +128,13 @@
                     <size key="freeformSize" width="414" height="285"/>
                     <connections>
                         <outlet property="backgroundView" destination="Yht-BQ-FnC" id="3Kn-w9-98C"/>
+                        <outlet property="bottomIndicatorContainer" destination="JWp-CX-966" id="qyb-gl-PVO"/>
                         <outlet property="containerView" destination="Rhw-bt-WQE" id="lPd-nz-byg"/>
                         <outlet property="containerViewHeight" destination="fgH-A7-ZAm" id="h2W-j7-c1q"/>
-                        <outlet property="indicatorContainer" destination="rM0-gu-TIz" id="bgQ-nY-upg"/>
                         <outlet property="scrollView" destination="kvm-g3-RQJ" id="ggn-61-8kW"/>
                         <outlet property="scrollViewHeight" destination="TO8-Ux-L9a" id="xaN-9l-Z1f"/>
                         <outlet property="stackView" destination="XIe-1r-Phr" id="Kzx-04-ppC"/>
+                        <outlet property="topIndicatorContainer" destination="rM0-gu-TIz" id="9hf-XP-oJ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X47-rx-isc" userLabel="First Responder" sceneMemberID="firstResponder"/>

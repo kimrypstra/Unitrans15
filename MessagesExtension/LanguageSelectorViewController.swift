@@ -18,19 +18,22 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var backgroundView: BackgroundView!
-    @IBOutlet weak var indicatorContainer: UIView!
-    
-    
+    @IBOutlet weak var topIndicatorContainer: UIView!
+    @IBOutlet weak var bottomIndicatorContainer: UIView!
     
     //Manager Classes
     let languageManager = LanguageManager()
     let connectionManager = ConnectionManager()
     
-    
     //Constants
     
+    
     //Views
+    var topIndicator: Indicators?
     var bottomIndicator: Indicators?
+    
+    
+    /*-----------------------------------------*/
     
     
     override func viewDidLoad() {
@@ -42,11 +45,21 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     func designIndicators() {
-        let view = Indicators().getView() as! Indicators
-        NSLog("Adding indicators")
-        bottomIndicator = view
-        indicatorContainer.addSubview(bottomIndicator!)
-        bottomIndicator?.setText()
+        let topView = Indicators().getView() as! Indicators
+        
+        topIndicator = topView
+        if topIndicator != nil {
+            topIndicatorContainer.addSubview(topIndicator!)
+            topIndicator?.setupChevrons()
+        }
+        let bottomView = Indicators().getView() as! Indicators
+        
+        bottomIndicator = bottomView
+        if bottomIndicator != nil {
+            bottomIndicatorContainer.addSubview(bottomIndicator!)
+            bottomIndicator?.setupChevrons()
+            bottomIndicatorContainer.transform = CGAffineTransform.init(rotationAngle: CGFloat(M_PI))
+        }
     }
     
     func setUpStackView() {
@@ -60,9 +73,25 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             label.numberOfLines = 2
             label.text = "\(languages[number])\n\(languageManager.getNativeLanguageName(name: languages[number]))"
             label.textAlignment = .center
-            label.addTextSpacing(spacing: 3)
+            label.addTextSpacing(spacing: 3.5)
             stackView.addArrangedSubview(label)
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            topIndicator?.isHidden = true
+        } else if scrollView.contentOffset.y >= containerViewHeight.constant + scrollViewHeight.constant - 1 {
+            bottomIndicator?.isHidden = true
+        } else {
+            if (topIndicator?.isHidden)! {
+                topIndicator?.isHidden = false
+            }
+            if (bottomIndicator?.isHidden)! {
+                bottomIndicator?.isHidden = false
+            }
+        }
+        print("Offset: \(scrollView.contentOffset.y + scrollViewHeight.constant), Height: \(containerViewHeight.constant)")
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

@@ -480,7 +480,7 @@
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -497,7 +497,7 @@
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -514,7 +514,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -531,7 +531,7 @@
 				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

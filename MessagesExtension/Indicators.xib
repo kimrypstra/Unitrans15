@@ -18,17 +18,32 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZR-fj-Gd1">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3t2-jX-eZ2">
-                            <rect key="frame" x="29" y="40" width="42" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="vow-rB-YzW">
+                            <rect key="frame" x="25" y="50" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="Qet-gO-lmS"/>
+                                <constraint firstAttribute="height" constant="50" id="cvu-Ow-14X"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="6xa-aG-vkL">
+                            <rect key="frame" x="25" y="25" width="50" height="50"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="pOK-Lj-4jt">
+                            <rect key="frame" x="25" y="0.0" width="50" height="50"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="3t2-jX-eZ2" firstAttribute="centerY" secondItem="fZR-fj-Gd1" secondAttribute="centerY" id="2DS-Cu-0Xi"/>
-                        <constraint firstItem="3t2-jX-eZ2" firstAttribute="centerX" secondItem="fZR-fj-Gd1" secondAttribute="centerX" id="oPG-R1-TX0"/>
+                        <constraint firstItem="vow-rB-YzW" firstAttribute="centerX" secondItem="fZR-fj-Gd1" secondAttribute="centerX" id="14c-TF-Wj4"/>
+                        <constraint firstItem="pOK-Lj-4jt" firstAttribute="height" secondItem="6xa-aG-vkL" secondAttribute="height" id="8vC-EJ-W8e"/>
+                        <constraint firstItem="6xa-aG-vkL" firstAttribute="centerX" secondItem="vow-rB-YzW" secondAttribute="centerX" id="FRw-vh-NzP"/>
+                        <constraint firstItem="6xa-aG-vkL" firstAttribute="top" secondItem="pOK-Lj-4jt" secondAttribute="bottom" constant="-25" id="JSZ-Oa-Oxg"/>
+                        <constraint firstItem="6xa-aG-vkL" firstAttribute="width" secondItem="vow-rB-YzW" secondAttribute="width" id="Nl3-ti-aSl"/>
+                        <constraint firstItem="pOK-Lj-4jt" firstAttribute="centerX" secondItem="6xa-aG-vkL" secondAttribute="centerX" id="XvC-ra-4xo"/>
+                        <constraint firstItem="6xa-aG-vkL" firstAttribute="height" secondItem="vow-rB-YzW" secondAttribute="height" id="YuK-9s-XU3"/>
+                        <constraint firstItem="vow-rB-YzW" firstAttribute="top" secondItem="6xa-aG-vkL" secondAttribute="bottom" constant="-25" id="spl-8a-uM3"/>
+                        <constraint firstItem="pOK-Lj-4jt" firstAttribute="width" secondItem="6xa-aG-vkL" secondAttribute="width" id="vfD-WJ-uo0"/>
+                        <constraint firstAttribute="bottom" secondItem="vow-rB-YzW" secondAttribute="bottom" id="yvN-fg-ZCD"/>
                     </constraints>
                 </view>
             </subviews>
@@ -40,9 +55,16 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="label" destination="3t2-jX-eZ2" id="sTg-mb-BbB"/>
+                <outlet property="innerChevron" destination="vow-rB-YzW" id="lN3-sn-xyC"/>
+                <outlet property="innerToMiddle" destination="spl-8a-uM3" id="2Sr-l2-2g1"/>
+                <outlet property="middleChevron" destination="6xa-aG-vkL" id="flk-9B-JPe"/>
+                <outlet property="middleToOuter" destination="JSZ-Oa-Oxg" id="sJR-pQ-A5D"/>
+                <outlet property="outerChevron" destination="pOK-Lj-4jt" id="C9P-AP-HzQ"/>
             </connections>
-            <point key="canvasLocation" x="-9.5" y="36.5"/>
+            <point key="canvasLocation" x="-41" y="38"/>
         </view>
     </objects>
+    <resources>
+        <image name="chevron" width="25" height="25"/>
+    </resources>
 </document>
