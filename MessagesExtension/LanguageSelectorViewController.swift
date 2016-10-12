@@ -12,25 +12,41 @@ import Messages
 class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewDelegate {
     
     //IBOutlets
-    @IBOutlet weak var pickerIndicators: DSPickerIndicators!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var backgroundView: BackgroundView!
+    @IBOutlet weak var indicatorContainer: UIView!
+    
+    
     
     //Manager Classes
     let languageManager = LanguageManager()
     let connectionManager = ConnectionManager()
     
+    
     //Constants
+    
+    //Views
+    var bottomIndicator: Indicators?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        designIndicators()
         setUpStackView()
-        pickerIndicators.setUpChevrons()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func designIndicators() {
+        let view = Indicators().getView() as! Indicators
+        NSLog("Adding indicators")
+        bottomIndicator = view
+        indicatorContainer.addSubview(bottomIndicator!)
+        bottomIndicator?.setText()
     }
     
     func setUpStackView() {

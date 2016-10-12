@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11521.1" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11535.1" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11517.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11523"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,8 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yht-BQ-FnC" customClass="BackgroundView" customModule="MessagesExtension" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="285"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwm-l7-MPH">
+                                        <rect key="frame" x="30" y="30" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="01X-u5-b2v"/>
                                             <constraint firstAttribute="width" constant="40" id="3MT-bv-UsZ"/>
@@ -29,10 +34,13 @@
                                         <state key="normal" image="settingsIcon"/>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvm-g3-RQJ">
+                                        <rect key="frame" x="0.0" y="124" width="414" height="58"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-bt-WQE">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XIe-1r-Phr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </stackView>
                                                 </subviews>
@@ -61,30 +69,24 @@
                                             <outlet property="delegate" destination="ObA-dk-sSI" id="l8S-Bk-5pb"/>
                                         </connections>
                                     </scrollView>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3b-Ow-aPw" customClass="DSPickerIndicators" customModule="MessagesExtension" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" restorationIdentifier="Indicators" translatesAutoresizingMaskIntoConstraints="NO" id="rM0-gu-TIz">
+                                        <rect key="frame" x="157" y="190" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="U6R-1w-byH"/>
-                                            <constraint firstAttribute="height" constant="200" id="rG1-UK-zNa"/>
+                                            <constraint firstAttribute="height" constant="100" id="5OF-Gt-eF6"/>
+                                            <constraint firstAttribute="width" constant="100" id="qqE-PQ-Lvi"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="gapBetweenChevrons">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="gapBetweenChevronSets">
-                                                <real key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="rM0-gu-TIz" firstAttribute="top" secondItem="kvm-g3-RQJ" secondAttribute="bottom" constant="8" id="L7m-f8-P3u"/>
                                     <constraint firstItem="Nwm-l7-MPH" firstAttribute="leading" secondItem="Yht-BQ-FnC" secondAttribute="leading" constant="30" id="P7K-AU-xpw"/>
-                                    <constraint firstItem="N3b-Ow-aPw" firstAttribute="centerY" secondItem="kvm-g3-RQJ" secondAttribute="centerY" id="UqA-0Z-bpL"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="centerX" secondItem="Yht-BQ-FnC" secondAttribute="centerX" id="Wwh-De-Hfl"/>
                                     <constraint firstItem="Nwm-l7-MPH" firstAttribute="top" secondItem="Yht-BQ-FnC" secondAttribute="top" constant="30" id="Y3z-3G-dCS"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="width" secondItem="Yht-BQ-FnC" secondAttribute="width" id="d7P-Y7-ILI"/>
                                     <constraint firstItem="kvm-g3-RQJ" firstAttribute="centerY" secondItem="Yht-BQ-FnC" secondAttribute="centerY" constant="10.5" id="kht-71-smW"/>
+                                    <constraint firstItem="rM0-gu-TIz" firstAttribute="centerX" secondItem="kvm-g3-RQJ" secondAttribute="centerX" id="rRf-qc-Q0B"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">
@@ -105,7 +107,6 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Yht-BQ-FnC" firstAttribute="leading" secondItem="zMn-AG-sqS" secondAttribute="leadingMargin" constant="-20" id="VP9-2s-iSv"/>
-                            <constraint firstItem="N3b-Ow-aPw" firstAttribute="centerX" secondItem="zMn-AG-sqS" secondAttribute="centerX" id="YBG-nR-IbR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Yht-BQ-FnC" secondAttribute="trailing" constant="-20" id="grl-GG-yRd"/>
                             <constraint firstItem="n38-gi-rB5" firstAttribute="top" secondItem="Yht-BQ-FnC" secondAttribute="bottom" id="ohy-fB-vSg"/>
                             <constraint firstItem="Yht-BQ-FnC" firstAttribute="top" secondItem="qkL-Od-lgU" secondAttribute="bottom" constant="-20" id="vki-Wb-mgG"/>
@@ -114,9 +115,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="285"/>
                     <connections>
+                        <outlet property="backgroundView" destination="Yht-BQ-FnC" id="3Kn-w9-98C"/>
                         <outlet property="containerView" destination="Rhw-bt-WQE" id="lPd-nz-byg"/>
                         <outlet property="containerViewHeight" destination="fgH-A7-ZAm" id="h2W-j7-c1q"/>
-                        <outlet property="pickerIndicators" destination="N3b-Ow-aPw" id="2A0-WJ-3Dk"/>
+                        <outlet property="indicatorContainer" destination="rM0-gu-TIz" id="bgQ-nY-upg"/>
                         <outlet property="scrollView" destination="kvm-g3-RQJ" id="ggn-61-8kW"/>
                         <outlet property="scrollViewHeight" destination="TO8-Ux-L9a" id="xaN-9l-Z1f"/>
                         <outlet property="stackView" destination="XIe-1r-Phr" id="Kzx-04-ppC"/>
