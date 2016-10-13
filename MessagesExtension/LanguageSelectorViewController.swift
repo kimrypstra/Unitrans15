@@ -40,7 +40,8 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         super.viewDidLoad()
         designIndicators()
         setUpStackView()
-        
+        loadDefaults()
+        //load user defaults and set scrollView to that language
         // Do any additional setup after loading the view.
     }
     
@@ -78,20 +79,34 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
     }
     
+    func loadDefaults() {
+        // load user defaults
+        
+        // if there is a previous language for this conversation, set it 
+        
+        // if the language's 'page' is 0 in the scroll view, hide the top indicator (or bottom if it's the last)
+        scrollViewDidScroll(self.scrollView)
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0 {
-            topIndicator?.isHidden = true
-        } else if scrollView.contentOffset.y >= containerViewHeight.constant + scrollViewHeight.constant - 1 {
-            bottomIndicator?.isHidden = true
-        } else {
-            if (topIndicator?.isHidden)! {
-                topIndicator?.isHidden = false
-            }
-            if (bottomIndicator?.isHidden)! {
-                bottomIndicator?.isHidden = false
-            }
+        let offset = scrollView.contentOffset.y
+        
+        switch offset {
+        case 0:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topIndicator?.alpha = 0
+            })
+        case containerViewHeight.constant - scrollViewHeight.constant:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.bottomIndicator?.alpha = 0
+            })
+        default:
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topIndicator?.alpha = 1
+                self.bottomIndicator?.alpha = 1
+            })
         }
-        print("Offset: \(scrollView.contentOffset.y + scrollViewHeight.constant), Height: \(containerViewHeight.constant)")
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
