@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11535.1" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11523"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="Rater" customModule="MessagesExtension" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OW7-Um-TXI">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="std-lc-H8O">
+                    <rect key="frame" x="40" y="0.0" width="295" height="85"/>
+                    <subviews>
+                        <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlK-n2-T2q">
+                            <rect key="frame" x="0.0" y="30" width="25" height="25"/>
+                            <state key="normal" image="starempty"/>
+                            <connections>
+                                <action selector="didTapStar:" destination="iN0-l3-epB" eventType="touchUpInside" id="k0P-pn-3lN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" alpha="0.0" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oks-G1-8gZ">
+                            <rect key="frame" x="67.5" y="30" width="25" height="25"/>
+                            <state key="normal" image="starempty"/>
+                            <connections>
+                                <action selector="didTapStar:" destination="iN0-l3-epB" eventType="touchUpInside" id="nGM-3J-Mte"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" alpha="0.0" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1r-xq-Njn">
+                            <rect key="frame" x="135" y="30" width="25" height="25"/>
+                            <state key="normal" image="starempty"/>
+                            <connections>
+                                <action selector="didTapStar:" destination="iN0-l3-epB" eventType="touchUpInside" id="sub-8p-ziS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" alpha="0.0" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cN-RU-Mgx">
+                            <rect key="frame" x="202.5" y="30" width="25" height="25"/>
+                            <state key="normal" image="starempty"/>
+                            <connections>
+                                <action selector="didTapStar:" destination="iN0-l3-epB" eventType="touchUpInside" id="91y-bu-AIO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" alpha="0.0" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fo4-Bb-DFf">
+                            <rect key="frame" x="270" y="30" width="25" height="25"/>
+                            <state key="normal" image="starempty"/>
+                            <connections>
+                                <action selector="didTapStar:" destination="iN0-l3-epB" eventType="touchUpInside" id="qWE-RW-ltW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="std-lc-H8O" firstAttribute="centerY" secondItem="OW7-Um-TXI" secondAttribute="centerY" id="QhV-jS-2dB"/>
+                <constraint firstItem="OW7-Um-TXI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="esv-gH-I8E"/>
+                <constraint firstItem="std-lc-H8O" firstAttribute="centerX" secondItem="OW7-Um-TXI" secondAttribute="centerX" id="gOh-XM-Qg5"/>
+                <constraint firstItem="std-lc-H8O" firstAttribute="width" secondItem="OW7-Um-TXI" secondAttribute="width" constant="-80" id="k4o-LZ-lAV"/>
+                <constraint firstItem="OW7-Um-TXI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mz2-Uu-AfF"/>
+                <constraint firstItem="OW7-Um-TXI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="uMG-L9-U3Y"/>
+                <constraint firstItem="OW7-Um-TXI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="w7Z-z3-zfI"/>
+                <constraint firstItem="std-lc-H8O" firstAttribute="height" secondItem="OW7-Um-TXI" secondAttribute="height" id="yCB-aZ-5N6"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="star1" destination="BlK-n2-T2q" id="6cB-Sh-ASm"/>
+                <outlet property="star2" destination="oks-G1-8gZ" id="rfj-Q9-OGZ"/>
+                <outlet property="star3" destination="K1r-xq-Njn" id="Szy-Gx-5AA"/>
+                <outlet property="star4" destination="7cN-RU-Mgx" id="Y9q-eh-SJP"/>
+                <outlet property="star5" destination="Fo4-Bb-DFf" id="tbV-NQ-nZC"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="starempty" width="25" height="25"/>
+    </resources>
+</document>

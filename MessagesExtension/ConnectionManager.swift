@@ -18,7 +18,7 @@ class ConnectionManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
     private let baseURL = "http://api.disordersoftware.com/unitrans/api.php?action=translate"
 
-    func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, completion: @escaping (NSDictionary?, Error?) -> ()){
+    func getTranslation(_ text: String, fromLanguage: String, toLanguage: String) -> String? {
         // An NSDictionary to return
         var dict = NSDictionary()
         
@@ -35,8 +35,8 @@ class ConnectionManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         
         guard let url = URL(string: urlString)
             else {
-                completion(nil, DSError(domain: "URL Error", code: 2))
-                return
+                print("Error 1")
+                return nil
             }
         
         // Set up the request
@@ -44,6 +44,7 @@ class ConnectionManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         
         var dataTask = URLSessionDataTask()
         var request = URLRequest(url: url)
+
         request.httpMethod = "GET"
         request.timeoutInterval = 60
         
@@ -51,22 +52,26 @@ class ConnectionManager: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
                 print("Error: \(error)")
-                completion(nil, DSError(domain: error!.localizedDescription, code: 0))
+                return nil
+                
             } else {
                 let httpResponse = response as! HTTPURLResponse
                 if httpResponse.statusCode != 200 {
                     //print("Error - server returned \(httpResponse.statusCode)")
-                    completion(nil, DSError(domain: "HTTP Error", code: httpResponse.statusCode))
+                    return nil
                 } else {
                     do {
                         if data != nil {
                             let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
                             dict = json
-                            completion(dict, nil)
+                            if let translatedText = dict["0"] as! String? {
+                                return translatedText
+                            }
+                            
                         }
                     } catch let error {
                         print("Error decoding JSON")
-                        completion(nil, DSError(domain: error.localizedDescription, code: 1))
+                        return nil
                     }
                 }
             }

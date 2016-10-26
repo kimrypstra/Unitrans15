@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */; };
+		2122EAFD1DB06F8E00D5B2B2 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */; };
+		2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */; };
+		2122EB011DBB844700D5B2B2 /* PopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB001DBB844700D5B2B2 /* PopoverController.swift */; };
+		2122EB031DBBA39700D5B2B2 /* Rater.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2122EB021DBBA39700D5B2B2 /* Rater.xib */; };
+		2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB041DBBA3C100D5B2B2 /* Rater.swift */; };
 		213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */; };
 		214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */; };
 		2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B38A1DADC621002E08D0 /* Indicators.swift */; };
@@ -19,7 +24,6 @@
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
 		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
-		21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA961DA8E66A000C744A /* ConnectionManager.swift */; };
 		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
 		C3F7C2B66E9AC4A80D18821D /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57DBD1D88B51057C10D00501 /* Pods_MessagesExtension.framework */; };
 		C9F806844C9E2EC61188B127 /* Pods_Unitrans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D623D89BED7536F861CB0E /* Pods_Unitrans.framework */; };
@@ -53,6 +57,11 @@
 		02D2FF9B705A9BDC1E38AF9F /* Pods-Unitrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.release.xcconfig"; sourceTree = "<group>"; };
 		145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
 		21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectorViewController.swift; sourceTree = "<group>"; };
+		2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
+		2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		2122EB001DBB844700D5B2B2 /* PopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverController.swift; sourceTree = "<group>"; };
+		2122EB021DBBA39700D5B2B2 /* Rater.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Rater.xib; sourceTree = "<group>"; };
+		2122EB041DBBA3C100D5B2B2 /* Rater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rater.swift; sourceTree = "<group>"; };
 		213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Kerning.swift"; sourceTree = "<group>"; };
 		2155B38A1DADC621002E08D0 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
@@ -67,7 +76,6 @@
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
-		21EBEA961DA8E66A000C744A /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
 		57DBD1D88B51057C10D00501 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		714C3EC78DA4F0C80F7D7733 /* Pods-Unitrans.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,9 +147,13 @@
 			isa = PBXGroup;
 			children = (
 				216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */,
-				2155B38A1DADC621002E08D0 /* Indicators.swift */,
-				2155B38C1DADC631002E08D0 /* Indicators.xib */,
 				21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */,
+				2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */,
+				2122EB001DBB844700D5B2B2 /* PopoverController.swift */,
+				2155B38A1DADC621002E08D0 /* Indicators.swift */,
+				2122EB041DBBA3C100D5B2B2 /* Rater.swift */,
+				2155B38C1DADC631002E08D0 /* Indicators.xib */,
+				2122EB021DBBA39700D5B2B2 /* Rater.xib */,
 				216BFAB61DA8E4D50041FA8F /* Assets.xcassets */,
 				216BFAB81DA8E4D50041FA8F /* Info.plist */,
 				21EBEA911DA8E614000C744A /* Supporting Files */,
@@ -155,7 +167,7 @@
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
 				21EBEA941DA8E664000C744A /* LanguageManager.swift */,
-				21EBEA961DA8E66A000C744A /* ConnectionManager.swift */,
+				2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */,
 				21EBEA981DA8E701000C744A /* DSError.swift */,
 				213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */,
 			);
@@ -271,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2122EB031DBBA39700D5B2B2 /* Rater.xib in Resources */,
 				216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */,
 				216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */,
@@ -347,14 +360,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2122EAFD1DB06F8E00D5B2B2 /* ExpandedViewController.swift in Sources */,
 				213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */,
 				214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */,
 				21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */,
 				2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */,
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
-				21EBEA971DA8E66A000C744A /* ConnectionManager.swift in Sources */,
+				2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */,
 				21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */,
+				2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */,
 				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
+				2122EB011DBB844700D5B2B2 /* PopoverController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +492,7 @@
 			baseConfigurationReference = B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -493,7 +509,7 @@
 			baseConfigurationReference = 145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -511,7 +527,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
@@ -528,7 +544,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;

@@ -14,19 +14,24 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     //IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewOffset: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var backgroundView: BackgroundView!
     @IBOutlet weak var topIndicatorContainer: UIView!
     @IBOutlet weak var bottomIndicatorContainer: UIView!
+    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var goButtonOffset: NSLayoutConstraint!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var settingsButtonOffset: NSLayoutConstraint!
     
     //Manager Classes
     let languageManager = LanguageManager()
-    let connectionManager = ConnectionManager()
     
     //Constants
-    
+    var languages = [String]()
+    var identifier: String?
     
     //Views
     var topIndicator: Indicators?
@@ -40,9 +45,29 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         super.viewDidLoad()
         designIndicators()
         setUpStackView()
-        loadDefaults()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
+        
         //load user defaults and set scrollView to that language
         // Do any additional setup after loading the view.
+        
+        let marker = UIView(frame: CGRect(x: self.view.frame.width / 2, y: 0, width: 1, height: self.view.frame.height))
+        marker.backgroundColor = UIColor.red
+        self.view.addSubview(marker)
+    }
+    
+    func insertMessage(notification: Notification) {
+        if let message = notification.userInfo?["Message"] as? MSMessage {
+            print("Got message")
+            self.activeConversation?.insert(message, completionHandler: { (error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                } else {
+                    self.dismiss()
+                }
+            })
+        } else {
+            print("No message")
+        }
     }
     
     func designIndicators() {
@@ -64,12 +89,13 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     func setUpStackView() {
-        let languages = languageManager.getLocalizedLanguageNames()
+        languages = languageManager.getLocalizedLanguageNames()
         containerViewHeight.constant = CGFloat(languageManager.languageCount()) * scrollViewHeight.constant
         
         for number in 0...languages.count - 1 {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: scrollViewHeight.constant))
             label.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
+            label.adjustsFontSizeToFitWidth = true 
             label.textColor = UIColor.white.withAlphaComponent(0.8)
             label.numberOfLines = 2
             label.text = "\(languages[number])\n\(languageManager.getNativeLanguageName(name: languages[number]))"
@@ -79,14 +105,64 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
     }
     
-    func loadDefaults() {
+    func loadDefaults(conversation: MSConversation) {
         // load user defaults
+        let defaults = UserDefaults()
+        var defaultsArray = [String: String]()
+        var ids = [String]()
+        for id in conversation.remoteParticipantIdentifiers {
+            ids.append(id.uuidString)
+        }
+        let sortedIDs = ids.sorted()
+        identifier = sortedIDs.joined(separator: "+")
         
-        // if there is a previous language for this conversation, set it 
+        if let conversationDefaults = defaults.value(forKey: identifier!) as? [String: String] {
+            if let toLanguage = conversationDefaults["toLanguage"] {
+                // set the scrollView to the appropriate page
+                if let index = languages.index(of: toLanguage) {
+                    scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
+                }
+                
+            }
+        }
         
         // if the language's 'page' is 0 in the scroll view, hide the top indicator (or bottom if it's the last)
         scrollViewDidScroll(self.scrollView)
+
+    }
+    
+
+    
+    @IBAction func goButtonTapped(_ sender: UIButton) {
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {(Timer) -> Void in
+            // first element
+            self.goButtonOffset.constant += 300
+            UIView.animate(withDuration: 0.2, animations: {() -> Void in
+                self.goButton.alpha = 0
+                self.view.layoutIfNeeded()
+            })
+        })
         
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: {(Timer) -> Void in
+            // second element
+            self.scrollViewOffset.constant -= 200
+            UIView.animate(withDuration: 0.2, animations: {() -> Void in
+                self.scrollView.alpha = 0
+                self.topIndicator?.alpha = 0
+                self.bottomIndicator?.alpha = 0
+                self.view.layoutIfNeeded()
+            })
+        })
+
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false, block: {(Timer) -> Void in
+            // third element
+            self.settingsButtonOffset.constant -= 200
+            UIView.animate(withDuration: 0.2, animations: {      
+                self.view.layoutIfNeeded()
+            }, completion: { (success) in
+                self.requestPresentationStyle(.expanded)
+            })
+        })
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -124,10 +200,17 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     // MARK: - Conversation Handling
     
     override func willBecomeActive(with conversation: MSConversation) {
-        // Called when the extension is about to move from the inactive to active state.
-        // This will happen when the extension is about to present UI.
-        
-        // Use this method to configure the extension and restore previously stored state.
+
+    }
+    
+    override func didBecomeActive(with conversation: MSConversation) {
+        loadDefaults(conversation: conversation)
+        if conversation.selectedMessage == nil {
+            // no message has been selected and the app should launch into compact
+        } else {
+            self.performSegue(withIdentifier: "toExpanded", sender: self)
+            // a message was selected and the app should launch into expanded, which will trigger the segue to the expanded view controller
+        }
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -165,8 +248,31 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
+        switch presentationStyle {
+        case .expanded:
+            self.performSegue(withIdentifier: "toExpanded", sender: self)
+        default:
+            break
+        }
     
         // Use this method to finalize any behaviors associated with the change in presentation style.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "toExpanded":
+            let IVC = segue.destination as! ExpandedViewController
+            IVC.conversationIdentifier = identifier
+            if self.activeConversation?.selectedMessage == nil {
+                let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
+                let code = languageManager.codeFromLanguageName(languages[pageNumber])
+                IVC.composerMode = .Compose(code!)
+            } else {
+                let messageURL = self.activeConversation?.selectedMessage?.url?.absoluteString
+                IVC.composerMode = .View(messageURL!)
+            }
+        default: break
+        }
     }
 
 }

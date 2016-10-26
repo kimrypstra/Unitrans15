@@ -132,7 +132,7 @@ class LanguageManager {
         if nativeName != nil {
             return nativeName!
         } else {
-            return "You should finish this list"
+            return "Translated"
         }
     }
     
@@ -195,50 +195,5 @@ class LanguageManager {
         }
         return returnValue
     }
-    
-    func sanitiseEmoji(_ text: String) -> String? {
-        // Takes in a string, and if it contains emoji, puts a single space between it and any normal characters so that the translator can read the words properly
-        
-        let characterSet = NSMutableCharacterSet(range: NSRange(location: 0x1F300, length: 0x1F700 - 0x1F300))
-        var emojiPresent = false
-        
-        // First, split the string into characters as String (text.characters returns CharacterViews, not Strings)
-        let arrayOfCharacters = text.characters
-        var arrayOfCharactersAsString = [String]()
-        for char in arrayOfCharacters {
-            let charString = String(char)
-            arrayOfCharactersAsString.append(charString)
-        }
-        
-        // Second, inspect each character to see if it is an emoji
-        var index = 0
-        for char in arrayOfCharactersAsString {
-            if char.rangeOfCharacter(from: characterSet as CharacterSet) != nil {
-                print("Emoji present: \(char) at index \(index) ")
-                emojiPresent = true
-                if index > 0 {
-                    if arrayOfCharactersAsString[index - 1] != " " {
-                        arrayOfCharactersAsString.insert(" ", at: index)
-                    }
-                    if index < arrayOfCharactersAsString.count - 1 {
-                        if arrayOfCharactersAsString[index + 1] != " " {
-                            arrayOfCharactersAsString.insert(" ", at: index + 1)
-                        }
-                    }
-                }
-            }
-            index += 1
-        }
-        
-        // If emoji were detected, return the sanitised string. Otherwise, spit out the same old text passed in originally.
-        var sanitised: String?
-        if emojiPresent {
-            let array = arrayOfCharactersAsString.flatMap { $0.characters }
-            sanitised = String(array)
-        } else {
-            sanitised = text
-        }
-        
-        return sanitised
-    }
+
 }
