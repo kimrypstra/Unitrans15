@@ -22,6 +22,7 @@
 		216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216BFAAE1DA8E4D50041FA8F /* Messages.framework */; };
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
+		2185A1BD1DC4602900DD0647 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2185A1BC1DC4602900DD0647 /* Language.swift */; };
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
 		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
 		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
@@ -74,6 +75,7 @@
 		216BFAB41DA8E4D50041FA8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		216BFAB61DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2185A1BC1DC4602900DD0647 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Language.swift; path = ../Language.swift; sourceTree = "<group>"; };
 		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */,
 				21EBEA981DA8E701000C744A /* DSError.swift */,
 				213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */,
+				2185A1BC1DC4602900DD0647 /* Language.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -234,7 +237,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kim Rypstra";
 				TargetAttributes = {
 					216BFA9E1DA8E4D50041FA8F = {
@@ -369,6 +372,7 @@
 				2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */,
 				21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */,
 				2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */,
+				2185A1BD1DC4602900DD0647 /* Language.swift in Sources */,
 				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
 				2122EB011DBB844700D5B2B2 /* PopoverController.swift in Sources */,
 			);
@@ -414,6 +418,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -463,6 +468,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -492,7 +498,7 @@
 			baseConfigurationReference = B187C6CB88C309A5FD371DC1 /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -500,6 +506,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -509,7 +516,7 @@
 			baseConfigurationReference = 145C0B881E569FA576EA8CBB /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -517,6 +524,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -527,7 +535,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
@@ -544,7 +552,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;

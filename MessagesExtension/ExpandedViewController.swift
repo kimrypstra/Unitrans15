@@ -52,18 +52,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
 
     //Enums & Structs
     enum Mode {
-        case Compose(String)
+        case Compose(String, Bool)
         case View(String)
-        case Reply(String)
+        case Reply(String, Bool)
         
-        func get() -> String {
+        func get() -> (String, Bool?) {
             switch self {
-            case .Compose(let languageCode):
-                return languageCode
+            case .Compose(let languageCode, let translator):
+                return (languageCode, translator)
             case .View(let url):
-                return url
-            case .Reply(let languageCode):
-                return languageCode
+                return (url, nil)
+            case .Reply(let languageCode, let translator):
+                return (languageCode, translator)
             }
         }
     }
@@ -112,7 +112,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         switch composerMode! {
         case .View:
             print("View mode")
-            if let query = URL(string: composerMode.get())?.query?.removingPercentEncoding?.removingPercentEncoding {
+            if let query = URL(string: composerMode.get().0)?.query?.removingPercentEncoding?.removingPercentEncoding {
                 let sep = query.components(separatedBy: "&")
                 var text = sep[0] as String
                 var from = sep[1] as String
@@ -262,6 +262,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     func errorHandler(notification: Notification) {
+        print("An error has occurred")
         if let error = notification.userInfo?["error"] as? DSError {
             let alert = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -346,9 +347,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             goButton.setImage(UIImage(named: "blankButton"), for: .normal)
             goButton.isEnabled = false
             toggleSpinner()
-            setDefaultsForConversation(toLanguage: composerMode.get())
+            setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get(), fromCode: "en")
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: "en", google: composerMode.get().1!)
         case .View:
             // Change the UI
             
@@ -358,8 +359,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 
             }, completion: { (success) in
                 self.buttonStackViewWidth.constant = (self.goButton.frame.width * 2) + (self.separationGap * 2)
-                self.rateButton.isHidden = true
+                
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.rateButton.isHidden = true
                     self.view.layoutIfNeeded()
                 }, completion: { (success) in
                     // blah
@@ -374,16 +376,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }, completion: nil)
             
             // Change composer to .Reply, setting the 'to' language to the original language
-            self.composerMode = .Reply(message.originalLanguage)
+            
+            self.composerMode = .Reply(message.originalLanguage, LanguageManager().checkIfMicrosoft(code: message.originalLanguage))
             
             // Present keyboard etc. 
             self.textView.text = ""
             self.textView.becomeFirstResponder()
         case .Reply:
             toggleSpinner()
-            setDefaultsForConversation(toLanguage: composerMode.get())
+            setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get(), fromCode: message.translatedLanguage)
+            print("Looks like google bool is: \(composerMode.get().1!)")
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: composerMode.get().1!)
         }
     }
     

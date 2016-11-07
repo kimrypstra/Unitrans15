@@ -11,10 +11,10 @@ import Messages
 
 class MessageManager: NSObject, URLSessionDelegate {
 
-    func requestTranslation(textToTranslate: String, toCode: String, fromCode: String) {
+    func requestTranslation(textToTranslate: String, toCode: String, fromCode: String, google: Bool) {
         
         let sanitisedText = sanitiseEmoji(text: textToTranslate)
-        getTranslation(sanitisedText, fromLanguage: fromCode, toLanguage: toCode, completion: {(translatedText) in
+        getTranslation(sanitisedText, fromLanguage: fromCode, toLanguage: toCode, google: google, completion: {(translatedText) in
             if translatedText != nil {
                 self.composeMessage(text: translatedText!, toCode: toCode, fromCode: fromCode, originalText: textToTranslate)
             } else {
@@ -86,8 +86,8 @@ class MessageManager: NSObject, URLSessionDelegate {
         
     }
     
-    func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, completion: @escaping (String?) -> ()) {
-        let baseURL = "http://api.disordersoftware.com/unitrans/api.php?action=translate"
+    func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, google: Bool, completion: @escaping (String?) -> ()) {
+        let baseURL = "http://api.disordersoftware.com/unitrans/Testing/api2.php?action=translate"
         // An NSDictionary to return
         var dict = NSDictionary()
         
@@ -96,10 +96,14 @@ class MessageManager: NSObject, URLSessionDelegate {
         let fromLanguage = fromLanguage.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let toLanguage = toLanguage.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         
+        var v = "g"
+        if !google {
+            v = "m"
+        }
         // Set up the URL String
         var urlString = ""
         if textToTranslate != nil && fromLanguage != nil && toLanguage != nil {
-            urlString = baseURL + "&text=\(textToTranslate!)&from=\(fromLanguage!)&to=\(toLanguage!)&v=2"
+            urlString = baseURL + "&text=\(textToTranslate!)&from=\(fromLanguage!)&to=\(toLanguage!)&v=\(v)"
         }
         
         guard let url = URL(string: urlString)
@@ -118,29 +122,42 @@ class MessageManager: NSObject, URLSessionDelegate {
         request.httpMethod = "GET"
         request.timeoutInterval = 60
         
+        // Debug
+        print(urlString)
+        
+        
         // Send the request
         dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
             if error != nil {
+                print("An error may have occurred")
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error": DSError(domain: error!.localizedDescription, code: 0)]))
                 completion(nil)
                 
             } else {
                 let httpResponse = response as! HTTPURLResponse
                 if httpResponse.statusCode != 200 {
-                    //print("Error - server returned \(httpResponse.statusCode)")
+                    print("Error - server returned \(httpResponse.statusCode)")
                     completion(nil)
                 } else {
                     do {
                         if data != nil {
-                            let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
-                            dict = json
-                            if let translatedText = dict["0"] as! String? {
-                                completion(translatedText)
+                            if google {
+                                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
+                                //print(json)
+                                let dataLevel = json["data"] as! NSDictionary
+                                let translationsLevel = dataLevel["translations"] as! NSArray
+                                let text = translationsLevel[0] as! NSDictionary
+                                print(text["translatedText"]!)
+                                completion(text["translatedText"] as! String)
+                            } else {
+                                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
+                                //print(json["0"])
+                                completion(json["0"] as! String)
                             }
                             
                         }
                     } catch let error {
-                        print("Error decoding JSON")
+                        print("Error decoding JSON: \(error)")
                         completion(nil)
                     }
                 }

@@ -30,7 +30,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     let languageManager = LanguageManager()
     
     //Constants
-    var languages = [String]()
+    var languages = [Language]()
     var identifier: String?
     
     //Views
@@ -49,15 +49,17 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         
         //load user defaults and set scrollView to that language
         // Do any additional setup after loading the view.
-        
+        /*
         let marker = UIView(frame: CGRect(x: self.view.frame.width / 2, y: 0, width: 1, height: self.view.frame.height))
         marker.backgroundColor = UIColor.red
         self.view.addSubview(marker)
+        */
     }
     
     func insertMessage(notification: Notification) {
         if let message = notification.userInfo?["Message"] as? MSMessage {
             print("Got message")
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
             self.activeConversation?.insert(message, completionHandler: { (error) in
                 if error != nil {
                     print(error?.localizedDescription)
@@ -89,16 +91,27 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     func setUpStackView() {
-        languages = languageManager.getLocalizedLanguageNames()
-        containerViewHeight.constant = CGFloat(languageManager.languageCount()) * scrollViewHeight.constant
+        languages = languageManager.initialiseLanguages()
+        languages.sort(by: { $0.localizedName < $1.localizedName })
+        containerViewHeight.constant = CGFloat(languages.count) * scrollViewHeight.constant
         
         for number in 0...languages.count - 1 {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: scrollViewHeight.constant))
-            label.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightHeavy)
-            label.adjustsFontSizeToFitWidth = true 
+            label.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightHeavy)
+            
+            label.adjustsFontSizeToFitWidth = true
             label.textColor = UIColor.white.withAlphaComponent(0.8)
             label.numberOfLines = 2
-            label.text = "\(languages[number])\n\(languageManager.getNativeLanguageName(name: languages[number]))"
+            let name = NSMutableAttributedString(string: languages[number].englishName, attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.8)])
+            if let native = languages[number].nativeName {
+                let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.4)])
+                name.append(nativeName)
+            }
+            
+            
+            label.lineBreakMode = .byWordWrapping
+            label.attributedText = name
+            
             label.textAlignment = .center
             label.addTextSpacing(spacing: 3.5)
             stackView.addArrangedSubview(label)
@@ -119,7 +132,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         if let conversationDefaults = defaults.value(forKey: identifier!) as? [String: String] {
             if let toLanguage = conversationDefaults["toLanguage"] {
                 // set the scrollView to the appropriate page
-                if let index = languages.index(of: toLanguage) {
+                if let index = languages.index(of: languages.filter{ $0.englishName == toLanguage }.first!) {
                     scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
                 }
                 
@@ -265,8 +278,12 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             IVC.conversationIdentifier = identifier
             if self.activeConversation?.selectedMessage == nil {
                 let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
-                let code = languageManager.codeFromLanguageName(languages[pageNumber])
-                IVC.composerMode = .Compose(code!)
+                if languages[pageNumber].prefersGoogle == true {
+                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, true)
+                } else {
+                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, false)
+                }
+                
             } else {
                 let messageURL = self.activeConversation?.selectedMessage?.url?.absoluteString
                 IVC.composerMode = .View(messageURL!)
