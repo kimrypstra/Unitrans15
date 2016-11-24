@@ -33,6 +33,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var languages = [Language]()
     var identifier: String?
     var subscribed: Bool?
+    var fromLanguage: String?
     
     //Views
     var topIndicator: Indicators?
@@ -189,11 +190,21 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         
         if let fromLanguage = defaults.value(forKey: "fromLanguage") as? String {
             print("From language: \(fromLanguage)")
+            self.fromLanguage = fromLanguage
         } else {
             print("No 'from' language set; setting default from device")
-            let language = NSLocale.preferredLanguages.first
+            var language = NSLocale.preferredLanguages.first
+            if language != "zh-TW" && language != "zh-CN" {
+                print("Language is problematic: \(language)")
+                if language!.contains("-") {
+                    let range = language!.range(of: "-")
+                    language = language!.substring(to: range!.lowerBound)
+                }
+            } else {
+                print("Language appears to be zh-TW or zh-CN")
+            }
             print("Device language: \(language!)")
-            
+            self.fromLanguage = language
             
         }
         
@@ -339,9 +350,9 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             if self.activeConversation?.selectedMessage == nil {
                 let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
                 if languages[pageNumber].prefersGoogle == true {
-                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, true)
+                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, fromLanguage!, true)
                 } else {
-                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, false)
+                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, fromLanguage!, false)
                 }
                 
             } else {

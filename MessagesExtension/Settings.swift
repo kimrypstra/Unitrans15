@@ -20,6 +20,8 @@ class Settings: UIView {
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var storeFrontView: UIView!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var themeView: UIView!
     
     var listView: List?
     var storeManager = StoreManager()
@@ -32,22 +34,56 @@ class Settings: UIView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(touches.first?.location(in: touches.first?.view))
+        
+        print(touches.first?.location(in: self))
     }
     
     func loadDefaults() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
+        versionLabel.text = "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)b\(Bundle.main.infoDictionary!["CFBundleVersion"]!)"
+        let defaults = UserDefaults()
         
-        if !pricesUpdated {
-            priceLabel.isHidden = true
-            storeFrontView.backgroundColor = UIColor.white
-            storeFrontView.layer.cornerRadius = 8
-            NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
-            storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
-            storeManager.updateProductList()
+        if let subscriptionStatus = defaults.value(forKey: "subscribed") as? Bool {
+            if subscriptionStatus == true {
+                print("SUBSCRUBED!!!")
+                // subscribed; remove storefront and add theme section
+                stackView.removeArrangedSubview(storeFrontView)
+                
+                
+            } else {
+                // not subscribed, but was; add storefront and remove theme section
+                print("NOT SUBSCRIBED!")
+                stackView.removeArrangedSubview(themeView)
+                
+                
+                if !pricesUpdated {
+                    priceLabel.isHidden = true
+                    storeFrontView.backgroundColor = UIColor.white
+                    storeFrontView.layer.cornerRadius = 8
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
+                    storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
+                    storeManager.updateProductList()
+                }
+            }
+            
+        } else {
+            // key is nil; user has never subscribed
+            stackView.removeArrangedSubview(themeView)
+            
+            
+            if !pricesUpdated {
+                priceLabel.isHidden = true
+                storeFrontView.backgroundColor = UIColor.white
+                storeFrontView.layer.cornerRadius = 8
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
+                storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
+                storeManager.updateProductList()
+            }
         }
         
-        let defaults = UserDefaults()
+        
+        
+
         if let defaultFromLanguage = defaults.value(forKey: "fromLanguage") as? String {
             // set the language label to the value
             let text = LanguageManager().nameFromCode(defaultFromLanguage, localized: true)

@@ -173,10 +173,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlY-14-iSG" customClass="Settings" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="488"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="488" id="Umq-AO-yXb"/>
+                                    <constraint firstAttribute="height" constant="600" id="Umq-AO-yXb"/>
                                 </constraints>
                             </view>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="F7m-oo-gPz" customClass="Rater" customModule="MessagesExtension" customModuleProvider="target">

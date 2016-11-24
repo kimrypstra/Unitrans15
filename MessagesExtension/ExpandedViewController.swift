@@ -56,18 +56,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
 
     //Enums & Structs
     enum Mode {
-        case Compose(String, Bool)
+        case Compose(String, String, Bool)
         case View(String)
-        case Reply(String, Bool)
+        case Reply(String, String, Bool)
         
-        func get() -> (String, Bool?) {
+        func get() -> (String, String?, Bool?) {
             switch self {
-            case .Compose(let languageCode, let translator):
-                return (languageCode, translator)
+            case .Compose(let languageCode, let fromLanguage, let translator):
+                return (languageCode, fromLanguage, translator)
             case .View(let url):
-                return (url, nil)
-            case .Reply(let languageCode, let translator):
-                return (languageCode, translator)
+                return (url, nil, nil)
+            case .Reply(let languageCode, let fromLanguage, let translator):
+                return (languageCode, fromLanguage, translator)
             }
         }
     }
@@ -394,7 +394,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             toggleSpinner()
             setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: "en", google: composerMode.get().1!)
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: composerMode.get().2!)
         case .View:
             // Change the UI
             
@@ -422,7 +422,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
             // Change composer to .Reply, setting the 'to' language to the original language
             
-            self.composerMode = .Reply(message.originalLanguage, LanguageManager().checkIfMicrosoft(code: message.originalLanguage))
+            self.composerMode = .Reply(message.originalLanguage, message.translatedLanguage, LanguageManager().checkIfMicrosoft(code: message.originalLanguage))
             
             // Present keyboard etc. 
             self.textView.text = ""
@@ -432,7 +432,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
             print("Looks like google bool is: \(composerMode.get().1!)")
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: composerMode.get().1!)
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: composerMode.get().2!)
         }
     }
     
@@ -511,6 +511,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }, completion: { (success) in
             self.settingsView?.removeFromSuperview()
             self.settingsView = nil
+            self.settingsButton.isEnabled = true
+            self.textView.isUserInteractionEnabled = true
+            self.swapButton.isEnabled = true
+            self.rateButton.isEnabled = true
+            self.goButton.isEnabled = true 
         })
 
     }
@@ -525,6 +530,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         goButton.isEnabled = false
         swapButton.isEnabled = false
         rateButton.isEnabled = false
+        textView.isUserInteractionEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopScroll), name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
@@ -542,7 +548,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
             self.view.layoutIfNeeded()
             if backgroundVertical.constant == topBarHeight {
-                backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
+                backgroundVertical.constant = topBarHeight + /*settingsContainerHeight.constant*/ 488
             } else {
                 backgroundVertical.constant = topBarHeight
             }
