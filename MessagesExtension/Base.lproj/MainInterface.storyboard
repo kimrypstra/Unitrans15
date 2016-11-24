@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11755"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -114,7 +114,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="topColor">
-                                        <color key="value" red="0.7625243067741394" green="0.88701778650283813" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.76862745098039209" green="0.8901960784313725" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
                                         <color key="value" red="0.74901960784313726" green="0.82352941176470584" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -163,7 +163,7 @@
         <!--Expanded View Controller-->
         <scene sceneID="Ipz-0k-hnX">
             <objects>
-                <viewController id="di7-fo-oAG" customClass="ExpandedViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="di7-fo-oAG" customClass="ExpandedViewController" customModule="MessagesExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d3d-Gb-7YT"/>
                         <viewControllerLayoutGuide type="bottom" id="TeC-Ov-fcX"/>
@@ -172,8 +172,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlY-14-iSG" customClass="Settings" customModule="MessagesExtension" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="488"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="488" id="Umq-AO-yXb"/>
+                                </constraints>
+                            </view>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="F7m-oo-gPz" customClass="Rater" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="85" width="375" height="85"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="85"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -206,11 +213,14 @@
                                         </connections>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="aRi-C3-jpD">
-                                        <rect key="frame" x="112.5" y="557" width="150" height="50"/>
+                                        <rect key="frame" x="113" y="556.5" width="150" height="50"/>
                                         <subviews>
                                             <button opaque="NO" alpha="0.57999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ms-Ul-ip4">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <state key="normal" image="settingsButton"/>
+                                                <connections>
+                                                    <action selector="didTapSettings:" destination="di7-fo-oAG" eventType="touchUpInside" id="EuO-mW-sBA"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0I-Rz-e1g">
                                                 <rect key="frame" x="50" y="0.0" width="50" height="50"/>
@@ -232,7 +242,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIA-wb-e9b">
-                                        <rect key="frame" x="172.5" y="205" width="30" height="30"/>
+                                        <rect key="frame" x="173" y="205" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="3it-1c-xVc"/>
                                             <constraint firstAttribute="height" constant="30" id="J3k-G2-Z98"/>
@@ -249,7 +259,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="taK-Hb-Y8b">
-                                                    <rect key="frame" x="168" y="271.5" width="39" height="39"/>
+                                                    <rect key="frame" x="168" y="272" width="39" height="39"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="39" id="rbH-Fn-5C7"/>
                                                         <constraint firstAttribute="width" constant="39" id="uif-cl-jCp"/>
@@ -302,9 +312,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="toS-zp-d7y" secondAttribute="trailing" id="09u-B2-Ofm"/>
+                            <constraint firstItem="PlY-14-iSG" firstAttribute="leading" secondItem="7gb-ZO-s8t" secondAttribute="leadingMargin" constant="-16" id="4ds-GJ-xIy"/>
+                            <constraint firstItem="F7m-oo-gPz" firstAttribute="centerX" secondItem="aRi-C3-jpD" secondAttribute="centerX" id="6VF-DA-3bw"/>
                             <constraint firstItem="TeC-Ov-fcX" firstAttribute="top" secondItem="toS-zp-d7y" secondAttribute="bottom" id="7cH-jB-Adv"/>
-                            <constraint firstItem="F7m-oo-gPz" firstAttribute="top" secondItem="d3d-Gb-7YT" secondAttribute="bottom" constant="65" id="GLs-mq-OHm"/>
-                            <constraint firstItem="F7m-oo-gPz" firstAttribute="centerX" secondItem="7gb-ZO-s8t" secondAttribute="centerX" id="l74-G7-F6K"/>
+                            <constraint firstItem="F7m-oo-gPz" firstAttribute="top" secondItem="d3d-Gb-7YT" secondAttribute="bottom" id="HLz-ux-gf5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PlY-14-iSG" secondAttribute="trailing" constant="-16" id="OqE-os-sec"/>
+                            <constraint firstItem="PlY-14-iSG" firstAttribute="top" secondItem="F7m-oo-gPz" secondAttribute="top" id="gsr-Xo-PYa"/>
                             <constraint firstItem="toS-zp-d7y" firstAttribute="top" secondItem="7gb-ZO-s8t" secondAttribute="top" constant="85" id="nKV-ao-6XB">
                                 <variation key="heightClass=compact-widthClass=compact" constant="65"/>
                             </constraint>
@@ -332,6 +345,8 @@
                         <outlet property="raterContainer" destination="F7m-oo-gPz" id="SyM-Lo-PLX"/>
                         <outlet property="raterContainerHeight" destination="zr9-wh-4VW" id="V0L-en-nNQ"/>
                         <outlet property="settingsButton" destination="3ms-Ul-ip4" id="h7b-x0-23b"/>
+                        <outlet property="settingsContainer" destination="PlY-14-iSG" id="2TS-EM-Pcz"/>
+                        <outlet property="settingsContainerHeight" destination="Umq-AO-yXb" id="cbm-bz-hi5"/>
                         <outlet property="spinner" destination="taK-Hb-Y8b" id="Ios-eg-e34"/>
                         <outlet property="swapButton" destination="fIA-wb-e9b" id="jww-JO-vuZ"/>
                         <outlet property="swapButtonVert" destination="MYE-q6-tVe" id="JIT-6q-7iQ"/>

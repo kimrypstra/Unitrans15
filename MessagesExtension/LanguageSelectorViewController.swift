@@ -32,6 +32,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     //Constants
     var languages = [Language]()
     var identifier: String?
+    var subscribed: Bool?
     
     //Views
     var topIndicator: Indicators?
@@ -88,6 +89,27 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             bottomIndicator?.setupChevrons()
             bottomIndicatorContainer.transform = CGAffineTransform.init(rotationAngle: CGFloat(M_PI))
         }
+        
+        let topRecog = UITapGestureRecognizer(target: self, action: #selector(self.didTapIndicator))
+        topRecog.accessibilityHint = "Scroll Up"
+        let bottomRecog = UITapGestureRecognizer(target: self, action: #selector(self.didTapIndicator))
+        bottomRecog.accessibilityHint = "Scroll Down"
+        topIndicator?.addGestureRecognizer(topRecog)
+        bottomIndicator?.addGestureRecognizer(bottomRecog)
+        
+    }
+    
+    func didTapIndicator(sender: UITapGestureRecognizer) {
+        switch sender.accessibilityHint! {
+        case "Scroll Up":
+            print("Tap UP")
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - scrollViewHeight.constant), animated: true)
+        case "Scroll Down":
+            print("Tap DOWN")
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y + scrollViewHeight.constant), animated: true)
+        default:
+            print("Error")
+        }
     }
     
     func setUpStackView() {
@@ -120,6 +142,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     func loadDefaults(conversation: MSConversation) {
         // load user defaults
+        print("Loading defaults...")
         let defaults = UserDefaults()
         var defaultsArray = [String: String]()
         var ids = [String]()
@@ -128,16 +151,53 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
         let sortedIDs = ids.sorted()
         identifier = sortedIDs.joined(separator: "+")
-        
-        if let conversationDefaults = defaults.value(forKey: identifier!) as? [String: String] {
-            if let toLanguage = conversationDefaults["toLanguage"] {
-                // set the scrollView to the appropriate page
-                if let index = languages.index(of: languages.filter{ $0.englishName == toLanguage }.first!) {
-                    scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
+        if let subscriptionStatus = defaults.value(forKey: "subscribed") as? Bool {
+            // the subscription key is there...
+            if subscriptionStatus == true {
+                // they are subscribed
+                subscribed = true
+                if let conversationDefaults = defaults.value(forKey: identifier!) as? [String: String] {
+                    if let toLanguage = conversationDefaults["toLanguage"] {
+                        // set the scrollView to the appropriate page
+                        if let index = languages.index(of: languages.filter{ $0.englishName == toLanguage }.first!) {
+                            scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
+                            print("Loaded to language: \(toLanguage)")
+                        } else {
+                            print("No preset 'to' language")
+                        }
+                    } else {
+                        print("No record of conversation defaults for this identifier")
+                    }
+                } else {
+                    print("No record of this conversation's identifier; must be a new conversation")
                 }
                 
+                if let theme = defaults.value(forKey: "theme") as? String {
+                    print("Theme: \(theme)")
+                } else {
+                    print("No theme selected; setting default")
+                }
+
+            } else {
+                // they are not subscribed
+                subscribed = false
             }
+        } else {
+            // they are not subscribed
+            subscribed = false
         }
+        
+        if let fromLanguage = defaults.value(forKey: "fromLanguage") as? String {
+            print("From language: \(fromLanguage)")
+        } else {
+            print("No 'from' language set; setting default from device")
+            let language = NSLocale.preferredLanguages.first
+            print("Device language: \(language!)")
+            
+            
+        }
+        
+        print("Subscribed: \(subscribed!)")
         
         // if the language's 'page' is 0 in the scroll view, hide the top indicator (or bottom if it's the last)
         scrollViewDidScroll(self.scrollView)

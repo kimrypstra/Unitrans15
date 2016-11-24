@@ -21,7 +21,7 @@ class LanguageManager {
     private let google = [
         "Afrikaans":"af",
         "Albanian":"sq",
-        /*"Amharic":"am",*/
+        "Amharic":"am",
         "Arabic":"ar",
         "Armenian":"hy",
         "Azerbaijani":"az",
@@ -125,8 +125,8 @@ class LanguageManager {
         "Yoruba":"yo",
         "Zulu":"zu"]
     
-    private let nativeNames = [
-        //"Afrikaans":"Afrikaans",
+    let nativeNames = [
+        "Afrikaans":"Afrikaans",
         "Albanian":"Shqiptar",
         "Amharic":"አማርኛ",
         "Arabic":"العربية",
@@ -147,8 +147,8 @@ class LanguageManager {
         "Czech":"Čeština",
         "Danish":"Dansk",
         "Dutch":"Nederlands",
-        //"English":"English",
-        //"Esperanto":"Esperanto",
+        "English":"English",
+        "Esperanto":"Esperanto",
         "Estonian":"Eesti",
         "Filipino":"Pilipino",
         "Finnish":"Suomalainen",
@@ -166,8 +166,8 @@ class LanguageManager {
         "Hindi":"हिंदी",
         "Hmong":"Hmong",
         "Hungarian":"Magyar",
-        //"Icelandic":"Icelandic",
-        //"Igbo":"Igbo",
+        "Icelandic":"Icelandic",
+        "Igbo":"Igbo",
         "Indonesian":"Bahasa Indonesia",
         "Irish":"Gaeilge",
         "Italian":"Italiano",
@@ -190,7 +190,7 @@ class LanguageManager {
         "Malay":"Malay",
         "Malayalam":"മലയാളം",
         "Maltese":"Malti",
-        //"Maori":"Maori",
+        "Maori":"Maori",
         "Marathi":"मराठी",
         "Mongolian":"Монгол",
         "Myanmar (Burmese)":"မြန်မာ",
@@ -208,8 +208,8 @@ class LanguageManager {
         "Scots Gaelic":"Gàidhlig",
         "Serbian (Cyrillic)":"Српски",
         "Serbian (Latin)":"Srpski",
-        //"Sesotho":"Sesotho",
-        //"Shona":"Shona",
+        "Sesotho":"Sesotho",
+        "Shona":"Shona",
         "Sindhi":"سنڌي",
         "Sinhala":"සිංහල",
         "Slovak":"Slovenský",
@@ -233,63 +233,103 @@ class LanguageManager {
         "Yiddish":"ייִדיש",
         "Yoruba":"Yorùbá",
         "Yucatec Maya":"Maaya yucateco",
-        //"Zulu":"Zulu",
+        "Zulu":"Zulu",
     ]
     
     private var localizedLanguages: [String : String] = [
         NSLocalizedString("Afrikaans", comment: "Language"):"af",
+        NSLocalizedString("Albanian", comment: "Language"):"sq",
+        NSLocalizedString("Amharic", comment: "Language"):"am",
         NSLocalizedString("Arabic", comment: "Language"):"ar",
-        NSLocalizedString("Bosnian (Latin)", comment: "Language"):"bs-Latn",
+        NSLocalizedString("Armenian", comment: "Language"):"hy",
+        NSLocalizedString("Azerbaijani", comment: "Language"):"az",
+        NSLocalizedString("Basque", comment: "Language"):"eu",
+        NSLocalizedString("Belarusian", comment: "Language"):"be",
+        NSLocalizedString("Bengali", comment: "Language"):"bn",
+        NSLocalizedString("Bosnian", comment: "Language"):"bs",
         NSLocalizedString("Bulgarian", comment: "Language"):"bg",
         NSLocalizedString("Catalan", comment: "Language"):"ca",
-        NSLocalizedString("Chinese Simplified", comment: "Language"):"zh-CHS",
-        NSLocalizedString("Chinese Traditional", comment: "Language"):"zh-CHT",
+        NSLocalizedString("Cebuano", comment: "Language"):"ceb",
+        NSLocalizedString("Chichewa", comment: "Language"):"ny",
+        NSLocalizedString("Chinese Simplified", comment: "Language"):"zh-CN",
+        NSLocalizedString("Chinese Traditional", comment: "Language"):"zh-TW",
         NSLocalizedString("Croatian", comment: "Language"):"hr",
         NSLocalizedString("Czech", comment: "Language"):"cs",
         NSLocalizedString("Danish", comment: "Language"):"da",
         NSLocalizedString("Dutch", comment: "Language"):"nl",
         NSLocalizedString("English", comment: "Language"):"en",
+        NSLocalizedString("Esperanto", comment: "Language"):"eo",
         NSLocalizedString("Estonian", comment: "Language"):"et",
+        NSLocalizedString("Filipino", comment: "Language"):"tl",
         NSLocalizedString("Finnish", comment: "Language"):"fi",
         NSLocalizedString("French", comment: "Language"):"fr",
+        NSLocalizedString("Galician", comment: "Language"):"gl",
+        NSLocalizedString("Georgian", comment: "Language"):"ka",
         NSLocalizedString("German", comment: "Language"):"de",
         NSLocalizedString("Greek", comment: "Language"):"el",
+        NSLocalizedString("Gujarati", comment: "Language"):"gu",
         NSLocalizedString("Haitian Creole", comment: "Language"):"ht",
-        NSLocalizedString("Hebrew", comment: "Language"):"he",
+        NSLocalizedString("Hausa", comment: "Language"):"ha",
+        NSLocalizedString("Hebrew", comment: "Language"):"iw",
         NSLocalizedString("Hindi", comment: "Language"):"hi",
-        NSLocalizedString("Hmong Daw", comment: "Language"):"mww",
+        NSLocalizedString("Hmong", comment: "Language"):"hmn",
         NSLocalizedString("Hungarian", comment: "Language"):"hu",
+        NSLocalizedString("Icelandic", comment: "Language"):"is",
+        NSLocalizedString("Igbo", comment: "Language"):"ig",
         NSLocalizedString("Indonesian", comment: "Language"):"id",
+        NSLocalizedString("Irish", comment: "Language"):"ga",
         NSLocalizedString("Italian", comment: "Language"):"it",
         NSLocalizedString("Japanese", comment: "Language"):"ja",
-        NSLocalizedString("Kiswahili", comment: "Language"):"sw",
-        NSLocalizedString("Klingon", comment: "Language"):"tlh",
+        NSLocalizedString("Javanese", comment: "Language"):"jw",
+        NSLocalizedString("Kannada", comment: "Language"):"kn",
+        NSLocalizedString("Kazakh", comment: "Language"):"kk",
+        NSLocalizedString("Khmer", comment: "Language"):"km",
         NSLocalizedString("Korean", comment: "Language"):"ko",
+        NSLocalizedString("Lao", comment: "Language"):"lo",
+        NSLocalizedString("Latin", comment: "Language"):"la",
         NSLocalizedString("Latvian", comment: "Language"):"lv",
         NSLocalizedString("Lithuanian", comment: "Language"):"lt",
+        NSLocalizedString("Macedonian", comment: "Language"):"mk",
+        NSLocalizedString("Malagasy", comment: "Language"):"mg",
         NSLocalizedString("Malay", comment: "Language"):"ms",
+        NSLocalizedString("Malayalam", comment: "Language"):"ml",
         NSLocalizedString("Maltese", comment: "Language"):"mt",
+        NSLocalizedString("Maori", comment: "Language"):"mi",
+        NSLocalizedString("Marathi", comment: "Language"):"mr",
+        NSLocalizedString("Mongolian", comment: "Language"):"mn",
+        NSLocalizedString("Myanmar (Burmese)", comment: "Language"):"my",
+        NSLocalizedString("Nepali", comment: "Language"):"ne",
         NSLocalizedString("Norwegian", comment: "Language"):"no",
         NSLocalizedString("Persian", comment: "Language"):"fa",
         NSLocalizedString("Polish", comment: "Language"):"pl",
         NSLocalizedString("Portuguese", comment: "Language"):"pt",
-        NSLocalizedString("Querétaro Otomi", comment: "Language"):"otq",
+        NSLocalizedString("Punjabi", comment: "Language"):"ma",
         NSLocalizedString("Romanian", comment: "Language"):"ro",
         NSLocalizedString("Russian", comment: "Language"):"ru",
-        NSLocalizedString("Serbian (Cyrillic)", comment: "Language"):"sr-Cyrl",
-        NSLocalizedString("Serbian (Latin)", comment: "Language"):"sr-Latn",
+        NSLocalizedString("Serbian", comment: "Language"):"sr",
+        NSLocalizedString("Sesotho", comment: "Language"):"st",
+        NSLocalizedString("Sinhala", comment: "Language"):"si",
         NSLocalizedString("Slovak", comment: "Language"):"sk",
         NSLocalizedString("Slovenian", comment: "Language"):"sl",
+        NSLocalizedString("Somali", comment: "Language"):"so",
         NSLocalizedString("Spanish", comment: "Language"):"es",
+        NSLocalizedString("Sudanese", comment: "Language"):"su",
+        NSLocalizedString("Swahili", comment: "Language"):"sw",
         NSLocalizedString("Swedish", comment: "Language"):"sv",
+        NSLocalizedString("Tajik", comment: "Language"):"tg",
+        NSLocalizedString("Tamil", comment: "Language"):"ta",
+        NSLocalizedString("Telugu", comment: "Language"):"te",
         NSLocalizedString("Thai", comment: "Language"):"th",
         NSLocalizedString("Turkish", comment: "Language"):"tr",
         NSLocalizedString("Ukrainian", comment: "Language"):"uk",
         NSLocalizedString("Urdu", comment: "Language"):"ur",
+        NSLocalizedString("Uzbek", comment: "Language"):"uz",
         NSLocalizedString("Vietnamese", comment: "Language"):"vi",
         NSLocalizedString("Welsh", comment: "Language"):"cy",
-        NSLocalizedString("Yucatec Maya", comment: "Language"):"yua"
-    ]
+        NSLocalizedString("Yiddish", comment: "Language"):"yi",
+        NSLocalizedString("Yoruba", comment: "Language"):"yo",
+        NSLocalizedString("Zulu", comment: "Language"):"zu",
+        ]
     
     private var englishLanguages: [String : String] = [
         "Afrikaans" : "af",
@@ -345,19 +385,16 @@ class LanguageManager {
         "Welsh"	:	"cy",
         "Yucatec Maya"	:	"yua"
     ]
+
     
-    let languagesTranslatedToOwnLanguage = [
-        "Japanese" : "日本語"
-    ]
-    
-    func getNativeLanguageName(name: String) -> String {
+    func getNativeLanguageName(name: String) -> String? {
         // Returns the language name given in it's OWN language
         
-        let nativeName = languagesTranslatedToOwnLanguage[name]
-        if nativeName != nil {
-            return nativeName!
+        let nativeName = nativeNames[name]
+        if nativeName != name {
+            return nativeName
         } else {
-            return "Translated"
+            return nil
         }
     }
     
@@ -382,7 +419,7 @@ class LanguageManager {
             languages = englishLanguages
         }
         
-        var returnString: String?
+        var returnString = "Update language list"
         
         for item in languages {
             if item.value == code {
@@ -438,22 +475,25 @@ class LanguageManager {
             let language = Language(
                 englishName: entry.key,
                 localizedName: NSLocalizedString(entry.key, comment: "The name of the language"),
-                nativeName: nativeNames[entry.key],
+                nativeName: getNativeLanguageName(name: entry.key),
                 prefersGoogle: true,
                 googleCode: entry.value,
                 microsoftCode: nil)
             languages.append(language)
         }
+        
+        /*
         for entry in microsoft {
             let language = Language(
                 englishName: entry.key,
                 localizedName: NSLocalizedString(entry.key, comment: "The name of the language"),
-                nativeName: nativeNames[entry.key],
+                nativeName: getNativeLanguageName(name: entry.key),
                 prefersGoogle: false,
                 googleCode: nil,
                 microsoftCode: entry.value)
             languages.append(language)
         }
+        */
         
         return languages
     }

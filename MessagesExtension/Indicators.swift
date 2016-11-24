@@ -36,6 +36,7 @@ class Indicators: UIView {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.pulse), userInfo: nil, repeats: true)
     }
 
+
     func pulse() {
         innerChevron.alpha = 1
         UIView.animate(withDuration: 0.8, animations: {() -> Void in

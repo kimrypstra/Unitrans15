@@ -11,6 +11,9 @@ import Messages
 
 class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, UIPopoverPresentationControllerDelegate, UIPopoverControllerDelegate {
 
+    
+    @IBOutlet weak var settingsContainer: Settings!
+    @IBOutlet weak var settingsContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var raterContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var backgroundVertical: NSLayoutConstraint!
     @IBOutlet weak var bubble: UIImageView!
@@ -33,6 +36,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     //xibs
     var raterView: Rater?
+    var settingsView: Settings?
     
     //Managers
     let messageManager = MessageManager()
@@ -209,6 +213,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 self.settingsButton.alpha = 0.58
                 self.view.layoutIfNeeded()
             }, completion: { (success) in
+
                 switch self.composerMode! {
                 case .Compose: self.textView.becomeFirstResponder()
                 default: break
@@ -219,6 +224,46 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         
     }
 
+    /*
+    willTransition
+    shove the UI up out of the way, the same way the language picker goes away 
+     then transition
+    - stackView 
+     - textView
+     - imageView
+     
+     didTransition
+     bring the picker UI back down in reverse, back to what they were 
+ */
+    
+    
+    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        
+        if presentationStyle == .compact {
+
+                self.swapButtonVert.constant = -100
+                self.textViewVerticalOffset.constant = -100
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.swapButton.alpha = 0
+                    self.bubble.alpha = 0
+                    self.textView.alpha = 0
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    //blah
+                })
+
+
+            
+
+        }
+        
+
+    }
+    
+    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        // do some stuff 
+    }
+    
     func handleKeyboard(notification: Notification) {
         guard let keyboardFrame = notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? NSValue else {
             fatalError("Keyboard has no frame")
@@ -394,9 +439,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     @IBAction func didTapRate(_ sender: UIButton) {
         if raterView == nil {
             NotificationCenter.default.addObserver(self, selector: #selector(self.didTapRate), name: NSNotification.Name(rawValue: "RATED"), object: nil)
-            
-            raterView = raterContainer.getView() as! Rater
             raterView?.frame.size.width = self.view.frame.width
+            raterView = raterContainer.getView() as? Rater
+            
             raterContainer.addSubview(raterView!)
             
             if backgroundVertical.constant == topBarHeight {
@@ -431,6 +476,104 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
         }
     }
+    
+    func stopScroll() {
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
+        settingsButton.isEnabled = true
+        goButton.isEnabled = true
+        swapButton.isEnabled = true
+        rateButton.isEnabled = true
+        
+    }
+    
+    func startScroll() {
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
+        settingsButton.isEnabled = true
+        goButton.isEnabled = true
+        swapButton.isEnabled = true
+        rateButton.isEnabled = true
+        
+    }
+    
+    func dismissSettings() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
+        if backgroundVertical.constant != topBarHeight {
+            backgroundVertical.constant = topBarHeight
+        } else {
+            backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
+        }
+        
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: { (success) in
+            self.settingsView?.removeFromSuperview()
+            self.settingsView = nil
+        })
+
+    }
+    
+    // listView is aligned to the top of the scrollView so if you scroll down and present the list it is out of place 
+    // 
+    
+    
+    
+    @IBAction func didTapSettings(_ sender: UIButton) {
+        settingsButton.isEnabled = false
+        goButton.isEnabled = false
+        swapButton.isEnabled = false
+        rateButton.isEnabled = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stopScroll), name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissSettings), name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
+        if settingsView == nil {
+            textView.resignFirstResponder()
+            settingsView = Bundle.main.loadNibNamed("Settings", owner: self, options: nil)?.first as! Settings
+            settingsContainer.addSubview(settingsView!)
+            settingsView?.loadDefaults()
+            settingsView?.listContainer.isHidden = true 
+            settingsView?.translatesAutoresizingMaskIntoConstraints = false
+            settingsContainer.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":settingsView! as Settings]))
+
+            settingsContainer.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":settingsView! as Settings]))
+            
+            self.view.layoutIfNeeded()
+            if backgroundVertical.constant == topBarHeight {
+                backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
+            } else {
+                backgroundVertical.constant = topBarHeight
+            }
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (success) in
+                // fill out the storefront 
+                
+            })
+            
+        } else {
+            dismissSettings()
+//            if backgroundVertical.constant != topBarHeight {
+//                backgroundVertical.constant = topBarHeight
+//            } else {
+//                backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
+//            }
+//            
+//            
+//            UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+//                self.view.layoutIfNeeded()
+//            }, completion: { (success) in
+//                self.settingsView?.removeFromSuperview()
+//                self.settingsView = nil
+//            })
+//            
+            
+        }
+    }
+
     
     
     func setDefaultsForConversation(toLanguage: String) {

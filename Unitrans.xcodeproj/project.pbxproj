@@ -17,12 +17,25 @@
 		214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */; };
 		2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B38A1DADC621002E08D0 /* Indicators.swift */; };
 		2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B38C1DADC631002E08D0 /* Indicators.xib */; };
+		216B751D1DDFF9A6009A6A3E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216B751C1DDFF9A6009A6A3E /* Settings.swift */; };
+		216B75201DE00AA0009A6A3E /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216B751E1DE00AA0009A6A3E /* ThemeCell.swift */; };
+		216B75211DE00AA0009A6A3E /* ThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 216B751F1DE00AA0009A6A3E /* ThemeCell.xib */; };
+		216B75231DE00BB1009A6A3E /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216B75221DE00BB1009A6A3E /* ThemeManager.swift */; };
+		216B75251DE00BC5009A6A3E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216B75241DE00BC5009A6A3E /* Theme.swift */; };
 		216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAA21DA8E4D50041FA8F /* Assets.xcassets */; };
 		216BFAAA1DA8E4D50041FA8F /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 216BFAA91DA8E4D50041FA8F /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216BFAAE1DA8E4D50041FA8F /* Messages.framework */; };
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
 		2185A1BD1DC4602900DD0647 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2185A1BC1DC4602900DD0647 /* Language.swift */; };
+		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
+		21CA317E1DD82D6D00CA2EF5 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CA317D1DD82D6D00CA2EF5 /* Settings.xib */; };
+		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
+		21D818871DD93AB20079F4B8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D818861DD93AB20079F4B8 /* List.swift */; };
+		21D8188E1DD9E6060079F4B8 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8188C1DD9E6060079F4B8 /* CustomCell.swift */; };
+		21D8188F1DD9E6060079F4B8 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D8188D1DD9E6060079F4B8 /* CustomCell.xib */; };
+		21D818911DDA97730079F4B8 /* Kefa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 21D818901DDA93E30079F4B8 /* Kefa.ttc */; };
+		21D818921DDA97750079F4B8 /* Kefa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 21D818901DDA93E30079F4B8 /* Kefa.ttc */; };
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
 		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
 		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
@@ -67,6 +80,11 @@
 		214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Kerning.swift"; sourceTree = "<group>"; };
 		2155B38A1DADC621002E08D0 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
 		2155B38C1DADC631002E08D0 /* Indicators.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Indicators.xib; sourceTree = "<group>"; };
+		216B751C1DDFF9A6009A6A3E /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		216B751E1DE00AA0009A6A3E /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
+		216B751F1DE00AA0009A6A3E /* ThemeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThemeCell.xib; sourceTree = "<group>"; };
+		216B75221DE00BB1009A6A3E /* ThemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		216B75241DE00BC5009A6A3E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		216BFA9F1DA8E4D50041FA8F /* Unitrans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unitrans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		216BFAA21DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAA41DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +94,13 @@
 		216BFAB61DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2185A1BC1DC4602900DD0647 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Language.swift; path = ../Language.swift; sourceTree = "<group>"; };
+		21CA31771DD7348300CA2EF5 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreManager.swift; path = ../StoreManager.swift; sourceTree = "<group>"; };
+		21CA317D1DD82D6D00CA2EF5 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
+		21D818841DD93A9F0079F4B8 /* List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List.xib; sourceTree = "<group>"; };
+		21D818861DD93AB20079F4B8 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		21D8188C1DD9E6060079F4B8 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		21D8188D1DD9E6060079F4B8 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		21D818901DDA93E30079F4B8 /* Kefa.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kefa.ttc; sourceTree = "<group>"; };
 		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
@@ -152,22 +177,42 @@
 				21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */,
 				2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */,
 				2122EB001DBB844700D5B2B2 /* PopoverController.swift */,
-				2155B38A1DADC621002E08D0 /* Indicators.swift */,
-				2122EB041DBBA3C100D5B2B2 /* Rater.swift */,
-				2155B38C1DADC631002E08D0 /* Indicators.xib */,
-				2122EB021DBBA39700D5B2B2 /* Rater.xib */,
 				216BFAB61DA8E4D50041FA8F /* Assets.xcassets */,
 				216BFAB81DA8E4D50041FA8F /* Info.plist */,
+				21CA31811DD82D8A00CA2EF5 /* XIBs */,
 				21EBEA911DA8E614000C744A /* Supporting Files */,
 			);
 			path = MessagesExtension;
 			sourceTree = "<group>";
 		};
+		21CA31811DD82D8A00CA2EF5 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				2155B38A1DADC621002E08D0 /* Indicators.swift */,
+				2155B38C1DADC631002E08D0 /* Indicators.xib */,
+				2122EB041DBBA3C100D5B2B2 /* Rater.swift */,
+				2122EB021DBBA39700D5B2B2 /* Rater.xib */,
+				216B751C1DDFF9A6009A6A3E /* Settings.swift */,
+				21CA317D1DD82D6D00CA2EF5 /* Settings.xib */,
+				21D818861DD93AB20079F4B8 /* List.swift */,
+				21D818841DD93A9F0079F4B8 /* List.xib */,
+				21D8188C1DD9E6060079F4B8 /* CustomCell.swift */,
+				21D8188D1DD9E6060079F4B8 /* CustomCell.xib */,
+				216B751E1DE00AA0009A6A3E /* ThemeCell.swift */,
+				216B751F1DE00AA0009A6A3E /* ThemeCell.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
 		21EBEA911DA8E614000C744A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				21D818901DDA93E30079F4B8 /* Kefa.ttc */,
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
+				21CA31771DD7348300CA2EF5 /* StoreManager.swift */,
+				216B75221DE00BB1009A6A3E /* ThemeManager.swift */,
+				216B75241DE00BC5009A6A3E /* Theme.swift */,
 				21EBEA941DA8E664000C744A /* LanguageManager.swift */,
 				2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */,
 				21EBEA981DA8E701000C744A /* DSError.swift */,
@@ -278,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D818921DDA97750079F4B8 /* Kefa.ttc in Resources */,
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +332,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21D818911DDA97730079F4B8 /* Kefa.ttc in Resources */,
+				21CA317E1DD82D6D00CA2EF5 /* Settings.xib in Resources */,
+				21D818851DD93A9F0079F4B8 /* List.xib in Resources */,
+				21D8188F1DD9E6060079F4B8 /* CustomCell.xib in Resources */,
+				216B75211DE00AA0009A6A3E /* ThemeCell.xib in Resources */,
 				2122EB031DBBA39700D5B2B2 /* Rater.xib in Resources */,
 				216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */,
@@ -368,9 +419,16 @@
 				214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */,
 				21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */,
 				2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */,
+				216B75231DE00BB1009A6A3E /* ThemeManager.swift in Sources */,
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
+				21D8188E1DD9E6060079F4B8 /* CustomCell.swift in Sources */,
 				2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */,
 				21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */,
+				21D818871DD93AB20079F4B8 /* List.swift in Sources */,
+				216B751D1DDFF9A6009A6A3E /* Settings.swift in Sources */,
+				216B75201DE00AA0009A6A3E /* ThemeCell.swift in Sources */,
+				216B75251DE00BC5009A6A3E /* Theme.swift in Sources */,
+				21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */,
 				2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */,
 				2185A1BD1DC4602900DD0647 /* Language.swift in Sources */,
 				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
@@ -502,7 +560,7 @@
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -520,7 +578,7 @@
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15.MessagesExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans.MessagesExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -538,7 +596,7 @@
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -555,7 +613,7 @@
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = YBCCTWH2WW;
 				INFOPLIST_FILE = Unitrans/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.Unitrans15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
