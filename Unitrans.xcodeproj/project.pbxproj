@@ -28,6 +28,7 @@
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
 		2185A1BD1DC4602900DD0647 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2185A1BC1DC4602900DD0647 /* Language.swift */; };
+		21C9F1531DEDCFB800291D8B /* UTSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */; };
 		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
 		21CA317E1DD82D6D00CA2EF5 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CA317D1DD82D6D00CA2EF5 /* Settings.xib */; };
 		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
@@ -94,6 +95,7 @@
 		216BFAB61DA8E4D50041FA8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2185A1BC1DC4602900DD0647 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Language.swift; path = ../Language.swift; sourceTree = "<group>"; };
+		21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTSafariViewController.swift; sourceTree = "<group>"; };
 		21CA31771DD7348300CA2EF5 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreManager.swift; path = ../StoreManager.swift; sourceTree = "<group>"; };
 		21CA317D1DD82D6D00CA2EF5 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
 		21D818841DD93A9F0079F4B8 /* List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List.xib; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				21D818901DDA93E30079F4B8 /* Kefa.ttc */,
+				21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */,
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
 				21CA31771DD7348300CA2EF5 /* StoreManager.swift */,
@@ -423,6 +426,7 @@
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
 				21D8188E1DD9E6060079F4B8 /* CustomCell.swift in Sources */,
 				2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */,
+				21C9F1531DEDCFB800291D8B /* UTSafariViewController.swift in Sources */,
 				21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */,
 				21D818871DD93AB20079F4B8 /* List.swift in Sources */,
 				216B751D1DDFF9A6009A6A3E /* Settings.swift in Sources */,

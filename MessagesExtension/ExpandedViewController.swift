@@ -8,6 +8,8 @@
 
 import UIKit
 import Messages
+import WebKit
+import SafariServices
 
 class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, UIPopoverPresentationControllerDelegate, UIPopoverControllerDelegate {
 
@@ -82,6 +84,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     var message: MessageData!
     
+    var settingsIsPresented = false
+    
     /*--------------------------------------*/
     
     
@@ -89,6 +93,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboard), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.errorHandler), name: NSNotification.Name(rawValue: "ERROR"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.goToWeb), name: NSNotification.Name(rawValue: "GO_TO_SITE"), object: nil)
         setUpInterface()
         
         
@@ -100,6 +105,32 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         
         // Do any additional setup after loading the view.
     }
+    
+    func goToWeb(sender: Notification) {
+        if let mail = sender.userInfo?["mail"] as? Bool {
+            if let url = sender.userInfo?["url"] as? URL {
+                print("Mail...")
+                self.extensionContext?.open(url, completionHandler: nil)
+                self.extensionContext?.open(<#T##URL: URL##URL#>, completionHandler: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+            }
+        } else {
+            if let url = sender.userInfo?["url"] as? URL {
+                let VC = WKWebView(frame: self.view.frame)
+                VC.frame.origin.y = 85
+                VC.frame.size.height -= 105
+                //let config = WKWebViewConfiguration()
+                VC.load(URLRequest(url: url))
+                
+                //self.view.addSubview(VC)
+                let safari = UTSafariViewController(url: url)
+                present(safari, animated: true, completion: nil)
+                
+            }
+        }
+        
+        
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         //Here we'll check the composer mode
@@ -161,66 +192,70 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         // animate the UI in
         let timeSep = 0.1
         let buttonToBubbleSep: CGFloat = 50
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 1, repeats: false, block: {(Timer) -> Void in
-            self.swapButtonVert.constant = 20
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.swapButton.alpha = 1
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-                //blah
+        if !settingsIsPresented {
+            let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 1, repeats: false, block: {(Timer) -> Void in
+                self.swapButtonVert.constant = 20
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.swapButton.alpha = 1
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    //blah
+                })
             })
-        })
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 2, repeats: false, block: {(Timer) -> Void in
-            self.textViewVerticalOffset.constant = self.desiredVerticalOffsetForTextView!
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.bubble.alpha = 1
-                self.textView.alpha = 1
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-                //blah
+            
+            let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 2, repeats: false, block: {(Timer) -> Void in
+                self.textViewVerticalOffset.constant = self.desiredVerticalOffsetForTextView!
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.bubble.alpha = 1
+                    self.textView.alpha = 1
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    //blah
+                })
             })
-        })
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 3, repeats: false, block: {(Timer) -> Void in
-            self.buttonStackViewSep.constant = buttonToBubbleSep
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.rateButton.alpha = 0.58
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-                //blah
+            
+            let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 3, repeats: false, block: {(Timer) -> Void in
+                self.buttonStackViewSep.constant = buttonToBubbleSep
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.rateButton.alpha = 0.58
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    //blah
+                })
             })
-        })
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 4, repeats: false, block: {(Timer) -> Void in
-            let center = self.goButton.center.y
-            self.goButton.center.y += 20
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.goButton.center.y = center
-                self.goButton.alpha = 1
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-                //blah
+            
+            let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 4, repeats: false, block: {(Timer) -> Void in
+                let center = self.goButton.center.y
+                self.goButton.center.y += 20
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.goButton.center.y = center
+                    self.goButton.alpha = 1
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    //blah
+                })
             })
-        })
-        
-        let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 5, repeats: false, block: {(Timer) -> Void in
-            let center = self.settingsButton.center.y
-            self.settingsButton.center.y += 40
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.settingsButton.center.y = center
-                self.settingsButton.alpha = 0.58
-                self.view.layoutIfNeeded()
-            }, completion: { (success) in
-
-                switch self.composerMode! {
-                case .Compose: self.textView.becomeFirstResponder()
-                default: break
-                }
-                
+            
+            let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 5, repeats: false, block: {(Timer) -> Void in
+                let center = self.settingsButton.center.y
+                self.settingsButton.center.y += 40
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                    self.settingsButton.center.y = center
+                    self.settingsButton.alpha = 0.58
+                    self.view.layoutIfNeeded()
+                }, completion: { (success) in
+                    
+                    switch self.composerMode! {
+                    case .Compose:
+                        self.textView.becomeFirstResponder()
+                    default:
+                        break
+                    }
+                    
+                })
             })
-        })
+        }
+        
         
     }
 
@@ -499,11 +534,13 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     func dismissSettings() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
+        
         if backgroundVertical.constant != topBarHeight {
             backgroundVertical.constant = topBarHeight
         } else {
             backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
         }
+        
         
         
         UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
@@ -515,7 +552,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             self.textView.isUserInteractionEnabled = true
             self.swapButton.isEnabled = true
             self.rateButton.isEnabled = true
-            self.goButton.isEnabled = true 
+            self.goButton.isEnabled = true
+            self.settingsIsPresented = false
+            self.textView.becomeFirstResponder()
         })
 
     }
@@ -531,6 +570,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         swapButton.isEnabled = false
         rateButton.isEnabled = false
         textView.isUserInteractionEnabled = false
+        settingsIsPresented = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopScroll), name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)

@@ -29,14 +29,45 @@ class Settings: UIView {
     
     
     func getView() -> UIView {
-        
         return Bundle.main.loadNibNamed("Settings", owner: nil, options: nil)?.first as! Settings
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        print(touches.first?.location(in: self))
+    @IBAction func facebookButton(_ sender: Any) {
+        guard let url = URL(string: "https://www.facebook.com/Unitrans-a-Message-Translator-172949406445526") else {
+            NSLog("Error: Icons URL error")
+            return
+        }
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
+
     }
+    
+    @IBAction func twitterButton(_ sender: Any) {
+        guard let url = URL(string: "https://twitter.com/disorderware") else {
+            NSLog("Error: Icons URL error")
+            return
+        }
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
+
+    }
+    
+    @IBAction func mailButton(_ sender: Any) {
+        guard let url = URL(string: "mailto:hi@disordersoftware.com") else {
+            NSLog("Error: Icons URL error")
+            return
+        }
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url,"mail":true]))
+
+    }
+    
+    @IBAction func webButton(_ sender: UIButton) {
+        guard let url = URL(string: "https://disordersoftware.com") else {
+            NSLog("Error: Icons URL error")
+            return
+        }
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
+    }
+
+    
     
     func loadDefaults() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
@@ -80,6 +111,7 @@ class Settings: UIView {
                 storeManager.updateProductList()
             }
         }
+        
         
         
         
