@@ -26,7 +26,7 @@ class Settings: UIView {
     var listView: List?
     var storeManager = StoreManager()
     var pricesUpdated = false
-    
+    var developerMode: Bool?
     
     func getView() -> UIView {
         return Bundle.main.loadNibNamed("Settings", owner: nil, options: nil)?.first as! Settings
@@ -50,17 +50,16 @@ class Settings: UIView {
 
     }
     
-    @IBAction func mailButton(_ sender: Any) {
-        guard let url = URL(string: "mailto:hi@disordersoftware.com") else {
-            NSLog("Error: Icons URL error")
-            return
-        }
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url,"mail":true]))
-
-    }
-    
     @IBAction func webButton(_ sender: UIButton) {
-        guard let url = URL(string: "https://disordersoftware.com") else {
+        var URLString: String?
+        switch sender.tag {
+        case 0: URLString = "https://disordersoftware.com"
+        case 1: URLString = "https://www.icons8.com"
+        case 2: URLString = "http://translate.google.com"
+        default: URLString = "https://disordersoftware.com"
+        }
+        
+        guard let url = URL(string: URLString!) else {
             NSLog("Error: Icons URL error")
             return
         }
@@ -69,14 +68,21 @@ class Settings: UIView {
 
     
     
-    func loadDefaults() {
+    func loadDefaults(notification: Notification?) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
         versionLabel.text = "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)b\(Bundle.main.infoDictionary!["CFBundleVersion"]!)"
         let defaults = UserDefaults()
         
+        if notification != nil {
+            if let theme = notification?.userInfo?["theme"] as? Theme {
+                self.themeLabel.text = theme.name
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil, userInfo: ["theme":theme])
+            }
+        }
+        
         if let subscriptionStatus = defaults.value(forKey: "subscribed") as? Bool {
-            if subscriptionStatus == true {
-                print("SUBSCRUBED!!!")
+            if subscriptionStatus == true || developerMode == true {
+                print("SUBSCRIBED!!!")
                 // subscribed; remove storefront and add theme section
                 stackView.removeArrangedSubview(storeFrontView)
                 
@@ -99,17 +105,25 @@ class Settings: UIView {
             
         } else {
             // key is nil; user has never subscribed
-            stackView.removeArrangedSubview(themeView)
-            
-            
-            if !pricesUpdated {
-                priceLabel.isHidden = true
-                storeFrontView.backgroundColor = UIColor.white
-                storeFrontView.layer.cornerRadius = 8
-                NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
-                storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
-                storeManager.updateProductList()
+            if !developerMode! {
+                stackView.removeArrangedSubview(themeView)
+                
+                
+                if !pricesUpdated {
+                    priceLabel.isHidden = true
+                    storeFrontView.backgroundColor = UIColor.white
+                    storeFrontView.layer.cornerRadius = 8
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
+                    storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
+                    storeManager.updateProductList()
+                }
+            } else if developerMode! {
+                print("SUBSCRIBED!!!")
+                // subscribed; remove storefront and add theme section
+                stackView.removeArrangedSubview(storeFrontView)
+
             }
+            
         }
         
         

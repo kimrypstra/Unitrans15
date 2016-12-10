@@ -141,7 +141,8 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
             let themeName = themes?[indexPath.row].name
             
             defaults.set(themeName, forKey: "theme")
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RELOAD")))
+            //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RELOAD")))
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RELOAD"), object: nil, userInfo: ["theme":ThemeManager().returnThemeOfName(name: themeName!)])
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_LANGUAGES")))
         }
         

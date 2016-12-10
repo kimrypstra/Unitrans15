@@ -25,7 +25,7 @@ class Indicators: UIView {
         return Bundle.main.loadNibNamed("Indicators", owner: nil, options: nil)?.first as! UIView
     }
     
-    func setupChevrons() {
+    func setupChevrons(colour: UIColor) {
         middleToOuter.constant = spacing
         innerToMiddle.constant = spacing
         
@@ -34,6 +34,14 @@ class Indicators: UIView {
         innerChevron.alpha = 0.5
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.pulse), userInfo: nil, repeats: true)
+        
+        outerChevron.image = UIImage(named: "chevron")?.withRenderingMode(.alwaysTemplate)
+        middleChevron.image = UIImage(named: "chevron")?.withRenderingMode(.alwaysTemplate)
+        innerChevron.image = UIImage(named: "chevron")?.withRenderingMode(.alwaysTemplate)
+        
+        outerChevron.tintColor = colour
+        middleChevron.tintColor = colour
+        innerChevron.tintColor = colour
     }
 
 

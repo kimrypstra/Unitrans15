@@ -40,6 +40,16 @@ class ThemeManager: NSObject {
         focussedButtonColour: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.4),
         darkKeyboard: false,
         imagePrefix: nil),
+        Theme(
+        name: "Dark",
+        topColour: UIColor(red: 94/255, green: 94/255, blue: 94/255, alpha: 1),
+        bottomColour: UIColor(red: 63/255, green: 63/255, blue: 63/255, alpha: 1),
+        textColour: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1),
+        bubbleColour: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.4),
+        buttonColour: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.2),
+        focussedButtonColour: UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.4),
+        darkKeyboard: true,
+        imagePrefix: "dark")
     ]
     
     let color = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
@@ -51,8 +61,8 @@ class ThemeManager: NSObject {
         return availableThemes
     }
     
-    func returnThemeOfName(name: String) -> Theme {
-        return availableThemes.first!
+    func returnThemeOfName(name: String) -> Theme? {
+        return availableThemes.filter{ $0.name == name }.first
     }
     
 }

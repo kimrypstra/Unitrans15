@@ -8,12 +8,12 @@
 
 import UIKit
 
-@IBDesignable class BackgroundView: UIView {
+class BackgroundView: UIView {
 
-    @IBInspectable var topColor: UIColor!
-    @IBInspectable var bottomColor: UIColor!
-    @IBInspectable var top: CGFloat = 0.0
-    @IBInspectable var bottom: CGFloat = 1.0
+    var topColor: UIColor!
+    var bottomColor: UIColor!
+    var top: CGFloat = 0.0
+    var bottom: CGFloat = 1.0
     
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()

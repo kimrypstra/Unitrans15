@@ -34,10 +34,21 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var identifier: String?
     var subscribed: Bool?
     var fromLanguage: String?
+    var themeToApply: Theme?
+    var shouldScrollOnTap = true
+    var scrollWasInitiatedByIndicator = false
+    var shouldPresentSettings = false
     
     //Views
     var topIndicator: Indicators?
     var bottomIndicator: Indicators?
+    
+    
+    
+    
+    var developerMode = true
+    
+    
     
     
     /*-----------------------------------------*/
@@ -45,6 +56,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyTheme()
         designIndicators()
         setUpStackView()
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
@@ -56,6 +68,11 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         marker.backgroundColor = UIColor.red
         self.view.addSubview(marker)
         */
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        backgroundView.topColor = themeToApply?.topColour
+        backgroundView.bottomColor = themeToApply?.bottomColour
     }
     
     func insertMessage(notification: Notification) {
@@ -80,14 +97,14 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         topIndicator = topView
         if topIndicator != nil {
             topIndicatorContainer.addSubview(topIndicator!)
-            topIndicator?.setupChevrons()
+            topIndicator?.setupChevrons(colour: themeToApply!.focussedButtonColour!)
         }
         let bottomView = Indicators().getView() as! Indicators
         
         bottomIndicator = bottomView
         if bottomIndicator != nil {
             bottomIndicatorContainer.addSubview(bottomIndicator!)
-            bottomIndicator?.setupChevrons()
+            bottomIndicator?.setupChevrons(colour: themeToApply!.focussedButtonColour!)
             bottomIndicatorContainer.transform = CGAffineTransform.init(rotationAngle: CGFloat(M_PI))
         }
         
@@ -100,17 +117,27 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         
     }
     
+    func requestCompact() {
+        self.requestPresentationStyle(.compact)
+    }
+    
+    
     func didTapIndicator(sender: UITapGestureRecognizer) {
-        switch sender.accessibilityHint! {
-        case "Scroll Up":
-            print("Tap UP")
-            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - scrollViewHeight.constant), animated: true)
-        case "Scroll Down":
-            print("Tap DOWN")
-            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y + scrollViewHeight.constant), animated: true)
-        default:
-            print("Error")
+        if shouldScrollOnTap {
+            switch sender.accessibilityHint! {
+            case "Scroll Up":
+                print("Tap UP")
+                shouldScrollOnTap = false
+                scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - scrollViewHeight.constant), animated: true)
+            case "Scroll Down":
+                print("Tap DOWN")
+                shouldScrollOnTap = false
+                scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y + scrollViewHeight.constant), animated: true)
+            default:
+                print("Error")
+            }
         }
+        
     }
     
     func setUpStackView() {
@@ -141,6 +168,24 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
     }
     
+    func applyTheme() {
+        print("Applying theme")
+        let defaults = UserDefaults()
+        if let theme = defaults.value(forKey: "theme") as? String {
+            print("Theme: \(theme)")
+            themeToApply = ThemeManager().returnThemeOfName(name: theme)
+            backgroundView.topColor = themeToApply!.topColour!
+            backgroundView.bottomColor = themeToApply!.bottomColour!
+            backgroundView.setNeedsDisplay()
+        } else {
+            print("No theme selected; setting default")
+            themeToApply = ThemeManager().returnThemeOfName(name: "Sky Blue")
+            backgroundView.topColor = themeToApply!.topColour!
+            backgroundView.bottomColor = themeToApply!.bottomColour!
+            backgroundView.setNeedsDisplay()
+        }
+    }
+    
     func loadDefaults(conversation: MSConversation) {
         // load user defaults
         print("Loading defaults...")
@@ -150,6 +195,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         for id in conversation.remoteParticipantIdentifiers {
             ids.append(id.uuidString)
         }
+        
         let sortedIDs = ids.sorted()
         identifier = sortedIDs.joined(separator: "+")
         if let subscriptionStatus = defaults.value(forKey: "subscribed") as? Bool {
@@ -172,20 +218,23 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 } else {
                     print("No record of this conversation's identifier; must be a new conversation")
                 }
-                
-                if let theme = defaults.value(forKey: "theme") as? String {
-                    print("Theme: \(theme)")
-                } else {
-                    print("No theme selected; setting default")
-                }
 
             } else {
                 // they are not subscribed
-                subscribed = false
+                if developerMode == true {
+                    subscribed = true
+                } else {
+                    subscribed = false
+                }
+                
             }
         } else {
             // they are not subscribed
-            subscribed = false
+            if developerMode == true {
+                subscribed = true
+            } else {
+                subscribed = false
+            }
         }
         
         if let fromLanguage = defaults.value(forKey: "fromLanguage") as? String {
@@ -215,7 +264,38 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
 
     }
     
-
+    func returnUIToNormal() {
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {(Timer) -> Void in
+            // first element
+            self.goButtonOffset.constant = 10
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.goButton.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+        })
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: {(Timer) -> Void in
+            // second element
+            self.scrollViewOffset.constant = 0
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.scrollView.alpha = 1
+                self.topIndicator?.alpha = 1
+                self.bottomIndicator?.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+        })
+        
+        let _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false, block: {(Timer) -> Void in
+            // third element
+            self.settingsButtonOffset.constant = 30
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (success) in
+                
+            })
+        })
+    }
     
     @IBAction func goButtonTapped(_ sender: UIButton) {
         let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {(Timer) -> Void in
@@ -249,6 +329,10 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         })
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        shouldScrollOnTap = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         
@@ -267,7 +351,18 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 self.bottomIndicator?.alpha = 1
             })
         }
+
+        
     }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        shouldScrollOnTap = true
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        shouldScrollOnTap = true
+    }
+    
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         //This takes the targeted end-point of the scroll and adjusts it so that it hits a 'page', but without using the aggressive pagination of a page-enabled scroll view
@@ -325,6 +420,13 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        switch presentationStyle {
+        case .compact:
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "GOING_TO_COMPACT"), object: nil, userInfo: nil)
+        default:
+            break
+        }
+        
         // Called before the extension transitions to a new presentation style.
     
         // Use this method to prepare for the change in presentation style.
@@ -335,6 +437,9 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         switch presentationStyle {
         case .expanded:
             self.performSegue(withIdentifier: "toExpanded", sender: self)
+        case .compact:
+            scrollViewDidScroll(self.scrollView)
+            returnUIToNormal()
         default:
             break
         }
@@ -347,6 +452,13 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         case "toExpanded":
             let IVC = segue.destination as! ExpandedViewController
             IVC.conversationIdentifier = identifier
+            IVC.developerMode = self.developerMode
+            IVC.theme = self.themeToApply
+            
+            if shouldPresentSettings {
+                IVC.shouldPresentSettings = true 
+            }
+            
             if self.activeConversation?.selectedMessage == nil {
                 let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
                 if languages[pageNumber].prefersGoogle == true {

@@ -55,7 +55,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     var desiredVerticalOffsetForTextView: CGFloat?
     var conversationIdentifier: String?
     let separationGap: CGFloat = 20
-
+    var developerMode: Bool?
+    var theme: Theme?
+    var shouldPresentSettings = false
+    
     //Enums & Structs
     enum Mode {
         case Compose(String, String, Bool)
@@ -111,7 +114,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             if let url = sender.userInfo?["url"] as? URL {
                 print("Mail...")
                 self.extensionContext?.open(url, completionHandler: nil)
-                self.extensionContext?.open(<#T##URL: URL##URL#>, completionHandler: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+                
             }
         } else {
             if let url = sender.userInfo?["url"] as? URL {
@@ -131,6 +134,52 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         
     }
     
+    var respondToNotificationCalled = false
+    
+    func respondToNotification(notification: Notification) {
+        if !respondToNotificationCalled {
+            respondToNotificationCalled = true
+            if let theme = notification.userInfo?["theme"] as? Theme {
+                applyTheme(theme: theme, notification: nil)
+            } else {
+                print("No theme at respondToNotification")
+            }
+        }
+        
+        
+        
+    }
+    
+    func applyTheme(theme: Theme?, notification: Notification?) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
+        var themeToApply: Theme?
+        if theme != nil {
+            themeToApply = theme
+        } else if notification != nil {
+            if let themeFromNotification = notification?.userInfo?["theme"] as? Theme? {
+                themeToApply = themeFromNotification
+            }
+        }
+        
+        self.theme = themeToApply
+        print("Applying theme: \(theme?.name!)")
+        background.topColor = self.theme?.topColour
+        background.bottomColor = self.theme?.bottomColour
+        
+        textView.textColor = self.theme?.textColour
+        
+        if theme?.imagePrefix != nil {
+            // change the images to suit the detailed theme
+        }
+        
+        if theme?.darkKeyboard == true {
+            textView.keyboardAppearance = .dark
+        } else {
+            textView.keyboardAppearance = .default
+        }
+        background.setNeedsDisplay()
+        respondToNotificationCalled = false 
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         //Here we'll check the composer mode
@@ -143,6 +192,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         settingsButton.layer.borderColor = UIColor.red.cgColor
         settingsButton.layer.borderWidth = 1
         */
+        
+        // apply the theme 
+        applyTheme(theme: theme!, notification: nil)
+
         
         switch composerMode! {
         case .View:
@@ -189,6 +242,13 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        if shouldPresentSettings {
+            didTapSettings(nil)
+        } else {
+            
+        
+        
         // animate the UI in
         let timeSep = 0.1
         let buttonToBubbleSep: CGFloat = 50
@@ -252,8 +312,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                         break
                     }
                     
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.prepareForTransition), name: NSNotification.Name(rawValue: "GOING_TO_COMPACT"), object: nil)
+                    
                 })
             })
+        }
         }
         
         
@@ -270,29 +333,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
      didTransition
      bring the picker UI back down in reverse, back to what they were 
  */
-    
-    
-    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        
-        if presentationStyle == .compact {
-
-                self.swapButtonVert.constant = -100
-                self.textViewVerticalOffset.constant = -100
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                    self.swapButton.alpha = 0
-                    self.bubble.alpha = 0
-                    self.textView.alpha = 0
-                    self.view.layoutIfNeeded()
-                }, completion: { (success) in
-                    //blah
-                })
-
-
-            
-
-        }
-        
-
+    func prepareForTransition() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.alpha = 0
+        })
+        self.dismiss(animated: false, completion: nil)
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -560,11 +605,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     // listView is aligned to the top of the scrollView so if you scroll down and present the list it is out of place 
-    // 
+    //
     
-    
-    
-    @IBAction func didTapSettings(_ sender: UIButton) {
+    @IBAction func didTapSettings(_ sender: UIButton?) {
         settingsButton.isEnabled = false
         goButton.isEnabled = false
         swapButton.isEnabled = false
@@ -575,11 +618,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.stopScroll), name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissSettings), name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.respondToNotification), name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
+        
         if settingsView == nil {
             textView.resignFirstResponder()
             settingsView = Bundle.main.loadNibNamed("Settings", owner: self, options: nil)?.first as! Settings
             settingsContainer.addSubview(settingsView!)
-            settingsView?.loadDefaults()
+            settingsView?.developerMode = developerMode
+            settingsView?.loadDefaults(notification: nil)
             settingsView?.listContainer.isHidden = true 
             settingsView?.translatesAutoresizingMaskIntoConstraints = false
             settingsContainer.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":settingsView! as Settings]))
