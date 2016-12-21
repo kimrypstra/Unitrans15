@@ -81,8 +81,14 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.textColor = theme?.textColour
             cell.background.topColor = theme?.topColour
             cell.background.bottomColor = theme?.bottomColour
-            cell.bubble.image = UIImage(named: "bubble")?.withRenderingMode(.alwaysTemplate)
-            cell.bubble.tintColor = theme?.bubbleColour
+            if theme?.isRichTheme == true {
+                cell.bubble.image = UIImage(named: "\(theme!.imagePrefix!)Bubble")?.withRenderingMode(.alwaysOriginal)
+                print("\(theme!.imagePrefix!)Bubble")
+            } else {
+                cell.bubble.image = UIImage(named: "bubble")?.withRenderingMode(.alwaysTemplate)
+                cell.bubble.tintColor = theme?.bubbleColour
+            }
+            
             // if the cell is the current from language, put a tick there
             
             if cell.nameLabel.text == selected {

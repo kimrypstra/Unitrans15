@@ -34,6 +34,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     @IBOutlet weak var blur: UIVisualEffectView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var raterContainer: Rater!
+
     
     
     //xibs
@@ -107,7 +108,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         */
         
         // Do any additional setup after loading the view.
+        
     }
+    
+
     
     func goToWeb(sender: Notification) {
         if let mail = sender.userInfo?["mail"] as? Bool {
@@ -152,27 +156,44 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     func applyTheme(theme: Theme?, notification: Notification?) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
-        var themeToApply: Theme?
+        
         if theme != nil {
-            themeToApply = theme
+            self.theme = theme
         } else if notification != nil {
             if let themeFromNotification = notification?.userInfo?["theme"] as? Theme? {
-                themeToApply = themeFromNotification
+                self.theme = themeFromNotification
             }
         }
         
-        self.theme = themeToApply
+        
         print("Applying theme: \(theme?.name!)")
         background.topColor = self.theme?.topColour
         background.bottomColor = self.theme?.bottomColour
         
         textView.textColor = self.theme?.textColour
         
-        if theme?.imagePrefix != nil {
+        if self.theme?.isRichTheme == true {
             // change the images to suit the detailed theme
+            bubble.image = UIImage(named: "\(self.theme!.imagePrefix!)Bubble")?.withRenderingMode(.alwaysOriginal)
+            goButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)GoButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            rateButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)RateButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            settingsButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)SettingsButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            swapButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)SwapButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else {
+            bubble.image = UIImage(named: "bubble")?.withRenderingMode(.alwaysTemplate)
+            goButton.setImage(UIImage(named: "rightArrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            rateButton.setImage(UIImage(named: "rateButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            settingsButton.setImage(UIImage(named: "settingsButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            swapButton.setImage(UIImage(named: "swapButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            
+            bubble.tintColor = self.theme?.bubbleColour
+            goButton.imageView?.tintColor = self.theme?.buttonColour
+            rateButton.imageView?.tintColor = self.theme?.buttonColour
+            settingsButton.imageView?.tintColor = self.theme?.buttonColour
+            swapButton.imageView?.tintColor = self.theme?.buttonColour
         }
         
-        if theme?.darkKeyboard == true {
+        if self.theme?.darkKeyboard == true {
             textView.keyboardAppearance = .dark
         } else {
             textView.keyboardAppearance = .default
@@ -318,8 +339,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             })
         }
         }
-        
-        
     }
 
     /*
@@ -350,7 +369,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
         self.keyboardHeight = keyboardFrame.cgRectValue.height
         let screenHeight = UIScreen.main.bounds.height
-        let interfaceHeight = textViewVerticalOffset.constant + buttonStackViewSep.constant + goButton.frame.height + 20 /*bubble padding*/ + 50 /*lower padding and keyboard accessory*/
+        let interfaceHeight = textViewVerticalOffset.constant + buttonStackViewSep.constant + goButton.frame.height + 20 /*bubble padding*/ + 120 /*lower padding and keyboard accessory -- *** CHANGE THIS NUMBER TO CHANGE THE MAX TEXT VIEW HEIGHT FOR SOME REASON *** */
         self.remainingHeight = screenHeight - keyboardHeight! - interfaceHeight
     }
     
@@ -407,18 +426,31 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        var shouldReturn = true
+        if textView.text.characters.count + (text.characters.count - range.length) <= 1000 {
+            shouldReturn = true
+        } else {
+            textView.shake()
+            bubble.shake()
+            shouldReturn = false
+        }
+        return shouldReturn
+
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         var maxHeight: CGFloat {
             if remainingHeight != nil {
                 return remainingHeight!
             } else {
-                return 137
+                return 117
             }
         }
         
         let contentHeight = textView.contentSize.height
         var shouldAnimate = true
-        
+        print(contentHeight)
         if contentHeight + textView.font!.lineHeight > maxHeight && textViewIsScrollEnabled == false {
             // Too big!
             self.textView.isScrollEnabled = true

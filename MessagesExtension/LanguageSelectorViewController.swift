@@ -38,6 +38,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var shouldScrollOnTap = true
     var scrollWasInitiatedByIndicator = false
     var shouldPresentSettings = false
+    var stackViewFontColour: UIColor?
     
     //Views
     var topIndicator: Indicators?
@@ -56,7 +57,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyTheme()
+        applyTheme(notification: nil)
         designIndicators()
         setUpStackView()
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
@@ -150,11 +151,18 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             label.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightHeavy)
             
             label.adjustsFontSizeToFitWidth = true
-            label.textColor = UIColor.white.withAlphaComponent(0.8)
+            var textColor: UIColor?
+            if themeToApply?.selectorTextColour != nil {
+                stackViewFontColour = themeToApply!.selectorTextColour!
+            } else {
+                print("No indicator text color...")
+                stackViewFontColour = UIColor.white.withAlphaComponent(0.8)
+            }
+            label.textColor = stackViewFontColour
             label.numberOfLines = 2
-            let name = NSMutableAttributedString(string: languages[number].englishName, attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.8)])
+            let name = NSMutableAttributedString(string: languages[number].englishName, attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.8)])
             if let native = languages[number].nativeName {
-                let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(0.4)])
+                let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.4)])
                 name.append(nativeName)
             }
             
@@ -168,22 +176,50 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
     }
     
-    func applyTheme() {
+    func applyTheme(notification: Notification?) {
         print("Applying theme")
         let defaults = UserDefaults()
-        if let theme = defaults.value(forKey: "theme") as? String {
-            print("Theme: \(theme)")
-            themeToApply = ThemeManager().returnThemeOfName(name: theme)
-            backgroundView.topColor = themeToApply!.topColour!
-            backgroundView.bottomColor = themeToApply!.bottomColour!
-            backgroundView.setNeedsDisplay()
+        if notification == nil {
+            if let theme = defaults.value(forKey: "theme") as? String {
+                print("Theme: \(theme)")
+                themeToApply = ThemeManager().returnThemeOfName(name: theme)
+            } else {
+                print("No theme selected; setting default")
+                themeToApply = ThemeManager().returnThemeOfName(name: "Classic")
+            }
         } else {
-            print("No theme selected; setting default")
-            themeToApply = ThemeManager().returnThemeOfName(name: "Sky Blue")
-            backgroundView.topColor = themeToApply!.topColour!
-            backgroundView.bottomColor = themeToApply!.bottomColour!
-            backgroundView.setNeedsDisplay()
+            if let theme = notification?.userInfo?["theme"] as? Theme {
+                print("Theme: \(theme.name)")
+                themeToApply = theme
+            }
         }
+        stackViewFontColour = themeToApply?.selectorTextColour
+        backgroundView.topColor = themeToApply!.topColour!
+        backgroundView.bottomColor = themeToApply!.bottomColour!
+        
+        //backgroundView.topColor = UIColor.white
+        //backgroundView.bottomColor =  UIColor.white
+        
+        if themeToApply?.isRichTheme == true {
+            //goButton.setImage(UIImage(named: "\(themeToApply!.imagePrefix!)GoButton"), for: .normal)
+            goButton.setImage(UIImage(named: "maskedGoButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            goButton.imageView?.tintColor = themeToApply?.selectorTextColour
+            goButton.alpha = 1
+        } else {
+            goButton.setImage(UIImage(named:"rightArrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            goButton.imageView?.tintColor = themeToApply?.buttonColour
+        }
+        
+        if notification != nil {
+            for view in stackView.arrangedSubviews {
+                stackView.removeArrangedSubview(view)
+            }
+            designIndicators()
+            setUpStackView()           
+        }
+        
+        backgroundView.setNeedsDisplay()
+        
     }
     
     func loadDefaults(conversation: MSConversation) {
@@ -450,6 +486,8 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         case "toExpanded":
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.applyTheme), name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
             let IVC = segue.destination as! ExpandedViewController
             IVC.conversationIdentifier = identifier
             IVC.developerMode = self.developerMode
