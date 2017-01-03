@@ -167,6 +167,10 @@ class Settings: UIView {
         storeManager.buyTheThing()
     }
     
+    @IBAction func restorePurchasesTapped(_ sender: UIButton) {
+        storeManager.restorePurchases()
+    }
+    
     func removeList() {
         self.listCenterX.constant = 375
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {

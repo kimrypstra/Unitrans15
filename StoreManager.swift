@@ -49,6 +49,26 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         
     }
     
+    func restorePurchases() {
+    
+        if let receiptURL = Bundle.main.appStoreReceiptURL {
+            let receiptData = NSData(contentsOf: receiptURL)
+            
+            if receiptData == nil {
+                //there is no receipt
+            } else {
+                //send to server for forwarding to apple 
+            }
+            
+        }
+        
+        
+        if SKPaymentQueue.canMakePayments() {
+            SKPaymentQueue.default().add(self)
+            SKPaymentQueue.default().restoreCompletedTransactions()
+        }
+    }
+    
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         // check if the payment was successful, etc...
         switch transactions.first!.transactionState {

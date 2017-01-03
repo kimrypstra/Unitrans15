@@ -47,7 +47,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     
     
-    var developerMode = true
+    var developerMode = false
     
     
     

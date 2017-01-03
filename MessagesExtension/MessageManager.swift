@@ -86,6 +86,11 @@ class MessageManager: NSObject, URLSessionDelegate {
         
     }
     
+    func abortWithError(error: String, code: Int) {
+        let errorPost = DSError(domain: error, code: code)
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":errorPost]))
+    }
+    
     func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, google: Bool, completion: @escaping (String?) -> ()) {
         let baseURL = "http://api.disordersoftware.com/unitrans/Testing/api2.php?action=translate"
         // An NSDictionary to return
@@ -144,9 +149,18 @@ class MessageManager: NSObject, URLSessionDelegate {
                             if google {
                                 let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
                                 //print(json)
-                                let dataLevel = json["data"] as! NSDictionary
-                                let translationsLevel = dataLevel["translations"] as! NSArray
-                                let text = translationsLevel[0] as! NSDictionary
+                                guard let dataLevel = json["data"] as? NSDictionary else {
+                                    self.abortWithError(error: "JSON Error", code: 1)
+                                    return
+                                }
+                                guard let translationsLevel = dataLevel["translations"] as? NSArray else {
+                                    self.abortWithError(error: "JSON Error", code: 2)
+                                    return
+                                }
+                                guard let text = translationsLevel[0] as? NSDictionary else {
+                                    self.abortWithError(error: "JSON Error", code: 3)
+                                    return
+                                }
                                 print(text["translatedText"]!)
                                 completion(text["translatedText"] as! String)
                             } else {
