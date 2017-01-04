@@ -9,7 +9,7 @@
 import UIKit
 import StoreKit
 
-class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate {
+class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate, URLSessionDelegate, SKRequestDelegate {
 
     let productIdentifiers = Set(["com.kimrypstra.unitrans.MessagesExtension.Yearly"])
     var product: SKProduct?
@@ -50,23 +50,73 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     }
     
     func restorePurchases() {
-    
+        print("Restoring purchases...")
         if let receiptURL = Bundle.main.appStoreReceiptURL {
+            
             let receiptData = NSData(contentsOf: receiptURL)
             
             if receiptData == nil {
+                print("There is no receipt at: \(receiptURL.absoluteString)")
                 //there is no receipt
+                let refreshRequest = SKReceiptRefreshRequest()
+                refreshRequest.start()
+                refreshRequest.delegate = self
             } else {
                 //send to server for forwarding to apple 
+                
+                var testString = ["message" : "Hello, world"]
+                
+                guard let url = URL(string: "http://api.disordersoftware.com/unitrans/Testing/validate.php") else {
+                    print("URL Error in receipt validation")
+                    return
+                }
+                let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
+                
+                var dataTask = URLSessionDataTask()
+                var request = URLRequest(url: url)
+                
+                
+                print("Sending validation request to \(url.absoluteString)")
+                dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+                    if error == nil {
+                        do {
+                            print("Received: \(data!)")
+                            let payload = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+                            print("Payload: \(payload)")
+                        } catch {
+                            print("Error deserializing: \(error)")
+                        }
+                    } else {
+                        let httpResponse = response as! HTTPURLResponse
+                        print("Status: \(httpResponse.statusCode) \nError: \(error)")
+                    }
+                })
+                
+                dataTask.resume()
             }
             
+        } else {
+            print("No receipt in bundle?")
         }
         
-        
+        /*
         if SKPaymentQueue.canMakePayments() {
             SKPaymentQueue.default().add(self)
             SKPaymentQueue.default().restoreCompletedTransactions()
         }
+        */
+    }
+    
+    func requestDidFinish(_ request: SKRequest) {
+        print("Finished request...")
+        if request.isKind(of: SKReceiptRefreshRequest.self) {
+            restorePurchases()
+        }
+        
+    }
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        print("Request failed with error: \(error)")
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
