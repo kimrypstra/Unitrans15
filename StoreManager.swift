@@ -54,7 +54,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         if let receiptURL = Bundle.main.appStoreReceiptURL {
             
             let receiptData = NSData(contentsOf: receiptURL)
-            
+            let receiptString = receiptData?.base64EncodedString(options: .init(rawValue: 0))
             if receiptData == nil {
                 print("There is no receipt at: \(receiptURL.absoluteString)")
                 //there is no receipt
@@ -64,7 +64,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             } else {
                 //send to server for forwarding to apple 
                 
-                var testString = ["message" : "Hello, world"]
+                //var testString = ["message" : "Hello, world"]
                 
                 guard let url = URL(string: "http://api.disordersoftware.com/unitrans/Testing/validate.php") else {
                     print("URL Error in receipt validation")
@@ -74,15 +74,17 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                 
                 var dataTask = URLSessionDataTask()
                 var request = URLRequest(url: url)
-                
+                request.httpBody = receiptString?.data(using: String.Encoding.ascii)
+                request.httpMethod = "POST"
                 
                 print("Sending validation request to \(url.absoluteString)")
                 dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
                     if error == nil {
                         do {
                             print("Received: \(data!)")
-                            let payload = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String: Any]
+                            let payload = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
                             print("Payload: \(payload)")
+                            // now, parse the payload and handle the codes and check the things 
                         } catch {
                             print("Error deserializing: \(error)")
                         }
