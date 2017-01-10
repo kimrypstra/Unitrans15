@@ -32,6 +32,7 @@ class Settings: UIView {
         return Bundle.main.loadNibNamed("Settings", owner: nil, options: nil)?.first as! Settings
     }
     
+    
     @IBAction func facebookButton(_ sender: Any) {
         guard let url = URL(string: "https://www.facebook.com/Unitrans-a-Message-Translator-172949406445526") else {
             NSLog("Error: Icons URL error")
@@ -66,10 +67,29 @@ class Settings: UIView {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
     }
 
-    
+    func refreshAfterPurchase() {
+        // Check user defaults to see if there is a theme saved 
+        let defaults = UserDefaults()
+        if let themeName = defaults.value(forKey: "theme") as? String {
+            // If there is, post a notification to restore it
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RELOAD"), object: nil, userInfo: ["theme":ThemeManager().returnThemeOfName(name: themeName)])
+            themeLabel.text = themeName
+        } else {
+            themeLabel.text = "Classic"
+        }
+        // If not dw 
+        
+        // remove the store UI 
+        stackView.removeArrangedSubview(storeFrontView)
+        // present the theme picker UI
+        stackView.insertArrangedSubview(themeView, at: 2)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil)
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: nil))
+    }
     
     func loadDefaults(notification: Notification?) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterPurchase), name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil) // This is added here because it's basically the first function that runs when the class is loaded (apart from getView())
         versionLabel.text = "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)b\(Bundle.main.infoDictionary!["CFBundleVersion"]!)"
         let defaults = UserDefaults()
         
@@ -77,6 +97,12 @@ class Settings: UIView {
             if let theme = notification?.userInfo?["theme"] as? Theme {
                 self.themeLabel.text = theme.name
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil, userInfo: ["theme":theme])
+            }
+        } else {
+            if let themeName = UserDefaults().value(forKey: "theme") as? String {
+                self.themeLabel.text = themeName
+            } else {
+                self.themeLabel.text = "Classic"
             }
         }
         
@@ -126,10 +152,6 @@ class Settings: UIView {
             
         }
         
-        
-        
-        
-
         if let defaultFromLanguage = defaults.value(forKey: "fromLanguage") as? String {
             // set the language label to the value
             let text = LanguageManager().nameFromCode(defaultFromLanguage, localized: true)

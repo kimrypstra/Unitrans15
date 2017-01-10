@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ObA-dk-sSI">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,7 +31,7 @@
                                             <constraint firstAttribute="height" constant="40" id="01X-u5-b2v"/>
                                             <constraint firstAttribute="width" constant="40" id="3MT-bv-UsZ"/>
                                         </constraints>
-                                        <state key="normal" image="E899B961-2FCC-4A27-A16C-92B4AD7F123B"/>
+                                        <state key="normal" image="A337448B-D630-496E-B64A-BFA8B1629707"/>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kvm-g3-RQJ">
                                         <rect key="frame" x="0.0" y="124" width="414" height="58"/>
@@ -173,20 +173,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlY-14-iSG" customClass="Settings" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="600"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="600" id="Umq-AO-yXb"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="F7m-oo-gPz" customClass="Rater" customModule="MessagesExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="375" height="85"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="zr9-wh-4VW"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toS-zp-d7y" customClass="BackgroundView" customModule="MessagesExtension" customModuleProvider="target">
@@ -308,6 +298,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="F7m-oo-gPz" customClass="Rater" customModule="MessagesExtension" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="80" width="375" height="85"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="zr9-wh-4VW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -315,7 +315,7 @@
                             <constraint firstItem="PlY-14-iSG" firstAttribute="leading" secondItem="7gb-ZO-s8t" secondAttribute="leadingMargin" constant="-16" id="4ds-GJ-xIy"/>
                             <constraint firstItem="F7m-oo-gPz" firstAttribute="centerX" secondItem="aRi-C3-jpD" secondAttribute="centerX" id="6VF-DA-3bw"/>
                             <constraint firstItem="TeC-Ov-fcX" firstAttribute="top" secondItem="toS-zp-d7y" secondAttribute="bottom" id="7cH-jB-Adv"/>
-                            <constraint firstItem="F7m-oo-gPz" firstAttribute="top" secondItem="d3d-Gb-7YT" secondAttribute="bottom" id="HLz-ux-gf5"/>
+                            <constraint firstItem="F7m-oo-gPz" firstAttribute="top" secondItem="d3d-Gb-7YT" secondAttribute="bottom" constant="60" id="HLz-ux-gf5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PlY-14-iSG" secondAttribute="trailing" constant="-16" id="OqE-os-sec"/>
                             <constraint firstItem="PlY-14-iSG" firstAttribute="top" secondItem="F7m-oo-gPz" secondAttribute="top" id="gsr-Xo-PYa"/>
                             <constraint firstItem="toS-zp-d7y" firstAttribute="top" secondItem="7gb-ZO-s8t" secondAttribute="top" constant="85" id="nKV-ao-6XB">
@@ -362,7 +362,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="E899B961-2FCC-4A27-A16C-92B4AD7F123B" width="50" height="50">
+        <image name="A337448B-D630-496E-B64A-BFA8B1629707" width="50" height="50">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -83,8 +83,29 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                         do {
                             print("Received: \(data!)")
                             let payload = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! [String: Any]
-                            print("Payload: \(payload)")
+                            //print("Payload: \(payload)")
                             // now, parse the payload and handle the codes and check the things 
+                            if let response = payload["Response"] as? [String: Any] {
+                                if response["status"] as? Int == 0 {
+                                    print("All is well")
+                                    let receipt = response["receipt"] as! [String: Any]
+                                    if receipt != nil {
+                                        if let version = receipt["original_application_version"] as? String {
+                                            let versionDouble = Double(version)
+                                            if versionDouble! <= 1.2 {
+                                                print("Version is <= 1.2; Give all of the things")
+                                                self.deliverTheGoods()
+                                            } else {
+                                                print("Version is >= 1.2; continue validating")
+                                                // This receipt was generated after the business model changed - it is for an IAP, not an outright.
+                                                // So, we need to check that it is current, or if the subscription has been cancelled
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                            }
                         } catch {
                             print("Error deserializing: \(error)")
                         }
@@ -155,6 +176,11 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         if (defaults.value(forKey: "subscribed") == nil) {
             defaults.setValue(true, forKey: "subscribed")
         }
+        
+        // Send a notification to update the store UI
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REFRESH_UI"), object: nil, userInfo: nil))
+        
+
     }
     
     func validateReciept() {

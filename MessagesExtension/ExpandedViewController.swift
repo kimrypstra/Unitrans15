@@ -405,6 +405,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
+    func presentMessage() {
+        let alert = UIAlertController(title: "Thank you!", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
+    }
+    
     func errorHandler(notification: Notification) {
         print("An error has occurred")
         if let error = notification.userInfo?["error"] as? DSError {
@@ -549,6 +557,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     @IBAction func didTapRate(_ sender: UIButton) {
+        
         if raterView == nil {
             NotificationCenter.default.addObserver(self, selector: #selector(self.didTapRate), name: NSNotification.Name(rawValue: "RATED"), object: nil)
             raterView?.frame.size.width = self.view.frame.width
@@ -567,6 +576,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }, completion: { (success) in
                 
             })
+            self.raterView?.hideStars()
             self.raterView?.presentStars()
         } else {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RATED"), object: nil)
@@ -584,7 +594,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 self.raterView = nil
             })
             
-            self.rateButton.isEnabled = false 
+            //self.rateButton.isEnabled = false
             
         }
     }
@@ -651,6 +661,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissSettings), name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.respondToNotification), name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentMessage), name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
         
         if settingsView == nil {
             textView.resignFirstResponder()

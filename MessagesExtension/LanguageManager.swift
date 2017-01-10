@@ -21,7 +21,6 @@ class LanguageManager {
     private let google = [
         "Afrikaans":"af",
         "Albanian":"sq",
-        "Amharic":"am",
         "Arabic":"ar",
         "Armenian":"hy",
         "Azerbaijani":"az",
@@ -128,7 +127,6 @@ class LanguageManager {
     let nativeNames = [
         "Afrikaans":"Afrikaans",
         "Albanian":"Shqiptar",
-        "Amharic":"አማርኛ",
         "Arabic":"العربية",
         "Armenian":"հայերեն",
         "Azerbaijani":"Azərbaycan",
@@ -239,7 +237,6 @@ class LanguageManager {
     private var localizedLanguages: [String : String] = [
         NSLocalizedString("Afrikaans", comment: "Language"):"af",
         NSLocalizedString("Albanian", comment: "Language"):"sq",
-        NSLocalizedString("Amharic", comment: "Language"):"am",
         NSLocalizedString("Arabic", comment: "Language"):"ar",
         NSLocalizedString("Armenian", comment: "Language"):"hy",
         NSLocalizedString("Azerbaijani", comment: "Language"):"az",
