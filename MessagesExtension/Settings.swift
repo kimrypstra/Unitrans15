@@ -65,6 +65,7 @@ class Settings: UIView {
             return
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
+        
     }
 
     func refreshAfterPurchase() {

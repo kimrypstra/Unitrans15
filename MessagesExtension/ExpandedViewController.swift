@@ -130,7 +130,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 
                 //self.view.addSubview(VC)
                 let safari = UTSafariViewController(url: url)
-                present(safari, animated: true, completion: nil)
+                self.present(safari, animated: true, completion: nil)
                 
             }
         }
