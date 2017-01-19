@@ -272,29 +272,46 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 subscribed = false
             }
         }
+        print("Subscribed: \(subscribed!)")
         
         if let fromLanguage = defaults.value(forKey: "fromLanguage") as? String {
             print("From language: \(fromLanguage)")
             self.fromLanguage = fromLanguage
         } else {
             print("No 'from' language set; setting default from device")
-            var language = NSLocale.preferredLanguages.first
-            if language != "zh-TW" && language != "zh-CN" {
-                print("Language is problematic: \(language)")
-                if language!.contains("-") {
-                    let range = language!.range(of: "-")
-                    language = language!.substring(to: range!.lowerBound)
+            if var language = NSLocale.preferredLanguages.first {
+                print("Detected device language: \(language)")
+                if language.contains("-Hans") {
+                    print("Language is Chinese Simplified")
+                    self.fromLanguage = "zh"
+                } else if language.contains("-Hant") {
+                    print("Language is Chinese Traditional")
+                    self.fromLanguage = "zh-TW"
+                    
+                } else {
+                    switch language {
+                    case "zh-TW":
+                        print("Language is zh-TW")
+                        self.fromLanguage = language
+                    case "zh-CN":
+                        print("Language is zh-CN")
+                        self.fromLanguage = language
+                    case nil:
+                        print("There doesn't appear to be a device language set? Setting to English...")
+                        self.fromLanguage = "en"
+                    default:
+                        // For all other language cases
+                        if let range = language.range(of: "-") {
+                            language = language.substring(to: range.lowerBound)
+                        }
+                        self.fromLanguage = language
+                    }
                 }
-            } else {
-                print("Language appears to be zh-TW or zh-CN")
+                
+                print("From language set to: \(self.fromLanguage!)")
             }
-            print("Device language: \(language!)")
-            self.fromLanguage = language
-            
         }
-        
-        print("Subscribed: \(subscribed!)")
-        
+
         // if the language's 'page' is 0 in the scroll view, hide the top indicator (or bottom if it's the last)
         scrollViewDidScroll(self.scrollView)
 

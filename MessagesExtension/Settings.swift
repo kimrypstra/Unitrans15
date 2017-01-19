@@ -8,6 +8,7 @@
 
 import UIKit
 import StoreKit
+import SafariServices
 
 class Settings: UIView {
    
@@ -65,6 +66,7 @@ class Settings: UIView {
             return
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
+
         
     }
 
@@ -85,7 +87,7 @@ class Settings: UIView {
         // present the theme picker UI
         stackView.insertArrangedSubview(themeView, at: 2)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil)
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: nil))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: ["message":NSLocalizedString("Thank you!", comment: "Thank you - thanking the user for their purchase")]))
     }
     
     func loadDefaults(notification: Notification?) {

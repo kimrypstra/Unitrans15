@@ -77,7 +77,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }
         }
     }
-    var composerMode: Mode!
+    var composerMode: Mode! 
     
     struct MessageData {
         let translatedText: String
@@ -100,6 +100,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToWeb), name: NSNotification.Name(rawValue: "GO_TO_SITE"), object: nil)
         setUpInterface()
         
+        
+        self.view.frame.origin.y += 65
         
         /*
         let marker = UIView(frame: CGRect(x: self.view.frame.width / 2, y: 0, width: 1, height: self.view.frame.height))
@@ -129,13 +131,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 VC.load(URLRequest(url: url))
                 
                 //self.view.addSubview(VC)
-                let safari = UTSafariViewController(url: url)
+                let safari = SFSafariViewController(url: url)
                 self.present(safari, animated: true, completion: nil)
-                
             }
         }
-        
-        
     }
     
     var respondToNotificationCalled = false
@@ -268,7 +267,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             didTapSettings(nil)
         } else {
             
-        
+            switch composerMode! {
+            case .View: self.textView.isEditable = false
+            default: self.textView.isEditable = true
+            }
         
         // animate the UI in
         let timeSep = 0.1
@@ -545,6 +547,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             self.composerMode = .Reply(message.originalLanguage, message.translatedLanguage, LanguageManager().checkIfMicrosoft(code: message.originalLanguage))
             
             // Present keyboard etc. 
+            self.textView.isEditable = true 
             self.textView.text = ""
             self.textView.becomeFirstResponder()
         case .Reply:
@@ -559,7 +562,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     @IBAction func didTapRate(_ sender: UIButton) {
         
         if raterView == nil {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.didTapRate), name: NSNotification.Name(rawValue: "RATED"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.didExitRatingView(notification:)), name: NSNotification.Name(rawValue: "RATED"), object: nil)
             raterView?.frame.size.width = self.view.frame.width
             raterView = raterContainer.getView() as? Rater
             
@@ -596,6 +599,32 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
             //self.rateButton.isEnabled = false
             
+        }
+    }
+    
+    func didExitRatingView(notification: Notification?) {
+        if notification != nil {
+            // send the rating to analytics from notification user info 
+            
+            // disable the rate button
+            self.rateButton.isEnabled = false
+            
+            // remove the rater view
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RATED"), object: nil)
+            if backgroundVertical.constant != topBarHeight {
+                backgroundVertical.constant = topBarHeight
+            } else {
+                backgroundVertical.constant = topBarHeight + raterContainerHeight.constant
+            }
+            
+            
+            UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (success) in
+                self.raterView?.removeFromSuperview()
+                self.raterView = nil
+            })
+
         }
     }
     

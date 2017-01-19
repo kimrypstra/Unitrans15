@@ -108,10 +108,12 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                             }
                         } catch {
                             print("Error deserializing: \(error)")
+                            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 0)]))
                         }
                     } else {
                         let httpResponse = response as! HTTPURLResponse
                         print("Status: \(httpResponse.statusCode) \nError: \(error)")
+                        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 1)]))
                     }
                 })
                 
@@ -120,14 +122,9 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             
         } else {
             print("No receipt in bundle?")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 2)]))
         }
-        
-        /*
-        if SKPaymentQueue.canMakePayments() {
-            SKPaymentQueue.default().add(self)
-            SKPaymentQueue.default().restoreCompletedTransactions()
-        }
-        */
+
     }
     
     func requestDidFinish(_ request: SKRequest) {
@@ -154,7 +151,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             // 
         case .failed:
             print("Failed - \(transactions.first?.error)")
-            let error = DSError(domain: (transactions.first?.error?.localizedDescription)!, code: 0)
+            let error = DSError(domain: (transactions.first?.error?.localizedDescription)!, code: 3)
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":error]))
             
             //
@@ -166,6 +163,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             //
         case .deferred:
             print("Deferred...")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Purchase deferred", code: 0)]))
             //
         }
     }
@@ -182,9 +180,4 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         
 
     }
-    
-    func validateReciept() {
-        // This is a placeholder to remind you to validate reciepts. You'll need to change the name of the function too you silly bastard.
-    }
-    
 }
