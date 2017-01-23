@@ -83,12 +83,16 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             self.activeConversation?.insert(message, completionHandler: { (error) in
                 if error != nil {
                     print(error?.localizedDescription)
+                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error inserting message", code: 0)]))
+
                 } else {
                     self.dismiss()
                 }
             })
         } else {
             print("No message")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "No message to insert", code: 0)]))
+
         }
     }
     
@@ -318,6 +322,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     func returnUIToNormal() {
+        // This is called when the app returns to compact presentation style 
         let _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: {(Timer) -> Void in
             // first element
             self.goButtonOffset.constant = 10
@@ -517,9 +522,9 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             if self.activeConversation?.selectedMessage == nil {
                 let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
                 if languages[pageNumber].prefersGoogle == true {
-                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, fromLanguage!, true)
+                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, fromLanguage!)
                 } else {
-                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, fromLanguage!, false)
+                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, fromLanguage!)
                 }
                 
             } else {

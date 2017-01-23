@@ -17,8 +17,6 @@ class MessageManager: NSObject, URLSessionDelegate {
         getTranslation(sanitisedText, fromLanguage: fromCode, toLanguage: toCode, google: google, completion: {(translatedText) in
             if translatedText != nil {
                 self.composeMessage(text: translatedText!, toCode: toCode, fromCode: fromCode, originalText: textToTranslate)
-            } else {
-                
             }
         })
 
@@ -93,27 +91,22 @@ class MessageManager: NSObject, URLSessionDelegate {
     
     func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, google: Bool, completion: @escaping (String?) -> ()) {
         let baseURL = "http://api.disordersoftware.com/unitrans/Testing/api2.php?action=translate"
-        // An NSDictionary to return
-        var dict = NSDictionary()
-        
+
         // Set up the payload
         let textToTranslate = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let fromLanguage = fromLanguage.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let toLanguage = toLanguage.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        
-        var v = "g"
-        if !google {
-            v = "m"
-        }
+
         // Set up the URL String
         var urlString = ""
         if textToTranslate != nil && fromLanguage != nil && toLanguage != nil {
-            urlString = baseURL + "&text=\(textToTranslate!)&from=\(fromLanguage!)&to=\(toLanguage!)&v=\(v)"
+            urlString = baseURL + "&text=\(textToTranslate!)&from=\(fromLanguage!)&to=\(toLanguage!)&v=g"
         }
         
         guard let url = URL(string: urlString)
             else {
                 print("Error 1")
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Unable to compose message", code: 1)]))
                 completion(nil)
                 return
         }
@@ -142,6 +135,7 @@ class MessageManager: NSObject, URLSessionDelegate {
                 let httpResponse = response as! HTTPURLResponse
                 if httpResponse.statusCode != 200 {
                     print("Error - server returned \(httpResponse.statusCode)")
+                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error": DSError(domain: "Unable to reach server. Status: \(httpResponse.statusCode)", code: 0)]))
                     completion(nil)
                 } else {
                     do {
@@ -163,12 +157,7 @@ class MessageManager: NSObject, URLSessionDelegate {
                                 }
                                 print(text["translatedText"]!)
                                 completion(text["translatedText"] as! String)
-                            } else {
-                                let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
-                                //print(json["0"])
-                                completion(json["0"] as! String)
                             }
-                            
                         }
                     } catch let error {
                         print("Error decoding JSON: \(error)")

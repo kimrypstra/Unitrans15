@@ -10,14 +10,6 @@ import Foundation
 
 class LanguageManager {
     
-    
-    
-    private let microsoft = [
-        "Klingon":"tlh",
-        "Serbian (Latin)":"sr-Latn",
-        "Yucatec Maya":"yua"
-    ]
-    
     private let google = [
         "Afrikaans":"af",
         "Albanian":"sq",
@@ -425,24 +417,7 @@ class LanguageManager {
         }
         
         return returnString
-        
-        /*
-        let arrayOfLanguageNames = Array(languages.keys)
-        var flipped = [String : String]()
-        for languageName in arrayOfLanguageNames {
-            if let languageCode = languages[languageName] {
-                // returns languages in english only
-                 flipped[languageCode] = languageName
-            }
-        }
-        if flipped[code] != nil {
-            return flipped[code]
-        } else {
-            print("Error!")
-            return "Error!"
-        }
-         */
-        
+
     }
     
     func codeFromLanguageName(_ name: String) -> String? {
@@ -453,16 +428,6 @@ class LanguageManager {
             returnValue = languageCode
         }
         return returnValue
-    }
-
-    func checkIfMicrosoft(code: String) -> Bool {
-        if microsoft.values.contains(code) {
-            print("\(code) appears to be a Microsoft language")
-        } else {
-            print("\(code) appears to be a Google language")
-        }
-        return !microsoft.values.contains(code)
-        // ie; if it is a microsoft language return false, because the bools is Google-centric. ie; if it is microsoft, google is false
     }
     
     func initialiseLanguages() -> [Language] {
@@ -478,20 +443,7 @@ class LanguageManager {
                 microsoftCode: nil)
             languages.append(language)
         }
-        
-        /*
-        for entry in microsoft {
-            let language = Language(
-                englishName: entry.key,
-                localizedName: NSLocalizedString(entry.key, comment: "The name of the language"),
-                nativeName: getNativeLanguageName(name: entry.key),
-                prefersGoogle: false,
-                googleCode: nil,
-                microsoftCode: entry.value)
-            languages.append(language)
-        }
-        */
-        
+
         return languages
     }
 }

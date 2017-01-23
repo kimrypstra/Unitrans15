@@ -52,7 +52,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     var remainingHeight: CGFloat? = nil
     var pulseTimer: Timer?
     
-    //Magic Numbers
+    //Stuff
     var desiredVerticalOffsetForTextView: CGFloat?
     var conversationIdentifier: String?
     let separationGap: CGFloat = 20
@@ -62,18 +62,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     //Enums & Structs
     enum Mode {
-        case Compose(String, String, Bool)
+        case Compose(String, String)
         case View(String)
-        case Reply(String, String, Bool)
+        case Reply(String, String)
         
-        func get() -> (String, String?, Bool?) {
+        func get() -> (String, String?) {
             switch self {
-            case .Compose(let languageCode, let fromLanguage, let translator):
-                return (languageCode, fromLanguage, translator)
+            case .Compose(let languageCode, let fromLanguage):
+                return (languageCode, fromLanguage)
             case .View(let url):
-                return (url, nil, nil)
-            case .Reply(let languageCode, let fromLanguage, let translator):
-                return (languageCode, fromLanguage, translator)
+                return (url, nil)
+            case .Reply(let languageCode, let fromLanguage):
+                return (languageCode, fromLanguage)
             }
         }
     }
@@ -89,6 +89,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     var message: MessageData!
     
     var settingsIsPresented = false
+    var respondToNotificationCalled = false
     
     /*--------------------------------------*/
     
@@ -99,18 +100,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.errorHandler), name: NSNotification.Name(rawValue: "ERROR"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToWeb), name: NSNotification.Name(rawValue: "GO_TO_SITE"), object: nil)
         setUpInterface()
-        
-        
+    
         self.view.frame.origin.y += 65
-        
-        /*
-        let marker = UIView(frame: CGRect(x: self.view.frame.width / 2, y: 0, width: 1, height: self.view.frame.height))
-        marker.backgroundColor = UIColor.red
-        self.view.addSubview(marker)
-        */
-        
-        // Do any additional setup after loading the view.
-        
     }
     
 
@@ -124,22 +115,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }
         } else {
             if let url = sender.userInfo?["url"] as? URL {
-                let VC = WKWebView(frame: self.view.frame)
-                VC.frame.origin.y = 85
-                VC.frame.size.height -= 105
-                //let config = WKWebViewConfiguration()
-                VC.load(URLRequest(url: url))
-                
-                //self.view.addSubview(VC)
                 let safari = SFSafariViewController(url: url)
                 self.present(safari, animated: true, completion: nil)
             }
         }
     }
     
-    var respondToNotificationCalled = false
-    
     func respondToNotification(notification: Notification) {
+        // This is called when a theme is applied - we're responding to the notification that contains the theme information
         if !respondToNotificationCalled {
             respondToNotificationCalled = true
             if let theme = notification.userInfo?["theme"] as? Theme {
@@ -148,14 +131,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 print("No theme at respondToNotification")
             }
         }
-        
-        
-        
     }
     
     func applyTheme(theme: Theme?, notification: Notification?) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
-        
         if theme != nil {
             self.theme = theme
         } else if notification != nil {
@@ -163,7 +142,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 self.theme = themeFromNotification
             }
         }
-        
         
         print("Applying theme: \(theme?.name!)")
         background.topColor = self.theme?.topColour
@@ -202,21 +180,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //Here we'll check the composer mode
-        
-        /*
-        goButton.layer.borderColor = UIColor.red.cgColor
-        goButton.layer.borderWidth = 1
-        rateButton.layer.borderColor = UIColor.red.cgColor
-        rateButton.layer.borderWidth = 1
-        settingsButton.layer.borderColor = UIColor.red.cgColor
-        settingsButton.layer.borderWidth = 1
-        */
-        
         // apply the theme 
         applyTheme(theme: theme!, notification: nil)
 
-        
+        //Here we'll check the composer mode
         switch composerMode! {
         case .View:
             print("View mode")
@@ -258,11 +225,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         case .Reply:
             fatalError("Error - should not ever be in reply mode unless goButton is hit within view mode")
         }
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         if shouldPresentSettings {
             didTapSettings(nil)
         } else {
@@ -343,26 +308,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
 
-    /*
-    willTransition
-    shove the UI up out of the way, the same way the language picker goes away 
-     then transition
-    - stackView 
-     - textView
-     - imageView
-     
-     didTransition
-     bring the picker UI back down in reverse, back to what they were 
- */
     func prepareForTransition() {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 0
         })
         self.dismiss(animated: false, completion: nil)
-    }
-    
-    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // do some stuff 
     }
     
     func handleKeyboard(notification: Notification) {
@@ -439,17 +389,16 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         var shouldReturn = true
         if textView.text.characters.count + (text.characters.count - range.length) <= 1000 {
-            shouldReturn = true
+            return true
         } else {
             textView.shake()
             bubble.shake()
-            shouldReturn = false
+            return false
         }
-        return shouldReturn
-
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        // Seriously just don't mess with this
         var maxHeight: CGFloat {
             if remainingHeight != nil {
                 return remainingHeight!
@@ -480,7 +429,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 textViewIsScrollEnabled = false
                 shouldAnimate = false
             }
-  
         }
         
         if shouldAnimate {
@@ -490,8 +438,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 // blah
             })
         }
-        
-
     }
 
     @IBAction func didTapSwap(_ sender: UIButton) {
@@ -516,10 +462,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             toggleSpinner()
             setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: composerMode.get().2!)
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: true)
         case .View:
             // Change the UI
-            
             UIView.animate(withDuration: 0.2, animations: { 
                 self.swapButton.alpha = 0
                 self.rateButton.alpha = 0
@@ -544,7 +489,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
             // Change composer to .Reply, setting the 'to' language to the original language
             
-            self.composerMode = .Reply(message.originalLanguage, message.translatedLanguage, LanguageManager().checkIfMicrosoft(code: message.originalLanguage))
+            self.composerMode = .Reply(message.originalLanguage, message.translatedLanguage)
             
             // Present keyboard etc. 
             self.textView.isEditable = true 
@@ -555,7 +500,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
             print("Looks like google bool is: \(composerMode.get().1!)")
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: composerMode.get().2!)
+            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: true)
         }
     }
     
@@ -589,16 +534,12 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 backgroundVertical.constant = topBarHeight + raterContainerHeight.constant
             }
             
-            
             UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.view.layoutIfNeeded()
             }, completion: { (success) in
                 self.raterView?.removeFromSuperview()
                 self.raterView = nil
             })
-            
-            //self.rateButton.isEnabled = false
-            
         }
     }
     
@@ -624,7 +565,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 self.raterView?.removeFromSuperview()
                 self.raterView = nil
             })
-
         }
     }
     
@@ -635,7 +575,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         goButton.isEnabled = true
         swapButton.isEnabled = true
         rateButton.isEnabled = true
-        
     }
     
     func startScroll() {
@@ -645,7 +584,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         goButton.isEnabled = true
         swapButton.isEnabled = true
         rateButton.isEnabled = true
-        
     }
     
     func dismissSettings() {
@@ -656,9 +594,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         } else {
             backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
         }
-        
-        
-        
+    
         UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.view.layoutIfNeeded()
         }, completion: { (success) in
@@ -672,11 +608,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             self.settingsIsPresented = false
             self.textView.becomeFirstResponder()
         })
-
     }
-    
-    // listView is aligned to the top of the scrollView so if you scroll down and present the list it is out of place 
-    //
     
     @IBAction func didTapSettings(_ sender: UIButton?) {
         settingsButton.isEnabled = false
@@ -720,26 +652,9 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
         } else {
             dismissSettings()
-//            if backgroundVertical.constant != topBarHeight {
-//                backgroundVertical.constant = topBarHeight
-//            } else {
-//                backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
-//            }
-//            
-//            
-//            UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//                self.view.layoutIfNeeded()
-//            }, completion: { (success) in
-//                self.settingsView?.removeFromSuperview()
-//                self.settingsView = nil
-//            })
-//            
-            
         }
     }
-
-    
-    
+  
     func setDefaultsForConversation(toLanguage: String) {
         var conversationDefaults = [String: String]()
         conversationDefaults["toLanguage"] = LanguageManager().nameFromCode(toLanguage, localized: true)
@@ -747,27 +662,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         if conversationIdentifier != nil {
             defaults.setValue(conversationDefaults, forKey: conversationIdentifier!)
         }
-        
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Send an error to analytics
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -9,6 +9,26 @@
 import UIKit
 import StoreKit
 
+extension Date {
+    static let iso8601Formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+    var iso8601: String {
+        return Date.iso8601Formatter.string(from: self)
+    }
+}
+
+extension String {
+    var dateFromISO8601: Date? {
+        return Date.iso8601Formatter.date(from: self)
+    }
+}
+
 class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDelegate, URLSessionDelegate, SKRequestDelegate {
 
     let productIdentifiers = Set(["com.kimrypstra.unitrans.MessagesExtension.Yearly"])
@@ -22,15 +42,16 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             request.start()
         } else {
             print("Can't make payments")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Unable to make payments", code: 0)]))
+            
         }
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        // handle the updated list of products, and populate the stackView with your XIBs 
         if response.products.count > 0 {
             print("Received \(response.products.count) products and \(response.invalidProductIdentifiers.count) invalid products")
             product = response.products.first
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "didReceiveProductData"), object: nil, userInfo: ["product":response.products.first]))
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "didReceiveProductData"), object: nil, userInfo: ["product":response.products.first!]))
         } else {
             print("Invalid products: \(response.invalidProductIdentifiers)")
         }
@@ -45,9 +66,12 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             SKPaymentQueue.default().add(payment)
         } else {
             print("Product not ready yet")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error purchasing", code: 0)]))
         }
         
     }
+    
+    
     
     func restorePurchases() {
         print("Restoring purchases...")
@@ -61,11 +85,10 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                 let refreshRequest = SKReceiptRefreshRequest()
                 refreshRequest.start()
                 refreshRequest.delegate = self
+                // When the refresh request is complete, requestDidFinish is called and this method is called again
             } else {
                 //send to server for forwarding to apple 
-                
-                //var testString = ["message" : "Hello, world"]
-                
+
                 guard let url = URL(string: "http://api.disordersoftware.com/unitrans/Testing/validate.php") else {
                     print("URL Error in receipt validation")
                     return
@@ -90,6 +113,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                                     print("All is well")
                                     let receipt = response["receipt"] as! [String: Any]
                                     if receipt != nil {
+                                        print(receipt)
                                         if let version = receipt["original_application_version"] as? String {
                                             let versionDouble = Double(version)
                                             if versionDouble! <= 1.2 {
@@ -99,6 +123,23 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                                                 print("Version is >= 1.2; continue validating")
                                                 // This receipt was generated after the business model changed - it is for an IAP, not an outright.
                                                 // So, we need to check that it is current, or if the subscription has been cancelled
+                                                // check 'expires_date' and 'cancellation_date' 
+                                                
+                                                if receipt["cancellation_date"] != nil {
+                                                    // the thing is cancelled, don't give the things
+                                                } else if let expiryDate = receipt["expires_date"] as? String {
+                                                    let date = expiryDate.dateFromISO8601
+                                                    if date! < Date() {
+                                                        // The thing is expired; don't give the things
+                                                    } else {
+                                                        // Give the things!! 
+                                                        self.deliverTheGoods()
+                                                    }
+                                                } else {
+                                                    // something is amiss here
+                                                }
+                                                
+                                            
                                             }
                                         }
                                         

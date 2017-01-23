@@ -10,12 +10,9 @@
 		21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */; };
 		2122EAFD1DB06F8E00D5B2B2 /* ExpandedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */; };
 		2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */; };
-		2122EB011DBB844700D5B2B2 /* PopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB001DBB844700D5B2B2 /* PopoverController.swift */; };
 		2122EB031DBBA39700D5B2B2 /* Rater.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2122EB021DBBA39700D5B2B2 /* Rater.xib */; };
 		2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB041DBBA3C100D5B2B2 /* Rater.swift */; };
 		213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */; };
-		213EF7B11E3058B300DF9C5F /* WebViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213EF7B01E3058B300DF9C5F /* WebViewer.swift */; };
-		213EF7B31E3058BD00DF9C5F /* WebViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213EF7B21E3058BD00DF9C5F /* WebViewer.xib */; };
 		214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */; };
 		2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B38A1DADC621002E08D0 /* Indicators.swift */; };
 		2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B38C1DADC631002E08D0 /* Indicators.xib */; };
@@ -30,15 +27,12 @@
 		216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */; };
 		216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 216BFAB61DA8E4D50041FA8F /* Assets.xcassets */; };
 		2185A1BD1DC4602900DD0647 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2185A1BC1DC4602900DD0647 /* Language.swift */; };
-		21C9F1531DEDCFB800291D8B /* UTSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */; };
 		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
 		21CA317E1DD82D6D00CA2EF5 /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21CA317D1DD82D6D00CA2EF5 /* Settings.xib */; };
 		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
 		21D818871DD93AB20079F4B8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D818861DD93AB20079F4B8 /* List.swift */; };
 		21D8188E1DD9E6060079F4B8 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8188C1DD9E6060079F4B8 /* CustomCell.swift */; };
 		21D8188F1DD9E6060079F4B8 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D8188D1DD9E6060079F4B8 /* CustomCell.xib */; };
-		21D818911DDA97730079F4B8 /* Kefa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 21D818901DDA93E30079F4B8 /* Kefa.ttc */; };
-		21D818921DDA97750079F4B8 /* Kefa.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 21D818901DDA93E30079F4B8 /* Kefa.ttc */; };
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
 		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
 		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
@@ -74,12 +68,9 @@
 		21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageSelectorViewController.swift; sourceTree = "<group>"; };
 		2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedViewController.swift; sourceTree = "<group>"; };
 		2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
-		2122EB001DBB844700D5B2B2 /* PopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverController.swift; sourceTree = "<group>"; };
 		2122EB021DBBA39700D5B2B2 /* Rater.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Rater.xib; sourceTree = "<group>"; };
 		2122EB041DBBA3C100D5B2B2 /* Rater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rater.swift; sourceTree = "<group>"; };
 		213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		213EF7B01E3058B300DF9C5F /* WebViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewer.swift; sourceTree = "<group>"; };
-		213EF7B21E3058BD00DF9C5F /* WebViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewer.xib; sourceTree = "<group>"; };
 		214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Kerning.swift"; sourceTree = "<group>"; };
 		2155B38A1DADC621002E08D0 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
 		2155B38C1DADC631002E08D0 /* Indicators.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Indicators.xib; sourceTree = "<group>"; };
@@ -98,14 +89,12 @@
 		216BFAB81DA8E4D50041FA8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2185A1BC1DC4602900DD0647 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Language.swift; path = ../Language.swift; sourceTree = "<group>"; };
 		21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/Unitrans-eqpisnafkiewfrdtjbenlyskwdxm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
-		21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTSafariViewController.swift; sourceTree = "<group>"; };
 		21CA31771DD7348300CA2EF5 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreManager.swift; path = ../StoreManager.swift; sourceTree = "<group>"; };
 		21CA317D1DD82D6D00CA2EF5 /* Settings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Settings.xib; sourceTree = "<group>"; };
 		21D818841DD93A9F0079F4B8 /* List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List.xib; sourceTree = "<group>"; };
 		21D818861DD93AB20079F4B8 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		21D8188C1DD9E6060079F4B8 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		21D8188D1DD9E6060079F4B8 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
-		21D818901DDA93E30079F4B8 /* Kefa.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kefa.ttc; sourceTree = "<group>"; };
 		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
@@ -184,7 +173,6 @@
 				216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */,
 				21179FA51DAC7CD100AB0F48 /* LanguageSelectorViewController.swift */,
 				2122EAFC1DB06F8E00D5B2B2 /* ExpandedViewController.swift */,
-				2122EB001DBB844700D5B2B2 /* PopoverController.swift */,
 				216BFAB61DA8E4D50041FA8F /* Assets.xcassets */,
 				216BFAB81DA8E4D50041FA8F /* Info.plist */,
 				21CA31811DD82D8A00CA2EF5 /* XIBs */,
@@ -208,8 +196,6 @@
 				21D8188D1DD9E6060079F4B8 /* CustomCell.xib */,
 				216B751E1DE00AA0009A6A3E /* ThemeCell.swift */,
 				216B751F1DE00AA0009A6A3E /* ThemeCell.xib */,
-				213EF7B01E3058B300DF9C5F /* WebViewer.swift */,
-				213EF7B21E3058BD00DF9C5F /* WebViewer.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -217,8 +203,6 @@
 		21EBEA911DA8E614000C744A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				21D818901DDA93E30079F4B8 /* Kefa.ttc */,
-				21C9F1521DEDCFB800291D8B /* UTSafariViewController.swift */,
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
 				21CA31771DD7348300CA2EF5 /* StoreManager.swift */,
@@ -334,7 +318,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21D818921DDA97750079F4B8 /* Kefa.ttc in Resources */,
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,8 +326,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				213EF7B31E3058BD00DF9C5F /* WebViewer.xib in Resources */,
-				21D818911DDA97730079F4B8 /* Kefa.ttc in Resources */,
 				21CA317E1DD82D6D00CA2EF5 /* Settings.xib in Resources */,
 				21D818851DD93A9F0079F4B8 /* List.xib in Resources */,
 				21D8188F1DD9E6060079F4B8 /* CustomCell.xib in Resources */,
@@ -435,18 +416,15 @@
 				21EBEA991DA8E701000C744A /* DSError.swift in Sources */,
 				21D8188E1DD9E6060079F4B8 /* CustomCell.swift in Sources */,
 				2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */,
-				21C9F1531DEDCFB800291D8B /* UTSafariViewController.swift in Sources */,
 				21179FA61DAC7CD100AB0F48 /* LanguageSelectorViewController.swift in Sources */,
 				21D818871DD93AB20079F4B8 /* List.swift in Sources */,
 				216B751D1DDFF9A6009A6A3E /* Settings.swift in Sources */,
 				216B75201DE00AA0009A6A3E /* ThemeCell.swift in Sources */,
-				213EF7B11E3058B300DF9C5F /* WebViewer.swift in Sources */,
 				216B75251DE00BC5009A6A3E /* Theme.swift in Sources */,
 				21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */,
 				2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */,
 				2185A1BD1DC4602900DD0647 /* Language.swift in Sources */,
 				21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */,
-				2122EB011DBB844700D5B2B2 /* PopoverController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +556,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -596,7 +574,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
