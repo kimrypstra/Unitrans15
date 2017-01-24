@@ -507,6 +507,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     @IBAction func didTapRate(_ sender: UIButton) {
         
         if raterView == nil {
+            // bring rater container to the front
+            self.view.sendSubview(toBack: settingsContainer)
             NotificationCenter.default.addObserver(self, selector: #selector(self.didExitRatingView(notification:)), name: NSNotification.Name(rawValue: "RATED"), object: nil)
             raterView?.frame.size.width = self.view.frame.width
             raterView = raterContainer.getView() as? Rater
@@ -527,6 +529,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             self.raterView?.hideStars()
             self.raterView?.presentStars()
         } else {
+            
+            
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RATED"), object: nil)
             if backgroundVertical.constant != topBarHeight {
                 backgroundVertical.constant = topBarHeight
@@ -611,6 +615,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     @IBAction func didTapSettings(_ sender: UIButton?) {
+        self.view.sendSubview(toBack: raterContainer)
         settingsButton.isEnabled = false
         goButton.isEnabled = false
         swapButton.isEnabled = false
