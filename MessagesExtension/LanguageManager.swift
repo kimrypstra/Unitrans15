@@ -436,7 +436,7 @@ class LanguageManager {
         for entry in google {
             let language = Language(
                 englishName: entry.key,
-                localizedName: NSLocalizedString(entry.key, comment: "The name of the language"),
+                localizedName: nameFromCode(entry.value, localized: true)!,
                 nativeName: getNativeLanguageName(name: entry.key),
                 prefersGoogle: true,
                 googleCode: entry.value,

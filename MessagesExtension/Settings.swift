@@ -45,7 +45,7 @@ class Settings: UIView {
     
     @IBAction func twitterButton(_ sender: Any) {
         guard let url = URL(string: "https://twitter.com/disorderware") else {
-            NSLog("Error: Icons URL error")
+            NSLog("Error: Twitter URL error")
             return
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
@@ -62,7 +62,7 @@ class Settings: UIView {
         }
         
         guard let url = URL(string: URLString!) else {
-            NSLog("Error: Icons URL error")
+            NSLog("Error: URL error")
             return
         }
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "GO_TO_SITE"), object: nil, userInfo: ["url":url]))
@@ -167,7 +167,7 @@ class Settings: UIView {
         } else {
             // set the language label to automatic 
             print("No language set")
-            fromLanguageLabel.text = NSLocalizedString("Automatic", comment: "A label which tells the user that the app will choose the 'from' language automatically")
+            fromLanguageLabel.text = NSLocalizedString("Automatic", comment: "A label which tells the user that the app will choose the source language automatically")
         }
         
         if let theme = defaults.value(forKey: "theme") as? String {
@@ -182,7 +182,7 @@ class Settings: UIView {
     
     func updateProductInfo(notification: Notification) {
         if let product = notification.userInfo?["product"] as? SKProduct {
-            priceLabel.text = "\(product.priceLocale.currencySymbol!)\(product.price) per year"
+            priceLabel.text = "\(product.priceLocale.currencySymbol!)\(product.price)\(NSLocalizedString("per year", comment: "a suffix added to the price to show that it is charged once every year"))"
             priceLabel.isHidden = false
             pricesUpdated = true 
         }

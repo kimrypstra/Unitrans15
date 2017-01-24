@@ -358,8 +358,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     }
     
     func presentMessage() {
-        let alert = UIAlertController(title: "Thank you!", message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: NSLocalizedString("Thank you!", comment: "Thanking the user for purchasing"), message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "A button to say 'Ok, dismiss the alert'"), style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
@@ -368,8 +368,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     func errorHandler(notification: Notification) {
         print("An error has occurred")
         if let error = notification.userInfo?["error"] as? DSError {
-            let alert = UIAlertController(title: "Error", message: error.domain, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Presented when an error has occured"), message: error.domain, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "A button to say 'Ok, dismiss the alert'"), style: .default, handler: { (action) in
                 if self.spinner.isAnimating {
                     self.toggleSpinner()
                 }

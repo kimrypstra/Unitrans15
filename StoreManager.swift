@@ -42,7 +42,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             request.start()
         } else {
             print("Can't make payments")
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Unable to make payments", code: 0)]))
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: NSLocalizedString("Unable to make payments", comment: "Presented when the user is not able to make payments from this device"), code: 0)]))
             
         }
     }
@@ -204,7 +204,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             //
         case .deferred:
             print("Deferred...")
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Purchase deferred", code: 0)]))
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: NSLocalizedString("Purchase deferred", comment: "Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent"), code: 0)]))
             //
         }
     }
