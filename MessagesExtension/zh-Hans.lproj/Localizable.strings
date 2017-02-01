@@ -1,0 +1,346 @@
+/* Language */
+"Afrikaans" = "南非荷兰语";
+
+/* Language */
+"Albanian" = "阿尔巴尼亚人";
+
+/* Language */
+"Amharic" = "阿姆哈拉语";
+
+/* Language */
+"Arabic" = "阿拉伯";
+
+/* Language */
+"Armenian" = "亚美尼亚";
+
+/* A label which tells the user that the app will choose the source language automatically */
+"Automatic" = "自动";
+
+/* Language */
+"Azerbaijani" = "阿塞拜疆";
+
+/* Language */
+"Basque" = "巴斯克";
+
+/* Language */
+"Belarusian" = "白俄罗斯";
+
+/* Language */
+"Bengali" = "孟加拉";
+
+/* Language */
+"Bosnian" = "波斯尼亚";
+
+/* Language */
+"Bulgarian" = "保加利亚语";
+
+/* Language */
+"Catalan" = "加泰罗尼亚";
+
+/* Language */
+"Cebuano" = "宿务";
+
+/* Language */
+"Chichewa" = "奇切瓦";
+
+/* Language */
+"Chinese Simplified" = "简体中文";
+
+/* Language */
+"Chinese Traditional" = "中国传统的";
+
+/* Language */
+"Corsican" = "科西嘉";
+
+/* Language */
+"Croatian" = "克罗地亚";
+
+/* Language */
+"Czech" = "捷克";
+
+/* Language */
+"Danish" = "丹麦";
+
+/* Language */
+"Dutch" = "荷兰人";
+
+/* Language */
+"English" = "英语";
+
+/* Presented when an error has occured */
+"Error" = "错误";
+
+/* Language */
+"Esperanto" = "世界语";
+
+/* Language */
+"Estonian" = "爱沙尼亚语";
+
+/* Language */
+"Filipino" = "菲律宾";
+
+/* Language */
+"Finnish" = "芬兰";
+
+/* Language */
+"French" = "法国";
+
+/* Language */
+"Frisian" = "弗里斯兰";
+
+/* Language */
+"Galician" = "加利西亚";
+
+/* Language */
+"Georgian" = "格鲁吉亚";
+
+/* Language */
+"German" = "德语";
+
+/* Language */
+"Greek" = "希腊语";
+
+/* Language */
+"Gujarati" = "古吉拉特语";
+
+/* Language */
+"Haitian Creole" = "海地克里奥尔语";
+
+/* Language */
+"Hausa" = "豪萨语";
+
+/* Language */
+"Hawaiian" = "夏威夷";
+
+/* Language */
+"Hebrew" = "希伯来语";
+
+/* Language */
+"Hindi" = "印地语";
+
+/* Language */
+"Hmong" = "苗族";
+
+/* Language */
+"Hungarian" = "匈牙利";
+
+/* Language */
+"Icelandic" = "冰岛的";
+
+/* Language */
+"Igbo" = "伊博";
+
+/* Language */
+"Indonesian" = "印度尼西亚";
+
+/* Language */
+"Irish" = "爱尔兰的";
+
+/* Language */
+"Italian" = "意大利";
+
+/* Language */
+"Japanese" = "日本";
+
+/* Language */
+"Javanese" = "爪哇";
+
+/* Language */
+"Kannada" = "卡纳达语";
+
+/* Language */
+"Kazakh" = "哈萨克人";
+
+/* Language */
+"Khmer" = "高棉";
+
+/* Language */
+"Klingon" = "克林贡语";
+
+/* Language */
+"Korean" = "朝鲜的";
+
+/* Language */
+"Kurdish (Kurmanji)" = "库尔德人（Kurmanji）";
+
+/* Language */
+"Kyrgyz" = "吉尔吉斯";
+
+/* Language */
+"Lao" = "老挝";
+
+/* Language */
+"Latin" = "拉丁";
+
+/* Language */
+"Latvian" = "拉脱维亚";
+
+/* Language */
+"Lithuanian" = "立陶宛";
+
+/* Language */
+"Luxembourgish" = "卢森堡";
+
+/* Language */
+"Macedonian" = "马其顿";
+
+/* Language */
+"Malagasy" = "马尔加什";
+
+/* Language */
+"Malay" = "马来语";
+
+/* Language */
+"Malayalam" = "马拉雅拉姆语";
+
+/* Language */
+"Maltese" = "马耳他语";
+
+/* Language */
+"Maori" = "毛利";
+
+/* Language */
+"Marathi" = "马拉";
+
+/* Language */
+"Mongolian" = "蒙";
+
+/* Language */
+"Myanmar (Burmese)" = "缅甸（缅甸）";
+
+/* Language */
+"Nepali" = "尼泊尔";
+
+/* Language */
+"Norwegian" = "挪威";
+
+/* A button to say 'Ok, dismiss the alert' */
+"OK" = "好";
+
+/* Language */
+"Pashto" = "普什图语";
+
+/* Language */
+"Persian" = "波斯语";
+
+/* Language */
+"Polish" = "抛光";
+
+/* Language */
+"Portuguese" = "葡萄牙语";
+
+/* Language */
+"Punjabi" = "旁遮普";
+
+/* Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent */
+"Purchase deferred" = "推迟购买";
+
+/* Language */
+"Querétaro Otomi" = "克雷塔罗乙巳";
+
+/* Language */
+"Romanian" = "罗马尼亚";
+
+/* Language */
+"Russian" = "俄语";
+
+/* Language */
+"Samoan" = "萨摩亚";
+
+/* Language */
+"Scots Gaelic" = "苏格兰盖尔语";
+
+/* Language */
+"Serbian (Cyrillic)" = "塞尔维亚语（西里尔文）";
+
+/* Language */
+"Serbian (Latin)" = "塞尔维亚语（拉丁）";
+
+/* Language */
+"Sesotho" = "塞索托语";
+
+/* Language */
+"Shona" = "绍纳语";
+
+/* Language */
+"Sindhi" = "信德";
+
+/* Language */
+"Sinhala" = "僧伽罗语";
+
+/* Language */
+"Slovak" = "斯洛伐克";
+
+/* Language */
+"Slovenian" = "斯洛文尼亚";
+
+/* Language */
+"Somali" = "索马里";
+
+/* Language */
+"Spanish" = "西班牙语";
+
+/* Language */
+"Sundanese" = "巽";
+
+/* Language */
+"Swahili" = "斯瓦希里";
+
+/* Language */
+"Swedish" = "瑞典";
+
+/* Language */
+"Tajik" = "塔吉克";
+
+/* Language */
+"Tamil" = "泰米尔人";
+
+/* Language */
+"Telugu" = "泰卢固语";
+
+/* Language */
+"Thai" = "泰国";
+
+/* Thank you - thanking the user for their purchase
+   Thanking the user for purchasing */
+"Thank you!" = "谢谢！";
+
+/* Language */
+"Turkish" = "土耳其";
+
+/* Language */
+"Ukrainian" = "乌克兰";
+
+/* Presented when the user is not able to make payments from this device */
+"Unable to make payments" = "无法付款";
+
+/* Language */
+"Urdu" = "乌尔都语";
+
+/* Language */
+"Uzbek" = "乌兹别克";
+
+/* Language */
+"Vietnamese" = "越南";
+
+/* Language */
+"Welsh" = "威尔士语";
+
+/* Language */
+"Xhosa" = "科萨";
+
+/* Language */
+"Yiddish" = "意第绪语";
+
+/* Language */
+"Yoruba" = "约鲁巴语";
+
+/* Language */
+"Yucatec Maya" = "尤卡坦玛雅";
+
+/* Language */
+"Zulu" = "祖鲁";
+
+/* a suffix added to the price to show that it is charged once every year */
+"per year" = "每年";
+

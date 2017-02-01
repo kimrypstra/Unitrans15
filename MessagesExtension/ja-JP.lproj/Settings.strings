@@ -1,15 +1,15 @@
-
 /* Class = "UILabel"; text = "Subscribe to Unitrans!"; ObjectID = "9lP-0y-kEA"; */
-"9lP-0y-kEA.text" = "Subscribe to Unitrans!";
+"9lP-0y-kEA.text" = "Unitransを購読します！";
 
 /* Class = "UIButton"; normalTitle = "Restore Purchases"; ObjectID = "N7w-aS-FGS"; */
-"N7w-aS-FGS.normalTitle" = "Restore Purchases";
+"N7w-aS-FGS.normalTitle" = "購入を復元";
 
 /* Class = "UILabel"; text = "Adds themes, remembers languages for each conversation, and supports Unitrans!"; ObjectID = "PBt-4K-mh1"; */
-"PBt-4K-mh1.text" = "Adds themes, remembers languages for each conversation, and supports Unitrans!";
+"PBt-4K-mh1.text" = "、テーマを追加し、各会話の言語を覚えて、そしてUnitransをサポートしています！";
 
 /* Class = "UILabel"; text = "Price!"; ObjectID = "TLU-uc-9kM"; */
-"TLU-uc-9kM.text" = "Price!";
+"TLU-uc-9kM.text" = "価格！";
 
 /* Class = "UIButton"; normalTitle = "Icons by Icons8"; ObjectID = "gda-Z4-zBf"; */
-"gda-Z4-zBf.normalTitle" = "Icons by Icons8";
+"gda-Z4-zBf.normalTitle" = "Icons8によってアイコン";
+

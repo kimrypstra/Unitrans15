@@ -1,0 +1,346 @@
+/* Language */
+"Afrikaans" = "Afrikaans";
+
+/* Language */
+"Albanian" = "Albanees";
+
+/* Language */
+"Amharic" = "Amhaars";
+
+/* Language */
+"Arabic" = "Arabisch";
+
+/* Language */
+"Armenian" = "Armeens";
+
+/* A label which tells the user that the app will choose the source language automatically */
+"Automatic" = "automatisch";
+
+/* Language */
+"Azerbaijani" = "Azerbeidzjaanse";
+
+/* Language */
+"Basque" = "baskisch";
+
+/* Language */
+"Belarusian" = "belarusian";
+
+/* Language */
+"Bengali" = "Bengalees";
+
+/* Language */
+"Bosnian" = "Bosnisch";
+
+/* Language */
+"Bulgarian" = "Bulgarian";
+
+/* Language */
+"Catalan" = "Catalan";
+
+/* Language */
+"Cebuano" = "Cebuano";
+
+/* Language */
+"Chichewa" = "Chichewa";
+
+/* Language */
+"Chinese Simplified" = "Versimpeld Chinees";
+
+/* Language */
+"Chinese Traditional" = "Chinese traditionele";
+
+/* Language */
+"Corsican" = "Corsicaans";
+
+/* Language */
+"Croatian" = "Kroatisch";
+
+/* Language */
+"Czech" = "Tsjechisch";
+
+/* Language */
+"Danish" = "Deens";
+
+/* Language */
+"Dutch" = "Nederlands";
+
+/* Language */
+"English" = "Engels";
+
+/* Presented when an error has occured */
+"Error" = "Fout";
+
+/* Language */
+"Esperanto" = "Esperanto";
+
+/* Language */
+"Estonian" = "Estlands";
+
+/* Language */
+"Filipino" = "Filippijn";
+
+/* Language */
+"Finnish" = "Fins";
+
+/* Language */
+"French" = "Frans";
+
+/* Language */
+"Frisian" = "Frisian";
+
+/* Language */
+"Galician" = "Galicisch";
+
+/* Language */
+"Georgian" = "Georgisch";
+
+/* Language */
+"German" = "Duits";
+
+/* Language */
+"Greek" = "Grieks";
+
+/* Language */
+"Gujarati" = "Gujarati";
+
+/* Language */
+"Haitian Creole" = "Haïtiaans Creools";
+
+/* Language */
+"Hausa" = "Hausa";
+
+/* Language */
+"Hawaiian" = "Hawaiiaans";
+
+/* Language */
+"Hebrew" = "Hebreeuws";
+
+/* Language */
+"Hindi" = "Hindi";
+
+/* Language */
+"Hmong" = "Hmong";
+
+/* Language */
+"Hungarian" = "Hongaars";
+
+/* Language */
+"Icelandic" = "IJslands";
+
+/* Language */
+"Igbo" = "Igbo";
+
+/* Language */
+"Indonesian" = "Indonesisch";
+
+/* Language */
+"Irish" = "Iers";
+
+/* Language */
+"Italian" = "Italiaans";
+
+/* Language */
+"Japanese" = "Japans";
+
+/* Language */
+"Javanese" = "Javaanse";
+
+/* Language */
+"Kannada" = "Kannada";
+
+/* Language */
+"Kazakh" = "Kazachse";
+
+/* Language */
+"Khmer" = "Khmer";
+
+/* Language */
+"Klingon" = "Klingon";
+
+/* Language */
+"Korean" = "Koreaans";
+
+/* Language */
+"Kurdish (Kurmanji)" = "Koerdisch (Kurmanji)";
+
+/* Language */
+"Kyrgyz" = "Kirgizische";
+
+/* Language */
+"Lao" = "Laotiaans";
+
+/* Language */
+"Latin" = "Latijns";
+
+/* Language */
+"Latvian" = "Lets";
+
+/* Language */
+"Lithuanian" = "Litouws";
+
+/* Language */
+"Luxembourgish" = "Luxemburgs";
+
+/* Language */
+"Macedonian" = "Macedonisch";
+
+/* Language */
+"Malagasy" = "Madagaskar-";
+
+/* Language */
+"Malay" = "Maleis-";
+
+/* Language */
+"Malayalam" = "Malayalam";
+
+/* Language */
+"Maltese" = "Maltees";
+
+/* Language */
+"Maori" = "Maori-";
+
+/* Language */
+"Marathi" = "marathi";
+
+/* Language */
+"Mongolian" = "Mongools";
+
+/* Language */
+"Myanmar (Burmese)" = "Myanmar (Birma)";
+
+/* Language */
+"Nepali" = "nepali";
+
+/* Language */
+"Norwegian" = "Noors";
+
+/* A button to say 'Ok, dismiss the alert' */
+"OK" = "OK";
+
+/* Language */
+"Pashto" = "Pashto";
+
+/* Language */
+"Persian" = "Perzisch";
+
+/* Language */
+"Polish" = "Pools";
+
+/* Language */
+"Portuguese" = "Portugees";
+
+/* Language */
+"Punjabi" = "Punjabi";
+
+/* Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent */
+"Purchase deferred" = "aankoop uitgesteld";
+
+/* Language */
+"Querétaro Otomi" = "Querétaro Otomi";
+
+/* Language */
+"Romanian" = "Roemeense";
+
+/* Language */
+"Russian" = "Russisch";
+
+/* Language */
+"Samoan" = "samoan";
+
+/* Language */
+"Scots Gaelic" = "Schots Gaelic";
+
+/* Language */
+"Serbian (Cyrillic)" = "Servisch (Cyrillisch)";
+
+/* Language */
+"Serbian (Latin)" = "Servisch (Latijn)";
+
+/* Language */
+"Sesotho" = "Sesotho";
+
+/* Language */
+"Shona" = "Shona";
+
+/* Language */
+"Sindhi" = "Sindhi";
+
+/* Language */
+"Sinhala" = "sinhala";
+
+/* Language */
+"Slovak" = "Slowaaks";
+
+/* Language */
+"Slovenian" = "Sloveens";
+
+/* Language */
+"Somali" = "Somalisch";
+
+/* Language */
+"Spanish" = "Spaans";
+
+/* Language */
+"Sundanese" = "sundanese";
+
+/* Language */
+"Swahili" = "Swahili";
+
+/* Language */
+"Swedish" = "Zweeds";
+
+/* Language */
+"Tajik" = "Tadzjiekse";
+
+/* Language */
+"Tamil" = "Tamil";
+
+/* Language */
+"Telugu" = "Telugu";
+
+/* Language */
+"Thai" = "Thais";
+
+/* Thank you - thanking the user for their purchase
+   Thanking the user for purchasing */
+"Thank you!" = "Dank je!";
+
+/* Language */
+"Turkish" = "Turks";
+
+/* Language */
+"Ukrainian" = "Oekraïens";
+
+/* Presented when the user is not able to make payments from this device */
+"Unable to make payments" = "Niet in staat om betalingen te doen";
+
+/* Language */
+"Urdu" = "Urdu";
+
+/* Language */
+"Uzbek" = "Oezbeeks";
+
+/* Language */
+"Vietnamese" = "Vietnamees";
+
+/* Language */
+"Welsh" = "Wels";
+
+/* Language */
+"Xhosa" = "Xhosa";
+
+/* Language */
+"Yiddish" = "Jiddisch";
+
+/* Language */
+"Yoruba" = "Yoruba";
+
+/* Language */
+"Yucatec Maya" = "Yukatek Maya";
+
+/* Language */
+"Zulu" = "Zoeloe";
+
+/* a suffix added to the price to show that it is charged once every year */
+"per year" = "per jaar";
+

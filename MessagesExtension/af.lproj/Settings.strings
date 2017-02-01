@@ -1,15 +1,15 @@
-
 /* Class = "UILabel"; text = "Subscribe to Unitrans!"; ObjectID = "9lP-0y-kEA"; */
-"9lP-0y-kEA.text" = "Subscribe to Unitrans!";
+"9lP-0y-kEA.text" = "Skryf in Unitrans!";
 
 /* Class = "UIButton"; normalTitle = "Restore Purchases"; ObjectID = "N7w-aS-FGS"; */
-"N7w-aS-FGS.normalTitle" = "Restore Purchases";
+"N7w-aS-FGS.normalTitle" = "Herstel aankope";
 
 /* Class = "UILabel"; text = "Adds themes, remembers languages for each conversation, and supports Unitrans!"; ObjectID = "PBt-4K-mh1"; */
-"PBt-4K-mh1.text" = "Adds themes, remembers languages for each conversation, and supports Unitrans!";
+"PBt-4K-mh1.text" = "Voeg temas, onthou tale vir elke gesprek, en ondersteun Unitrans!";
 
 /* Class = "UILabel"; text = "Price!"; ObjectID = "TLU-uc-9kM"; */
-"TLU-uc-9kM.text" = "Price!";
+"TLU-uc-9kM.text" = "Prys!";
 
 /* Class = "UIButton"; normalTitle = "Icons by Icons8"; ObjectID = "gda-Z4-zBf"; */
-"gda-Z4-zBf.normalTitle" = "Icons by Icons8";
+"gda-Z4-zBf.normalTitle" = "Icons deur Icons8";
+

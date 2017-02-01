@@ -229,6 +229,7 @@ class LanguageManager {
     private var localizedLanguages: [String : String] = [
         NSLocalizedString("Afrikaans", comment: "Language"):"af",
         NSLocalizedString("Albanian", comment: "Language"):"sq",
+        NSLocalizedString("Amharic", comment: "Language"):"am",
         NSLocalizedString("Arabic", comment: "Language"):"ar",
         NSLocalizedString("Armenian", comment: "Language"):"hy",
         NSLocalizedString("Azerbaijani", comment: "Language"):"az",
@@ -240,8 +241,9 @@ class LanguageManager {
         NSLocalizedString("Catalan", comment: "Language"):"ca",
         NSLocalizedString("Cebuano", comment: "Language"):"ceb",
         NSLocalizedString("Chichewa", comment: "Language"):"ny",
-        NSLocalizedString("Chinese Simplified", comment: "Language"):"zh-CN",
         NSLocalizedString("Chinese Traditional", comment: "Language"):"zh-TW",
+        NSLocalizedString("Chinese Simplified", comment: "Language"):"zh",
+        NSLocalizedString("Corsican", comment: "Language"):"co",
         NSLocalizedString("Croatian", comment: "Language"):"hr",
         NSLocalizedString("Czech", comment: "Language"):"cs",
         NSLocalizedString("Danish", comment: "Language"):"da",
@@ -252,6 +254,7 @@ class LanguageManager {
         NSLocalizedString("Filipino", comment: "Language"):"tl",
         NSLocalizedString("Finnish", comment: "Language"):"fi",
         NSLocalizedString("French", comment: "Language"):"fr",
+        NSLocalizedString("Frisian", comment: "Language"):"fy",
         NSLocalizedString("Galician", comment: "Language"):"gl",
         NSLocalizedString("Georgian", comment: "Language"):"ka",
         NSLocalizedString("German", comment: "Language"):"de",
@@ -259,6 +262,7 @@ class LanguageManager {
         NSLocalizedString("Gujarati", comment: "Language"):"gu",
         NSLocalizedString("Haitian Creole", comment: "Language"):"ht",
         NSLocalizedString("Hausa", comment: "Language"):"ha",
+        NSLocalizedString("Hawaiian", comment: "Language"):"haw",
         NSLocalizedString("Hebrew", comment: "Language"):"iw",
         NSLocalizedString("Hindi", comment: "Language"):"hi",
         NSLocalizedString("Hmong", comment: "Language"):"hmn",
@@ -273,11 +277,15 @@ class LanguageManager {
         NSLocalizedString("Kannada", comment: "Language"):"kn",
         NSLocalizedString("Kazakh", comment: "Language"):"kk",
         NSLocalizedString("Khmer", comment: "Language"):"km",
+        NSLocalizedString("Klingon", comment: "Language"):"",
         NSLocalizedString("Korean", comment: "Language"):"ko",
+        NSLocalizedString("Kurdish (Kurmanji)", comment: "Language"):"ku",
+        NSLocalizedString("Kyrgyz", comment: "Language"):"ky",
         NSLocalizedString("Lao", comment: "Language"):"lo",
         NSLocalizedString("Latin", comment: "Language"):"la",
         NSLocalizedString("Latvian", comment: "Language"):"lv",
         NSLocalizedString("Lithuanian", comment: "Language"):"lt",
+        NSLocalizedString("Luxembourgish", comment: "Language"):"lb",
         NSLocalizedString("Macedonian", comment: "Language"):"mk",
         NSLocalizedString("Malagasy", comment: "Language"):"mg",
         NSLocalizedString("Malay", comment: "Language"):"ms",
@@ -289,20 +297,27 @@ class LanguageManager {
         NSLocalizedString("Myanmar (Burmese)", comment: "Language"):"my",
         NSLocalizedString("Nepali", comment: "Language"):"ne",
         NSLocalizedString("Norwegian", comment: "Language"):"no",
+        NSLocalizedString("Pashto", comment: "Language"):"ps",
         NSLocalizedString("Persian", comment: "Language"):"fa",
         NSLocalizedString("Polish", comment: "Language"):"pl",
         NSLocalizedString("Portuguese", comment: "Language"):"pt",
-        NSLocalizedString("Punjabi", comment: "Language"):"ma",
+        NSLocalizedString("Punjabi", comment: "Language"):"pa",
+        NSLocalizedString("Querétaro Otomi", comment: "Language"):"",
         NSLocalizedString("Romanian", comment: "Language"):"ro",
         NSLocalizedString("Russian", comment: "Language"):"ru",
-        NSLocalizedString("Serbian", comment: "Language"):"sr",
+        NSLocalizedString("Samoan", comment: "Language"):"sm",
+        NSLocalizedString("Scots Gaelic", comment: "Language"):"gd",
+        NSLocalizedString("Serbian (Cyrillic)", comment: "Language"):"sr",
+        NSLocalizedString("Serbian (Latin)", comment: "Language"):"",
         NSLocalizedString("Sesotho", comment: "Language"):"st",
+        NSLocalizedString("Shona", comment: "Language"):"sn",
+        NSLocalizedString("Sindhi", comment: "Language"):"sd",
         NSLocalizedString("Sinhala", comment: "Language"):"si",
         NSLocalizedString("Slovak", comment: "Language"):"sk",
         NSLocalizedString("Slovenian", comment: "Language"):"sl",
         NSLocalizedString("Somali", comment: "Language"):"so",
         NSLocalizedString("Spanish", comment: "Language"):"es",
-        NSLocalizedString("Sudanese", comment: "Language"):"su",
+        NSLocalizedString("Sundanese", comment: "Language"):"su",
         NSLocalizedString("Swahili", comment: "Language"):"sw",
         NSLocalizedString("Swedish", comment: "Language"):"sv",
         NSLocalizedString("Tajik", comment: "Language"):"tg",
@@ -315,9 +330,11 @@ class LanguageManager {
         NSLocalizedString("Uzbek", comment: "Language"):"uz",
         NSLocalizedString("Vietnamese", comment: "Language"):"vi",
         NSLocalizedString("Welsh", comment: "Language"):"cy",
+        NSLocalizedString("Xhosa", comment: "Language"):"xh",
         NSLocalizedString("Yiddish", comment: "Language"):"yi",
         NSLocalizedString("Yoruba", comment: "Language"):"yo",
-        NSLocalizedString("Zulu", comment: "Language"):"zu",
+        NSLocalizedString("Yucatec Maya", comment: "Language"):"",
+        NSLocalizedString("Zulu", comment: "Language"):"zu"
         ]
     
     private var englishLanguages: [String : String] = [
@@ -405,7 +422,7 @@ class LanguageManager {
         if localized {
             languages = localizedLanguages
         } else {
-            languages = englishLanguages
+            languages = google
         }
         
         var returnString = "Update language list"
@@ -415,6 +432,9 @@ class LanguageManager {
                 returnString = item.key
             }
         }
+        print(returnString)
+        
+        // Handle the lowercase letters! They are messing up the sorting for some reason 
         
         return returnString
 

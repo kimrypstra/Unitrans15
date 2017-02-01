@@ -1,0 +1,346 @@
+/* Language */
+"Afrikaans" = "afrikansas";
+
+/* Language */
+"Albanian" = "albanų";
+
+/* Language */
+"Amharic" = "amharų";
+
+/* Language */
+"Arabic" = "arabiškas";
+
+/* Language */
+"Armenian" = "armėnų";
+
+/* A label which tells the user that the app will choose the source language automatically */
+"Automatic" = "Automatinis";
+
+/* Language */
+"Azerbaijani" = "azerbaidžaniečių";
+
+/* Language */
+"Basque" = "Baskų";
+
+/* Language */
+"Belarusian" = "Baltarusijos";
+
+/* Language */
+"Bengali" = "bengalų";
+
+/* Language */
+"Bosnian" = "bosnių";
+
+/* Language */
+"Bulgarian" = "bulgarų";
+
+/* Language */
+"Catalan" = "Katalonų";
+
+/* Language */
+"Cebuano" = "sebuanų";
+
+/* Language */
+"Chichewa" = "Chichewa";
+
+/* Language */
+"Chinese Simplified" = "Kinų, supaprastinta";
+
+/* Language */
+"Chinese Traditional" = "Kinų tradicinis";
+
+/* Language */
+"Corsican" = "Korsikiečių";
+
+/* Language */
+"Croatian" = "kroatų";
+
+/* Language */
+"Czech" = "Čekijos";
+
+/* Language */
+"Danish" = "danų";
+
+/* Language */
+"Dutch" = "olandų";
+
+/* Language */
+"English" = "Anglų";
+
+/* Presented when an error has occured */
+"Error" = "klaida";
+
+/* Language */
+"Esperanto" = "esperanto";
+
+/* Language */
+"Estonian" = "estų";
+
+/* Language */
+"Filipino" = "Filipinų";
+
+/* Language */
+"Finnish" = "suomių";
+
+/* Language */
+"French" = "Prancūzų kalba";
+
+/* Language */
+"Frisian" = "fryzų";
+
+/* Language */
+"Galician" = "Galisų";
+
+/* Language */
+"Georgian" = "gruzinų";
+
+/* Language */
+"German" = "vokiečių";
+
+/* Language */
+"Greek" = "graikų";
+
+/* Language */
+"Gujarati" = "gujarati";
+
+/* Language */
+"Haitian Creole" = "Haičio kreolų";
+
+/* Language */
+"Hausa" = "hausų";
+
+/* Language */
+"Hawaiian" = "Havajų";
+
+/* Language */
+"Hebrew" = "hebrajų";
+
+/* Language */
+"Hindi" = "hindi";
+
+/* Language */
+"Hmong" = "hmongų";
+
+/* Language */
+"Hungarian" = "vengrų";
+
+/* Language */
+"Icelandic" = "islandų";
+
+/* Language */
+"Igbo" = "igbų";
+
+/* Language */
+"Indonesian" = "indoneziečių";
+
+/* Language */
+"Irish" = "airių";
+
+/* Language */
+"Italian" = "italų";
+
+/* Language */
+"Japanese" = "Japonijos";
+
+/* Language */
+"Javanese" = "javiečių";
+
+/* Language */
+"Kannada" = "kanadų";
+
+/* Language */
+"Kazakh" = "kazachų";
+
+/* Language */
+"Khmer" = "khmerų";
+
+/* Language */
+"Klingon" = "Klingonas";
+
+/* Language */
+"Korean" = "korėjiečių";
+
+/* Language */
+"Kurdish (Kurmanji)" = "Kurdų (Kurmanji)";
+
+/* Language */
+"Kyrgyz" = "Kirgizijos";
+
+/* Language */
+"Lao" = "Laoso";
+
+/* Language */
+"Latin" = "lotynų";
+
+/* Language */
+"Latvian" = "Latvijos";
+
+/* Language */
+"Lithuanian" = "Lietuvos";
+
+/* Language */
+"Luxembourgish" = "liuksemburgiečių";
+
+/* Language */
+"Macedonian" = "Makedonijos";
+
+/* Language */
+"Malagasy" = "malagasių kalba";
+
+/* Language */
+"Malay" = "malajų";
+
+/* Language */
+"Malayalam" = "malajalių";
+
+/* Language */
+"Maltese" = "Maltos";
+
+/* Language */
+"Maori" = "maorių";
+
+/* Language */
+"Marathi" = "marati";
+
+/* Language */
+"Mongolian" = "mongolų";
+
+/* Language */
+"Myanmar (Burmese)" = "Mianmaras (Birmos)";
+
+/* Language */
+"Nepali" = "Nepalo";
+
+/* Language */
+"Norwegian" = "Norvegijos";
+
+/* A button to say 'Ok, dismiss the alert' */
+"OK" = "Gerai";
+
+/* Language */
+"Pashto" = "puštūnų";
+
+/* Language */
+"Persian" = "Persijos";
+
+/* Language */
+"Polish" = "lenkas";
+
+/* Language */
+"Portuguese" = "portugalų";
+
+/* Language */
+"Punjabi" = "Punjabi";
+
+/* Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent */
+"Purchase deferred" = "pirkimo atidėtas";
+
+/* Language */
+"Querétaro Otomi" = "Querétaro Otomi";
+
+/* Language */
+"Romanian" = "rumunų";
+
+/* Language */
+"Russian" = "Rusijos";
+
+/* Language */
+"Samoan" = "Samoa";
+
+/* Language */
+"Scots Gaelic" = "Škotų gėlų";
+
+/* Language */
+"Serbian (Cyrillic)" = "Serbų (kirilica)";
+
+/* Language */
+"Serbian (Latin)" = "Serbų (lotynų)";
+
+/* Language */
+"Sesotho" = "sesoto";
+
+/* Language */
+"Shona" = "Šona";
+
+/* Language */
+"Sindhi" = "sindi";
+
+/* Language */
+"Sinhala" = "sinhalų";
+
+/* Language */
+"Slovak" = "slovakų";
+
+/* Language */
+"Slovenian" = "slovėnų";
+
+/* Language */
+"Somali" = "somalių";
+
+/* Language */
+"Spanish" = "ispanų";
+
+/* Language */
+"Sundanese" = "svati";
+
+/* Language */
+"Swahili" = "swahili";
+
+/* Language */
+"Swedish" = "Švedijos";
+
+/* Language */
+"Tajik" = "tadžikų";
+
+/* Language */
+"Tamil" = "tamilų";
+
+/* Language */
+"Telugu" = "telugų";
+
+/* Language */
+"Thai" = "tajų";
+
+/* Thank you - thanking the user for their purchase
+   Thanking the user for purchasing */
+"Thank you!" = "Ačiū!";
+
+/* Language */
+"Turkish" = "turkų";
+
+/* Language */
+"Ukrainian" = "ukrainiečių";
+
+/* Presented when the user is not able to make payments from this device */
+"Unable to make payments" = "Nepavyko atlikti mokėjimus";
+
+/* Language */
+"Urdu" = "Urdų kalba";
+
+/* Language */
+"Uzbek" = "uzbekų";
+
+/* Language */
+"Vietnamese" = "vietnamiečių";
+
+/* Language */
+"Welsh" = "Velso";
+
+/* Language */
+"Xhosa" = "kosų";
+
+/* Language */
+"Yiddish" = "jidiš";
+
+/* Language */
+"Yoruba" = "volofų";
+
+/* Language */
+"Yucatec Maya" = "Yucatec Majai";
+
+/* Language */
+"Zulu" = "zulų";
+
+/* a suffix added to the price to show that it is charged once every year */
+"per year" = "per metus";
+

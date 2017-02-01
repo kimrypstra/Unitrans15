@@ -164,7 +164,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             }
             label.textColor = stackViewFontColour
             label.numberOfLines = 2
-            let name = NSMutableAttributedString(string: languages[number].englishName, attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.8)])
+            let name = NSMutableAttributedString(string: languages[number].localizedName, attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.8)])
             if let native = languages[number].nativeName {
                 let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.4)])
                 name.append(nativeName)
@@ -175,7 +175,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             label.attributedText = name
             
             label.textAlignment = .center
-            label.addTextSpacing(spacing: 3.5)
+            label.addTextSpacing(spacing: 3.5) // adds kerning
             stackView.addArrangedSubview(label)
         }
     }
