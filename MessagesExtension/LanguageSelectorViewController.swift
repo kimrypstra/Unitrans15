@@ -57,6 +57,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         applyTheme(notification: nil)
         designIndicators()
         setUpStackView()
@@ -78,7 +79,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     func insertMessage(notification: Notification) {
         if let message = notification.userInfo?["Message"] as? MSMessage {
-            print("Got message")
+            
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
             self.activeConversation?.insert(message, completionHandler: { (error) in
                 if error != nil {
@@ -131,11 +132,11 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         if shouldScrollOnTap {
             switch sender.accessibilityHint! {
             case "Scroll Up":
-                print("Tap UP")
+                
                 shouldScrollOnTap = false
                 scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y - scrollViewHeight.constant), animated: true)
             case "Scroll Down":
-                print("Tap DOWN")
+                
                 shouldScrollOnTap = false
                 scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y + scrollViewHeight.constant), animated: true)
             default:
@@ -148,6 +149,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     func setUpStackView() {
         languages = languageManager.initialiseLanguages()
         languages.sort(by: { $0.localizedName < $1.localizedName })
+        
         containerViewHeight.constant = CGFloat(languages.count) * scrollViewHeight.constant
         
         for number in 0...languages.count - 1 {
@@ -181,11 +183,11 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     func applyTheme(notification: Notification?) {
-        print("Applying theme")
+        
         let defaults = UserDefaults()
         if notification == nil {
             if let theme = defaults.value(forKey: "theme") as? String {
-                print("Theme: \(theme)")
+                
                 themeToApply = ThemeManager().returnThemeOfName(name: theme)
             } else {
                 print("No theme selected; setting default")
@@ -193,7 +195,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             }
         } else {
             if let theme = notification?.userInfo?["theme"] as? Theme {
-                print("Theme: \(theme.name)")
+                
                 themeToApply = theme
             }
         }
@@ -228,7 +230,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     func loadDefaults(conversation: MSConversation) {
         // load user defaults
-        print("Loading defaults...")
+        
         let defaults = UserDefaults()
         var defaultsArray = [String: String]()
         var ids = [String]()
@@ -248,7 +250,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                         // set the scrollView to the appropriate page
                         if let index = languages.index(of: languages.filter{ $0.englishName == toLanguage }.first!) {
                             scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
-                            print("Loaded to language: \(toLanguage)")
+                            
                         } else {
                             print("No preset 'to' language")
                         }
@@ -441,6 +443,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     override func didBecomeActive(with conversation: MSConversation) {
+        
         loadDefaults(conversation: conversation)
         if conversation.selectedMessage == nil {
             // no message has been selected and the app should launch into compact

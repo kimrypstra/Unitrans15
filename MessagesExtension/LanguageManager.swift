@@ -432,8 +432,17 @@ class LanguageManager {
                 returnString = item.key
             }
         }
-        print(returnString)
         
+        
+        if CharacterSet.lowercaseLetters.contains(returnString.unicodeScalars.first!) {
+            //first letter is not capital 
+            // remove first letter 
+            let removeIndex = returnString.index(returnString.startIndex, offsetBy: 0)
+            let letterIndex = returnString.index(returnString.startIndex, offsetBy: 1)
+            let char = returnString.substring(to: letterIndex)
+            returnString.remove(at: removeIndex)
+            returnString = "\(char.uppercased())\(returnString)"
+        }
         // Handle the lowercase letters! They are messing up the sorting for some reason 
         
         return returnString
@@ -453,7 +462,24 @@ class LanguageManager {
     func initialiseLanguages() -> [Language] {
         var languages = [Language]()
         
-        for entry in google {
+        var fromLanguage = ""
+        if var language = NSLocale.preferredLanguages.first {
+            
+            if language.contains("-Hans") {
+                print("Language is Chinese Simplified")
+                language = "zh"
+            } else if language.contains("-Hant") {
+                print("Language is Chinese Traditional")
+                language = "zh-TW"
+            } else {
+                if let range = language.range(of: "-") {
+                    language = language.substring(to: range.lowerBound)
+                }
+            }
+            fromLanguage = language
+        }
+        
+        for entry in google where entry.value != fromLanguage {
             let language = Language(
                 englishName: entry.key,
                 localizedName: nameFromCode(entry.value, localized: true)!,

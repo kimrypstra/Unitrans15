@@ -457,12 +457,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     @IBAction func didTapGo(_ sender: UIButton) {
         switch composerMode! {
         case .Compose:
-            goButton.setImage(UIImage(named: "blankButton"), for: .normal)
-            goButton.isEnabled = false
-            toggleSpinner()
-            setDefaultsForConversation(toLanguage: composerMode.get().0)
-            textView.resignFirstResponder()
-            messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: true)
+            if textView.text.characters.count > 0 {
+                goButton.setImage(UIImage(named: "blankButton"), for: .normal)
+                goButton.isEnabled = false
+                toggleSpinner()
+                setDefaultsForConversation(toLanguage: composerMode.get().0)
+                textView.resignFirstResponder()
+                messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: true)
+            } else {
+                textView.shake()
+                bubble.shake()
+            }
+            
         case .View:
             // Change the UI
             UIView.animate(withDuration: 0.2, animations: { 
