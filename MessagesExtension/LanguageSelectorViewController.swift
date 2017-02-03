@@ -45,7 +45,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var bottomIndicator: Indicators?
     
     
-    
+    var gai = GAI.sharedInstance()
     
     var developerMode = false
     
@@ -63,13 +63,15 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         setUpStackView()
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
         
-        //load user defaults and set scrollView to that language
-        // Do any additional setup after loading the view.
-        /*
-        let marker = UIView(frame: CGRect(x: self.view.frame.width / 2, y: 0, width: 1, height: self.view.frame.height))
-        marker.backgroundColor = UIColor.red
-        self.view.addSubview(marker)
-        */
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        gai = GAI.sharedInstance()
+        gai?.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai?.logger.logLevel = GAILogLevel.error  // remove before app release
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +86,8 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             self.activeConversation?.insert(message, completionHandler: { (error) in
                 if error != nil {
                     print(error?.localizedDescription)
+                    let error = GAIDictionaryBuilder.createException(withDescription: error.debugDescription, withFatal: 0)
+                    GAI.sharedInstance().defaultTracker.send(error!.build() as [NSObject: AnyObject])
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error inserting message", code: 0)]))
 
                 } else {

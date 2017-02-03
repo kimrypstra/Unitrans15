@@ -16,6 +16,8 @@ class Rater: UIView {
     @IBOutlet weak var star4: UIButton!
     @IBOutlet weak var star5: UIButton!
 
+    var languageName: String?
+    
     func getView() -> UIView {
         
         return Bundle.main.loadNibNamed("Rater", owner: nil, options: nil)?.first as! Rater
@@ -59,6 +61,9 @@ class Rater: UIView {
         star5.setImage(UIImage(named: "starfilled"), for: .normal)
         default: break
         }
+        
+        let rating = GAIDictionaryBuilder.createEvent(withCategory: "Rating", action: "Google", label: languageName, value: sender.tag as NSNumber)
+        GAI.sharedInstance().defaultTracker.send(rating!.build() as [NSObject: AnyObject])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RATED"), object: nil, userInfo: ["rating" : sender.tag]))
         let timeSep = 0.05
         
@@ -114,8 +119,8 @@ class Rater: UIView {
     }
     
     
-    func presentStars() {
-        print("Height: \(self.frame.height), yPos: \(star1.center.y)")
+    func presentStars(withLanguage: String) {
+        languageName = withLanguage
         let timeSep = 0.05
         let centerHeight = self.frame.height / 2 + 5
         let _ = Timer.scheduledTimer(withTimeInterval: timeSep * 1, repeats: false, block: {(Timer) -> Void in

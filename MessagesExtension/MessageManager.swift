@@ -86,6 +86,8 @@ class MessageManager: NSObject, URLSessionDelegate {
     
     func abortWithError(error: String, code: Int) {
         let errorPost = DSError(domain: error, code: code)
+        let error = GAIDictionaryBuilder.createException(withDescription: error, withFatal: 1)
+        GAI.sharedInstance().defaultTracker.send(error!.build() as [NSObject: AnyObject])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":errorPost]))
     }
     
@@ -135,6 +137,8 @@ class MessageManager: NSObject, URLSessionDelegate {
                 let httpResponse = response as! HTTPURLResponse
                 if httpResponse.statusCode != 200 {
                     print("Error - server returned \(httpResponse.statusCode)")
+                    let error = GAIDictionaryBuilder.createException(withDescription: "HTTP Error \(httpResponse.statusCode)", withFatal: 0)
+                    GAI.sharedInstance().defaultTracker.send(error!.build() as [NSObject: AnyObject])
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error": DSError(domain: "Unable to reach server. Status: \(httpResponse.statusCode)", code: 0)]))
                     completion(nil)
                 } else {

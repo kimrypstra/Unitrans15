@@ -7,7 +7,7 @@ target 'MessagesExtension' do
 
   # Pods for MessagesExtension
 
-# pod 'Google/Analytics'
+pod 'Google/Analytics'
 
 end
 

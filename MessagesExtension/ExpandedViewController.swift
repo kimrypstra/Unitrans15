@@ -463,6 +463,13 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 toggleSpinner()
                 setDefaultsForConversation(toLanguage: composerMode.get().0)
                 textView.resignFirstResponder()
+                let fromRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "FromLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().1!, localized: false))", value: 0)
+                let toRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "ToLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().0, localized: false))", value: 0)
+                let countRecord = GAIDictionaryBuilder.createEvent(withCategory: "Translation", action: "Count", label: "", value: textView.text.characters.count as NSNumber!)
+                let tracker = GAI.sharedInstance().defaultTracker
+                tracker?.send(countRecord!.build() as [NSObject : AnyObject])
+                tracker?.send(fromRecord!.build() as [NSObject : AnyObject])
+                tracker?.send(toRecord!.build() as [NSObject : AnyObject])
                 messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: true)
             } else {
                 textView.shake()
@@ -533,7 +540,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 
             })
             self.raterView?.hideStars()
-            self.raterView?.presentStars()
+            self.raterView?.presentStars(withLanguage: message.translatedLanguage)
         } else {
             
             

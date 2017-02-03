@@ -31,6 +31,8 @@
 		21C36EFA1E416CDB00EFE590 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36EFC1E416CDB00EFE590 /* InfoPlist.strings */; };
 		21C36EFF1E416CDB00EFE590 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F011E416CDB00EFE590 /* Localizable.strings */; };
 		21C36F041E416CDC00EFE590 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F061E416CDC00EFE590 /* InfoPlist.strings */; };
+		21C36F271E42CE6000EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
+		21C36F281E44BB3700EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
 		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
 		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
 		21D818871DD93AB20079F4B8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D818861DD93AB20079F4B8 /* List.swift */; };
@@ -147,6 +149,9 @@
 		21C36F221E416E2900EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		21C36F231E416E2A00EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21C36F241E416E2A00EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		21C36F251E42CDC600EFE590 /* Unitrans-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unitrans-Bridging-Header.h"; sourceTree = "<group>"; };
+		21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21C36F291E44C4E700EFE590 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
 		21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/Unitrans-eqpisnafkiewfrdtjbenlyskwdxm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		21CA31771DD7348300CA2EF5 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreManager.swift; path = ../StoreManager.swift; sourceTree = "<group>"; };
 		21D818841DD93A9F0079F4B8 /* List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List.xib; sourceTree = "<group>"; };
@@ -188,6 +193,8 @@
 		216BFA981DA8E4D40041FA8F = {
 			isa = PBXGroup;
 			children = (
+				21C36F251E42CDC600EFE590 /* Unitrans-Bridging-Header.h */,
+				21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */,
 				216BFAA11DA8E4D50041FA8F /* Unitrans */,
 				216BFAB01DA8E4D50041FA8F /* MessagesExtension */,
 				216BFAAD1DA8E4D50041FA8F /* Frameworks */,
@@ -229,6 +236,7 @@
 		216BFAB01DA8E4D50041FA8F /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
+				21C36F291E44C4E700EFE590 /* MessagesExtension.entitlements */,
 				21C36F011E416CDB00EFE590 /* Localizable.strings */,
 				21C36EFC1E416CDB00EFE590 /* InfoPlist.strings */,
 				216BFAB31DA8E4D50041FA8F /* MainInterface.storyboard */,
@@ -301,6 +309,7 @@
 				216BFABE1DA8E4D50041FA8F /* Embed App Extensions */,
 				DFCF6E5B8F847A5D88597D15 /* Frameworks */,
 				C1008A82BF931C5165C42271 /* [CP] Copy Pods Resources */,
+				B72C58A186E19D5978D1642B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -352,6 +361,11 @@
 						DevelopmentTeam = YBCCTWH2WW;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -392,6 +406,7 @@
 			files = (
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				21C36F041E416CDC00EFE590 /* InfoPlist.strings in Resources */,
+				21C36F271E42CE6000EFE590 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +422,7 @@
 				21C36EFF1E416CDB00EFE590 /* Localizable.strings in Resources */,
 				216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */,
+				21C36F281E44BB3700EFE590 /* GoogleService-Info.plist in Resources */,
 				21C36EFA1E416CDB00EFE590 /* InfoPlist.strings in Resources */,
 				216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */,
 			);
@@ -442,7 +458,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B72C58A186E19D5978D1642B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C1008A82BF931C5165C42271 /* [CP] Copy Pods Resources */ = {
@@ -472,7 +503,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -656,6 +687,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Unitrans-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -699,6 +731,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Unitrans-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
