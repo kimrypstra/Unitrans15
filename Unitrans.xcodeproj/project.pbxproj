@@ -33,6 +33,7 @@
 		21C36F041E416CDC00EFE590 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F061E416CDC00EFE590 /* InfoPlist.strings */; };
 		21C36F271E42CE6000EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
 		21C36F281E44BB3700EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
+		21C36F2B1E45CB1E00EFE590 /* String + HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */; };
 		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
 		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
 		21D818871DD93AB20079F4B8 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D818861DD93AB20079F4B8 /* List.swift */; };
@@ -152,6 +153,7 @@
 		21C36F251E42CDC600EFE590 /* Unitrans-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unitrans-Bridging-Header.h"; sourceTree = "<group>"; };
 		21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		21C36F291E44C4E700EFE590 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
+		21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + HTML.swift"; sourceTree = "<group>"; };
 		21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/Unitrans-eqpisnafkiewfrdtjbenlyskwdxm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
 		21CA31771DD7348300CA2EF5 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreManager.swift; path = ../StoreManager.swift; sourceTree = "<group>"; };
 		21D818841DD93A9F0079F4B8 /* List.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List.xib; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
+				21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */,
 				21CA31771DD7348300CA2EF5 /* StoreManager.swift */,
 				216B75221DE00BB1009A6A3E /* ThemeManager.swift */,
 				216B75241DE00BC5009A6A3E /* Theme.swift */,
@@ -513,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C36F2B1E45CB1E00EFE590 /* String + HTML.swift in Sources */,
 				2122EAFD1DB06F8E00D5B2B2 /* ExpandedViewController.swift in Sources */,
 				213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */,
 				214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */,

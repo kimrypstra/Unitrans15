@@ -70,11 +70,11 @@ class MessageManager: NSObject, URLSessionDelegate {
     private func composeMessage(text: String, toCode: String, fromCode: String, originalText: String) {
         let message: MSMessage? = MSMessage()
         let layout = MSMessageTemplateLayout()
-        layout.caption = text
+        layout.caption = String(htmlEncodedString: text)
         
         // text is already encoded as it's been received from the server
         var baseURL = URLComponents(string: "http://www.disordersoftware.com/message")
-        baseURL?.query = "text=\(text)&from=\(fromCode)&to=\(toCode)&original=\(originalText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)"
+        baseURL?.query = "text=\(text)&&from=\(fromCode)&&to=\(toCode)&&original=\(originalText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)"
         message?.url = baseURL?.url
         message?.layout = layout
         

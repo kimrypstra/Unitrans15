@@ -188,8 +188,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         case .View:
             print("View mode")
             if let query = URL(string: composerMode.get().0)?.query?.removingPercentEncoding?.removingPercentEncoding {
-                let sep = query.components(separatedBy: "&")
-                var text = sep[0] as String
+                let sep = query.components(separatedBy: "&&")
+                var text = String(htmlEncodedString: sep[0] as String)
                 var from = sep[1] as String
                 var to = sep[2] as String
                 var original = sep[3] as String

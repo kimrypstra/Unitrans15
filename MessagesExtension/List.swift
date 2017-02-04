@@ -64,6 +64,7 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
      
             } else {
                 cell.mainLabel.text = "Automatic"
+                cell.nativeLabel.text = "Device Language" 
             }
             
             if cell.mainLabel.text == selected {
