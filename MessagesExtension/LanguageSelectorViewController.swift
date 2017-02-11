@@ -44,7 +44,6 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var topIndicator: Indicators?
     var bottomIndicator: Indicators?
     
-    
     var gai = GAI.sharedInstance()
     
     var developerMode = false
@@ -64,6 +63,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
         
         // Configure tracker from GoogleService-Info.plist.
+        
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
@@ -71,7 +71,8 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         // Optional: configure GAI options.
         gai = GAI.sharedInstance()
         gai?.trackUncaughtExceptions = true  // report uncaught exceptions
-        gai?.logger.logLevel = GAILogLevel.error  // remove before app release
+        //gai?.logger.logLevel = GAILogLevel.error  // remove before app release
+ 
     }
     
     override func viewWillAppear(_ animated: Bool) {

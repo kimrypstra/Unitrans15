@@ -12,6 +12,7 @@
 		2122EAFF1DBB021E00D5B2B2 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */; };
 		2122EB031DBBA39700D5B2B2 /* Rater.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2122EB021DBBA39700D5B2B2 /* Rater.xib */; };
 		2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB041DBBA3C100D5B2B2 /* Rater.swift */; };
+		2135D81C1E4F0AEB009648DE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2135D81B1E4F0AEB009648DE /* StoreKit.framework */; };
 		213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */; };
 		214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */; };
 		2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B38A1DADC621002E08D0 /* Indicators.swift */; };
@@ -76,6 +77,7 @@
 		2122EAFE1DBB021E00D5B2B2 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		2122EB021DBBA39700D5B2B2 /* Rater.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Rater.xib; sourceTree = "<group>"; };
 		2122EB041DBBA3C100D5B2B2 /* Rater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rater.swift; sourceTree = "<group>"; };
+		2135D81B1E4F0AEB009648DE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Kerning.swift"; sourceTree = "<group>"; };
 		2155B38A1DADC621002E08D0 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2135D81C1E4F0AEB009648DE /* StoreKit.framework in Frameworks */,
 				216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */,
 				E02D02DB1709187114B19061 /* Pods_MessagesExtension.framework in Frameworks */,
 			);
@@ -227,6 +230,7 @@
 		216BFAAD1DA8E4D50041FA8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2135D81B1E4F0AEB009648DE /* StoreKit.framework */,
 				21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */,
 				216BFAAE1DA8E4D50041FA8F /* Messages.framework */,
 				325249521F8DA8E0180673B5 /* Pods_MessagesExtension.framework */,
@@ -365,6 +369,9 @@
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};

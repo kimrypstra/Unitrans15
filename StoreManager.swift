@@ -36,6 +36,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     
     func updateProductList() {
         // Check iTunes Connect for updated product details
+        SKPaymentQueue.default().add(self)
         if SKPaymentQueue.canMakePayments() {
             let request = SKProductsRequest(productIdentifiers: productIdentifiers)
             request.delegate = self
@@ -63,6 +64,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         // Buy the stuff
         if product != nil {
             let payment = SKPayment(product: product!)
+            
             SKPaymentQueue.default().add(payment)
         } else {
             print("Product not ready yet")
@@ -118,7 +120,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                                             let versionDouble = Double(version)
                                             if versionDouble! <= 1.2 {
                                                 print("Version is <= 1.2; Give all of the things")
-                                                self.deliverTheGoods()
+                                                self.deliverTheGoods(transaction: nil)
                                             } else {
                                                 print("Version is >= 1.2; continue validating")
                                                 // This receipt was generated after the business model changed - it is for an IAP, not an outright.
@@ -133,7 +135,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                                                         // The thing is expired; don't give the things
                                                     } else {
                                                         // Give the things!! 
-                                                        self.deliverTheGoods()
+                                                        self.deliverTheGoods(transaction: nil)
                                                     }
                                                 } else {
                                                     // something is amiss here
@@ -181,35 +183,39 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        // check if the payment was successful, etc...
-        switch transactions.first!.transactionState {
-        case .purchased:
-            // Success! Making money! 
-            print("Success")
-            deliverTheGoods()
-        case .purchasing:
-            print("Purchasing...")
-            // 
-        case .failed:
-            print("Failed - \(transactions.first?.error)")
-            let error = DSError(domain: (transactions.first?.error?.localizedDescription)!, code: 3)
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":error]))
-            
+        print("updatedTransactions")
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                // Success! Making money!
+                print("Success")
+                
+                deliverTheGoods(transaction: transaction)
+            case .purchasing:
+                print("Purchasing...")
+                break
+            case .failed:
+                print("Failed - \(transactions.first?.error)")
+                let error = DSError(domain: (transactions.first?.error?.localizedDescription)!, code: 3)
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":error]))
+                SKPaymentQueue.default().finishTransaction(transaction)
+                
             //
-        case .restored:
-            print("Restored!")
-            if transactions.first?.original?.payment.productIdentifier == productIdentifiers.first {
-                deliverTheGoods()
+            case .restored:
+                print("Restored!")
+                deliverTheGoods(transaction: transaction)
+                
+            //
+            case .deferred:
+                print("Deferred...")
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: NSLocalizedString("Purchase deferred", comment: "Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent"), code: 0)]))
+                //
             }
-            //
-        case .deferred:
-            print("Deferred...")
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: NSLocalizedString("Purchase deferred", comment: "Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent"), code: 0)]))
-            //
         }
+        
     }
     
-    func deliverTheGoods() {
+    func deliverTheGoods(transaction: SKPaymentTransaction?) {
         // Make the changes to UserDefaults to reflect the purchase and trigger a refresh of the app to take into account the changes immediately
         let defaults = UserDefaults()
         if (defaults.value(forKey: "subscribed") == nil) {
@@ -218,6 +224,11 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         
         // Send a notification to update the store UI
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REFRESH_UI"), object: nil, userInfo: nil))
+        
+        // Finish the transaction
+        if transaction != nil {
+            SKPaymentQueue.default().finishTransaction(transaction!)
+        }
         
 
     }
