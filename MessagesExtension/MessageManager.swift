@@ -92,7 +92,7 @@ class MessageManager: NSObject, URLSessionDelegate {
     }
     
     func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, google: Bool, completion: @escaping (String?) -> ()) {
-        let baseURL = "http://api.disordersoftware.com/unitrans/Testing/api2.php?action=translate"
+        let baseURL = "http://api.disordersoftware.com/unitrans/api3.php?action=translate"
 
         // Set up the payload
         let textToTranslate = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)

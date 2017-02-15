@@ -95,7 +95,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             } else {
                 //send to server for forwarding to apple 
 
-                guard let url = URL(string: "http://api.disordersoftware.com/unitrans/Testing/validate.php") else {
+                guard let url = URL(string: "http://api.disordersoftware.com/unitrans/validate.php") else {
                     print("URL Error in receipt validation")
                     return
                 }
