@@ -242,6 +242,7 @@ class Settings: UIView {
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "START_SCROLL")))
             self.listView?.removeFromSuperview()
             self.listView = nil
+            self.listContainer.isUserInteractionEnabled = false
         })
     }
     
@@ -258,6 +259,7 @@ class Settings: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadDefaults), name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
         if listView == nil {
             listContainer.isHidden = false
+            listContainer.isUserInteractionEnabled = true 
             listView = Bundle.main.loadNibNamed("List", owner: self, options: nil)?.first as! List
             listView?.listViewHeight.constant = 488
             listView?.setup(mode: sender.restorationIdentifier!)

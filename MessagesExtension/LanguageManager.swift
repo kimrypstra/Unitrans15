@@ -84,7 +84,6 @@ class LanguageManager {
         "Polish":"pl",
         "Portuguese":"pt",
         "Punjabi":"pa",
-        "Querétaro Otomi":"",
         "Romanian":"ro",
         "Russian":"ru",
         "Samoan":"sm",
@@ -190,7 +189,6 @@ class LanguageManager {
         "Polish":"Polskie",
         "Portuguese":"Português",
         "Punjabi":"ਪੰਜਾਬੀ ਦੇ",
-        "Querétaro Otomi":"Maxei ñäñho",
         "Romanian":"Română",
         "Russian":"русский",
         "Samoan":"Samoa",
@@ -221,7 +219,6 @@ class LanguageManager {
         "Xhosa":"isiXhosa",
         "Yiddish":"ייִדיש",
         "Yoruba":"Yorùbá",
-        "Yucatec Maya":"Maaya yucateco",
         "Zulu":"Zulu",
     ]
     
@@ -300,13 +297,11 @@ class LanguageManager {
         NSLocalizedString("Polish", comment: "Language"):"pl",
         NSLocalizedString("Portuguese", comment: "Language"):"pt",
         NSLocalizedString("Punjabi", comment: "Language"):"pa",
-        NSLocalizedString("Querétaro Otomi", comment: "Language"):"",
         NSLocalizedString("Romanian", comment: "Language"):"ro",
         NSLocalizedString("Russian", comment: "Language"):"ru",
         NSLocalizedString("Samoan", comment: "Language"):"sm",
         NSLocalizedString("Scots Gaelic", comment: "Language"):"gd",
         NSLocalizedString("Serbian (Cyrillic)", comment: "Language"):"sr",
-        NSLocalizedString("Serbian (Latin)", comment: "Language"):"",
         NSLocalizedString("Sesotho", comment: "Language"):"st",
         NSLocalizedString("Shona", comment: "Language"):"sn",
         NSLocalizedString("Sindhi", comment: "Language"):"sd",
@@ -331,7 +326,6 @@ class LanguageManager {
         NSLocalizedString("Xhosa", comment: "Language"):"xh",
         NSLocalizedString("Yiddish", comment: "Language"):"yi",
         NSLocalizedString("Yoruba", comment: "Language"):"yo",
-        NSLocalizedString("Yucatec Maya", comment: "Language"):"",
         NSLocalizedString("Zulu", comment: "Language"):"zu"
         ]
     
@@ -487,7 +481,10 @@ class LanguageManager {
             languages.append(language)
         }
 
-        print("We have \(languages.count) languages")
+        print("Native languages: \(nativeNames.count)")
+        print("Google: \(google.count)")
+        print("Localized Languages: \(localizedLanguages.count)")
+        print("Initialised Languages: \(languages.count) (this should be Google - 1, because the 'from' language isn't a valid 'to' language")
         return languages
     }
 }
