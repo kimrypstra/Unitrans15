@@ -46,7 +46,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     var gai = GAI.sharedInstance()
     
-    var developerMode = true
+    var developerMode = false
     
     
     
