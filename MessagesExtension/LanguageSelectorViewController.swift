@@ -55,7 +55,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
         
         applyTheme(notification: nil)
         designIndicators()
@@ -63,7 +63,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
         
         // Configure tracker from GoogleService-Info.plist.
-        
+        /*
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
@@ -72,13 +72,23 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         gai = GAI.sharedInstance()
         gai?.trackUncaughtExceptions = true  // report uncaught exceptions
         //gai?.logger.logLevel = GAILogLevel.error  // remove before app release
- 
+ */
+        
+        super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         backgroundView.topColor = themeToApply?.topColour
         backgroundView.bottomColor = themeToApply?.bottomColour
+        super.viewWillAppear(animated)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //
+        super.viewDidAppear(animated)
+    }
+    
+    
     
     func insertMessage(notification: Notification) {
         if let message = notification.userInfo?["Message"] as? MSMessage {
@@ -436,16 +446,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Conversation Handling
-    
-    override func willBecomeActive(with conversation: MSConversation) {
-
-    }
+    // MARK: - Conversation Handlingw
     
     override func didBecomeActive(with conversation: MSConversation) {
         
@@ -456,6 +457,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             self.performSegue(withIdentifier: "toExpanded", sender: self)
             // a message was selected and the app should launch into expanded, which will trigger the segue to the expanded view controller
         }
+        super.didBecomeActive(with: conversation)
     }
     
     override func didResignActive(with conversation: MSConversation) {

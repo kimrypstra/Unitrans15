@@ -166,7 +166,6 @@ class LanguageManager {
         "Kannada":"ಕನ್ನಡ",
         "Kazakh":"Қазақ",
         "Khmer":"ភាសាខ្មែរ",
-        "Klingon":"tlhIngan",
         "Korean":"한국어",
         "Kurdish (Kurmanji)":"Kurdî",
         "Kyrgyz":"Кыргызча",
@@ -277,7 +276,6 @@ class LanguageManager {
         NSLocalizedString("Kannada", comment: "Language"):"kn",
         NSLocalizedString("Kazakh", comment: "Language"):"kk",
         NSLocalizedString("Khmer", comment: "Language"):"km",
-        NSLocalizedString("Klingon", comment: "Language"):"",
         NSLocalizedString("Korean", comment: "Language"):"ko",
         NSLocalizedString("Kurdish (Kurmanji)", comment: "Language"):"ku",
         NSLocalizedString("Kyrgyz", comment: "Language"):"ky",
@@ -364,7 +362,6 @@ class LanguageManager {
         "Italian"	:	"it",
         "Japanese"	:	"ja",
         "Kiswahili"	:	"sw",
-        "Klingon"	:	"tlh",
         "Korean"	:	"ko",
         "Latvian"	:	"lv",
         "Lithuanian"	:	"lt",
@@ -490,6 +487,7 @@ class LanguageManager {
             languages.append(language)
         }
 
+        print("We have \(languages.count) languages")
         return languages
     }
 }

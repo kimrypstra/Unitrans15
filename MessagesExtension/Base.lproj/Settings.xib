@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -116,9 +116,23 @@
                                         <action selector="restorePurchasesTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="HgE-ih-XTH"/>
                                     </connections>
                                 </button>
+                                <visualEffectView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Yk-GY-jhZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="359" height="75"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MOe-G2-C9m">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <blurEffect style="light"/>
+                                </visualEffectView>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="X9t-dG-dk0">
+                                    <rect key="frame" x="170" y="28" width="20" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="5Yk-GY-jhZ" firstAttribute="leading" secondItem="IRS-BE-gGg" secondAttribute="leading" id="1B7-3E-wdD"/>
+                                <constraint firstItem="5Yk-GY-jhZ" firstAttribute="top" secondItem="IRS-BE-gGg" secondAttribute="top" id="2jG-I8-tBy"/>
                                 <constraint firstItem="PBt-4K-mh1" firstAttribute="leading" secondItem="IRS-BE-gGg" secondAttribute="leading" constant="8" id="2uN-d2-yBv"/>
                                 <constraint firstAttribute="height" constant="75" id="9K1-SJ-1ki"/>
                                 <constraint firstItem="N7w-aS-FGS" firstAttribute="leading" secondItem="PBt-4K-mh1" secondAttribute="trailing" id="Ff7-zV-brS"/>
@@ -131,6 +145,8 @@
                                 <constraint firstItem="9lP-0y-kEA" firstAttribute="leading" secondItem="IRS-BE-gGg" secondAttribute="leading" constant="8" id="Vrw-fs-Y0q"/>
                                 <constraint firstItem="PBt-4K-mh1" firstAttribute="top" secondItem="9lP-0y-kEA" secondAttribute="bottom" id="XAl-4E-QAw"/>
                                 <constraint firstItem="N7w-aS-FGS" firstAttribute="top" secondItem="TLU-uc-9kM" secondAttribute="bottom" constant="-1" id="ZRT-WP-Rbk"/>
+                                <constraint firstAttribute="trailing" secondItem="5Yk-GY-jhZ" secondAttribute="trailing" id="dWj-8B-dLf"/>
+                                <constraint firstAttribute="bottom" secondItem="5Yk-GY-jhZ" secondAttribute="bottom" id="eG1-cv-Div"/>
                                 <constraint firstItem="TLU-uc-9kM" firstAttribute="centerY" secondItem="9lP-0y-kEA" secondAttribute="centerY" id="f66-RO-eHu"/>
                             </constraints>
                         </view>
@@ -382,7 +398,9 @@
                 <outlet property="listTop" destination="LJk-ex-dsh" id="mci-YP-ZTu"/>
                 <outlet property="listWidth" destination="mnU-N6-SLJ" id="fG0-va-Icf"/>
                 <outlet property="priceLabel" destination="TLU-uc-9kM" id="qXD-z2-Er3"/>
+                <outlet property="spinner" destination="X9t-dG-dk0" id="UCw-TE-Gpv"/>
                 <outlet property="stackView" destination="qnK-00-2tp" id="XQw-bS-orj"/>
+                <outlet property="storeBlur" destination="5Yk-GY-jhZ" id="g2M-Lm-myc"/>
                 <outlet property="storeFrontView" destination="IRS-BE-gGg" id="smt-OM-2eM"/>
                 <outlet property="themeLabel" destination="nDz-bg-rio" id="IHa-1j-HnD"/>
                 <outlet property="themeView" destination="Xq3-jV-DcR" id="Acj-sf-JXP"/>

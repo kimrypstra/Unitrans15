@@ -23,11 +23,14 @@ class Settings: UIView {
     @IBOutlet weak var storeFrontView: UIView!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var themeView: UIView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var storeBlur: UIVisualEffectView!
     
     var listView: List?
     var storeManager = StoreManager()
     var pricesUpdated = false
     var developerMode: Bool?
+    var storeTapped = false
     
     func getView() -> UIView {
         return Bundle.main.loadNibNamed("Settings", owner: nil, options: nil)?.first as! Settings
@@ -91,6 +94,7 @@ class Settings: UIView {
     }
     
     func loadDefaults(notification: Notification?) {
+        storeFrontView.clipsToBounds = true 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterPurchase), name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil) // This is added here because it's basically the first function that runs when the class is loaded (apart from getView())
         versionLabel.text = "v\(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)b\(Bundle.main.infoDictionary!["CFBundleVersion"]!)"
@@ -126,6 +130,8 @@ class Settings: UIView {
                     priceLabel.isHidden = true
                     storeFrontView.backgroundColor = UIColor.white
                     storeFrontView.layer.cornerRadius = 8
+                    storeBlur.layer.cornerRadius = 8
+                    storeBlur.contentView.layer.cornerRadius = 8
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
                     storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
                     storeManager.updateProductList()
@@ -142,6 +148,8 @@ class Settings: UIView {
                     priceLabel.isHidden = true
                     storeFrontView.backgroundColor = UIColor.white
                     storeFrontView.layer.cornerRadius = 8
+                    storeBlur.layer.cornerRadius = 8
+                    storeBlur.contentView.layer.cornerRadius = 8
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
                     storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
                     storeManager.updateProductList()
@@ -189,11 +197,40 @@ class Settings: UIView {
     }
     
     func didTapStoreFront() {
-        storeManager.buyTheThing()
+        if pricesUpdated && SKPaymentQueue.canMakePayments() && !storeTapped {
+            storeTapped = true
+            addBlurAndSpinner()
+            storeManager.buyTheThing()
+        }
+        
     }
     
     @IBAction func restorePurchasesTapped(_ sender: UIButton) {
+        addBlurAndSpinner()
         storeManager.restorePurchases()
+    }
+    
+    func addBlurAndSpinner() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.removeBlurAndSpinner), name: NSNotification.Name(rawValue: "REMOVE_BLUR"), object: nil)
+        UIView.animate(withDuration: 0.5, animations: { 
+            self.storeBlur.alpha = 1
+        }) { (success) in
+            self.spinner.startAnimating()
+            self.spinner.isHidden = false
+        }
+    }
+    
+    func removeBlurAndSpinner() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_BLUR"), object: nil)
+        spinner.stopAnimating()
+        UIView.animate(withDuration: 0.5, animations: { 
+            self.storeBlur.alpha = 0
+        }) { (_) in
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+            self.storeTapped = false
+        }
+        
     }
     
     func removeList() {
@@ -210,6 +247,7 @@ class Settings: UIView {
     
     @IBAction func didTapTick(_ sender: UIButton) {
         print("Tapped tick")
+        
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "DISMISS_SETTINGS"), object: nil, userInfo: nil))
     }
     

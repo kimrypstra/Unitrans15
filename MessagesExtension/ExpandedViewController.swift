@@ -374,7 +374,12 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                     self.toggleSpinner()
                 }
                 if self.goButton.isEnabled == false {
-                    self.goButton.setImage(UIImage(named: "rightArrow"), for: .normal)
+                    print("Setting image...")
+                    if self.theme?.isRichTheme == true {
+                        self.goButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)GoButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+                    } else {
+                        self.goButton.setImage(UIImage(named: "rightArrow")?.withRenderingMode(.alwaysTemplate), for: .normal)
+                    }
                     self.goButton.isEnabled = true
                 }
             })

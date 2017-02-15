@@ -33,6 +33,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
 
     let productIdentifiers = Set(["com.kimrypstra.unitrans.MessagesExtension.Yearly"])
     var product: SKProduct?
+    var errorReachingStore = false
     
     func updateProductList() {
         // Check iTunes Connect for updated product details
@@ -62,12 +63,15 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     func buyTheThing() {
         print("BUYBUYBUY!")
         // Buy the stuff
-        if product != nil {
+        if product != nil && !errorReachingStore {
             let payment = SKPayment(product: product!)
-            
             SKPaymentQueue.default().add(payment)
+            
+            
+            
         } else {
             print("Product not ready yet")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error purchasing", code: 0)]))
         }
         
@@ -151,11 +155,13 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                             }
                         } catch {
                             print("Error deserializing: \(error)")
+                            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
                             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 0)]))
                         }
                     } else {
                         let httpResponse = response as! HTTPURLResponse
                         print("Status: \(httpResponse.statusCode) \nError: \(error)")
+                        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
                         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 1)]))
                     }
                 })
@@ -165,6 +171,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             
         } else {
             print("No receipt in bundle?")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 2)]))
         }
 
@@ -172,6 +179,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     
     func requestDidFinish(_ request: SKRequest) {
         print("Finished request...")
+        
         if request.isKind(of: SKReceiptRefreshRequest.self) {
             restorePurchases()
         }
@@ -179,6 +187,8 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error restoring purchases", code: 5)]))
         print("Request failed with error: \(error)")
     }
     
@@ -196,9 +206,12 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
                 break
             case .failed:
                 print("Failed - \(transactions.first?.error)")
+                errorReachingStore = true
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
                 let error = DSError(domain: (transactions.first?.error?.localizedDescription)!, code: 3)
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":error]))
                 SKPaymentQueue.default().finishTransaction(transaction)
+                SKPaymentQueue.default().remove(self)
                 
             //
             case .restored:
@@ -208,6 +221,7 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
             //
             case .deferred:
                 print("Deferred...")
+                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
                 NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: NSLocalizedString("Purchase deferred", comment: "Presented when a purchase is put on hold, waiting for some other action - eg, approval from a parent"), code: 0)]))
                 //
             }
@@ -228,7 +242,10 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         // Finish the transaction
         if transaction != nil {
             SKPaymentQueue.default().finishTransaction(transaction!)
+            SKPaymentQueue.default().remove(self)
         }
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REMOVE_BLUR")))
         
 
     }
