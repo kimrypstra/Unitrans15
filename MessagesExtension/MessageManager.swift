@@ -145,6 +145,8 @@ class MessageManager: NSObject, URLSessionDelegate {
                     do {
                         if data != nil {
                             if google {
+                                let string = String(data: data!, encoding: String.Encoding.utf8)
+                                print("Data: \(string)")
                                 let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
                                 //print(json)
                                 guard let dataLevel = json["data"] as? NSDictionary else {
