@@ -48,7 +48,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     var textViewIsScrollEnabled = false
     var textViewHeightConstraint: NSLayoutConstraint? = nil
     var keyboardHeight: CGFloat?
-    let topBarHeight: CGFloat = 85
+    var topBarHeight: CGFloat = 85
     var remainingHeight: CGFloat? = nil
     var pulseTimer: Timer?
     
@@ -102,6 +102,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         setUpInterface()
     
         self.view.frame.origin.y += 65
+        
+        //background.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
     }
     
 
@@ -109,7 +111,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     func goToWeb(sender: Notification) {
         if let mail = sender.userInfo?["mail"] as? Bool {
             if let url = sender.userInfo?["url"] as? URL {
-                print("Mail...")
+                NSLog("**** Mail...")
                 self.extensionContext?.open(url, completionHandler: nil)
                 
             }
@@ -128,7 +130,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             if let theme = notification.userInfo?["theme"] as? Theme {
                 applyTheme(theme: theme, notification: nil)
             } else {
-                print("No theme at respondToNotification")
+                NSLog("**** No theme at respondToNotification")
             }
         }
     }
@@ -143,7 +145,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }
         }
         
-        print("Applying theme: \(theme?.name!)")
+        NSLog("**** Applying theme: \(theme?.name!)")
         background.topColor = self.theme?.topColour
         background.bottomColor = self.theme?.bottomColour
         
@@ -186,14 +188,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         //Here we'll check the composer mode
         switch composerMode! {
         case .View:
-            print("View mode")
+            NSLog("**** View mode")
             if let query = URL(string: composerMode.get().0)?.query?.removingPercentEncoding?.removingPercentEncoding {
                 let sep = query.components(separatedBy: "&&")
                 var text = String(htmlEncodedString: sep[0] as String)
                 var from = sep[1] as String
                 var to = sep[2] as String
                 var original = sep[3] as String
-                print("Pre purge text: \(text)")
+                NSLog("**** Pre purge text: \(text)")
                 text = text.replacingOccurrences(of: "text=", with: "")
                 original = original.replacingOccurrences(of: "original=", with: "")
                 to = to.replacingOccurrences(of: "to=", with: "")
@@ -212,14 +214,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 textView.text = text
             }
         case .Compose:
-            print("Compose mode")
+            NSLog("**** Compose mode")
             // get rid of swap button, rate button, and shift the two remaining buttons over by shifting the goButton (which the other two are tied to) to the right by half the separation of goButton and settingsButton
             textView.text = ""
             rateButton.isHidden = true
             swapButton.isHidden = true
             desiredVerticalOffsetForTextView = 25
             buttonStackViewWidth.constant = (goButton.frame.width * 2) + (separationGap * 1)
-            print("Language code: \(composerMode.get())")
+            NSLog("**** Language code: \(composerMode.get())")
             
 
         case .Reply:
@@ -357,24 +359,24 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
-    func presentMessage() {
-        let alert = UIAlertController(title: NSLocalizedString("Thank you!", comment: "Thanking the user for purchasing"), message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "A button to say 'Ok, dismiss the alert'"), style: .default, handler: nil)
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
-    }
+//    func presentMessage() {
+//        let alert = UIAlertController(title: NSLocalizedString("Thank you!", comment: "Thanking the user for purchasing"), message: nil, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "A button to say 'Ok, dismiss the alert'"), style: .default, handler: nil)
+//        alert.addAction(okAction)
+//        self.present(alert, animated: true, completion: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
+//    }
     
     func errorHandler(notification: Notification) {
-        print("An error has occurred")
+        NSLog("**** An error has occurred")
         if let error = notification.userInfo?["error"] as? DSError {
-            let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Presented when an error has occured"), message: error.domain, preferredStyle: .alert)
+            let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Presented when an error has occured"), message: "\(error.domain), Code: \(error.code)", preferredStyle: .alert)
             let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: "A button to say 'Ok, dismiss the alert'"), style: .default, handler: { (action) in
                 if self.spinner.isAnimating {
                     self.toggleSpinner()
                 }
                 if self.goButton.isEnabled == false {
-                    print("Setting image...")
+                    NSLog("**** Setting image...")
                     if self.theme?.isRichTheme == true {
                         self.goButton.setImage(UIImage(named: "\(self.theme!.imagePrefix!)GoButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
                     } else {
@@ -418,13 +420,13 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         if contentHeight + textView.font!.lineHeight > maxHeight && textViewIsScrollEnabled == false {
             // Too big!
             self.textView.isScrollEnabled = true
-            print("Scrolling. Content: \(contentHeight), Max: \(maxHeight)")
+            NSLog("**** Scrolling. Content: \(contentHeight), Max: \(maxHeight)")
             textViewHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: maxHeight)
             textView.addConstraint(textViewHeightConstraint!)
             textViewIsScrollEnabled = true
         } else if textViewIsScrollEnabled == true && contentHeight + textView.font!.lineHeight < maxHeight {
             // Not too big!
-            print("Not Scrolling. Content: \(contentHeight), Max: \(maxHeight)")
+            NSLog("**** Not Scrolling. Content: \(contentHeight), Max: \(maxHeight)")
             if textViewHeightConstraint != nil {
                 self.textView.isScrollEnabled = false
                 textView.removeConstraint(textViewHeightConstraint!)
@@ -517,7 +519,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             toggleSpinner()
             setDefaultsForConversation(toLanguage: composerMode.get().0)
             textView.resignFirstResponder()
-            print("Looks like google bool is: \(composerMode.get().1!)")
+            NSLog("**** Looks like google bool is: \(composerMode.get().1!)")
             messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: true)
         }
     }
@@ -645,7 +647,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.startScroll), name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dismissSettings), name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.respondToNotification), name: NSNotification.Name(rawValue: "APPLY_THEME"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.presentMessage), name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.presentMessage), name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
         
         if settingsView == nil {
             textView.resignFirstResponder()

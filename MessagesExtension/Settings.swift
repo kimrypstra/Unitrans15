@@ -90,7 +90,7 @@ class Settings: UIView {
         // present the theme picker UI
         stackView.insertArrangedSubview(themeView, at: 2)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil)
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: ["message":NSLocalizedString("Thank you!", comment: "Thank you - thanking the user for their purchase")]))
+        //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: ["message":NSLocalizedString("Thank you!", comment: "Thank you - thanking the user for their purchase")]))
     }
     
     func loadDefaults(notification: Notification?) {
@@ -113,18 +113,17 @@ class Settings: UIView {
             }
         }
         
+        
         if let subscriptionStatus = defaults.value(forKey: "subscribed") as? Bool {
             if subscriptionStatus == true || developerMode == true {
-                print("SUBSCRIBED!!!")
+                NSLog("**** SUBSCRIBED!!!")
                 // subscribed; remove storefront and add theme section
                 stackView.removeArrangedSubview(storeFrontView)
-                
-                
+ 
             } else {
                 // not subscribed, but was; add storefront and remove theme section
-                print("NOT SUBSCRIBED!")
+                NSLog("**** NOT SUBSCRIBED!")
                 stackView.removeArrangedSubview(themeView)
-                
                 
                 if !pricesUpdated {
                     priceLabel.isHidden = true
@@ -134,7 +133,7 @@ class Settings: UIView {
                     storeBlur.contentView.layer.cornerRadius = 8
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateProductInfo), name: NSNotification.Name(rawValue: "didReceiveProductData"), object: nil)
                     storeFrontView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didTapStoreFront)))
-                    storeManager.updateProductList()
+                    storeManager.updateProductList() // <- First store entry point
                 }
             }
             
@@ -155,7 +154,7 @@ class Settings: UIView {
                     storeManager.updateProductList()
                 }
             } else if developerMode! {
-                print("SUBSCRIBED!!!")
+                NSLog("**** DEVELOPER MODE!!!")
                 // subscribed; remove storefront and add theme section
                 stackView.removeArrangedSubview(storeFrontView)
 
@@ -166,7 +165,7 @@ class Settings: UIView {
         if let defaultFromLanguage = defaults.value(forKey: "fromLanguage") as? String {
             // set the language label to the value
             let text = LanguageManager().nameFromCode(defaultFromLanguage, localized: true)
-            print("From language: \(text!)")
+            NSLog("**** From language: \(text!)")
             if text != nil {
                 fromLanguageLabel.text = text
             } else {
@@ -174,15 +173,15 @@ class Settings: UIView {
             }
         } else {
             // set the language label to automatic 
-            print("No language set")
+            NSLog("**** No language set")
             fromLanguageLabel.text = NSLocalizedString("Automatic", comment: "A label which tells the user that the app will choose the source language automatically")
         }
         
         if let theme = defaults.value(forKey: "theme") as? String {
-            print("Theme: \(theme)")
+            NSLog("**** Theme: \(theme)")
             themeLabel.text = theme
         } else {
-            print("No theme selected")
+            NSLog("**** No theme selected")
         }
         
         // find the other defaults!
@@ -190,7 +189,7 @@ class Settings: UIView {
     
     func updateProductInfo(notification: Notification) {
         if let product = notification.userInfo?["product"] as? SKProduct {
-            priceLabel.text = "\(product.priceLocale.currencySymbol!)\(product.price)\(NSLocalizedString("per year", comment: "a suffix added to the price to show that it is charged once every year"))"
+            priceLabel.text = "\(product.priceLocale.currencySymbol!)\(product.price)"
             priceLabel.isHidden = false
             pricesUpdated = true 
         }
@@ -247,13 +246,13 @@ class Settings: UIView {
     }
     
     @IBAction func didTapTick(_ sender: UIButton) {
-        print("Tapped tick")
+        NSLog("**** Tapped tick")
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "DISMISS_SETTINGS"), object: nil, userInfo: nil))
     }
     
     @IBAction func languageButton(_ sender: UIButton) {
-        print("Hit button")
+        NSLog("**** Hit button")
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "STOP_SCROLL")))
         NotificationCenter.default.addObserver(self, selector: #selector(self.removeList), name: NSNotification.Name(rawValue: "REMOVE_LANGUAGES"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.loadDefaults), name: NSNotification.Name(rawValue: "RELOAD"), object: nil)

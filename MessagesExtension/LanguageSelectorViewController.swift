@@ -106,7 +106,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 }
             })
         } else {
-            print("No message")
+            NSLog("**** No message")
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "No message to insert", code: 0)]))
 
         }
@@ -155,7 +155,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 shouldScrollOnTap = false
                 scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentOffset.y + scrollViewHeight.constant), animated: true)
             default:
-                print("Error")
+                NSLog("**** Error")
             }
         }
         
@@ -176,7 +176,6 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             if themeToApply?.selectorTextColour != nil {
                 stackViewFontColour = themeToApply!.selectorTextColour!
             } else {
-                print("No indicator text color...")
                 stackViewFontColour = UIColor.white.withAlphaComponent(0.8)
             }
             label.textColor = stackViewFontColour
@@ -205,7 +204,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 
                 themeToApply = ThemeManager().returnThemeOfName(name: theme)
             } else {
-                print("No theme selected; setting default")
+                NSLog("**** No theme selected; setting default")
                 themeToApply = ThemeManager().returnThemeOfName(name: "Classic")
             }
         } else {
@@ -267,13 +266,13 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                             scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
                             
                         } else {
-                            print("No preset 'to' language")
+                            NSLog("**** No preset 'to' language")
                         }
                     } else {
-                        print("No record of conversation defaults for this identifier")
+                        NSLog("**** No record of conversation defaults for this identifier")
                     }
                 } else {
-                    print("No record of this conversation's identifier; must be a new conversation")
+                    NSLog("**** No record of this conversation's identifier; must be a new conversation")
                 }
 
             } else {
@@ -293,32 +292,32 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 subscribed = false
             }
         }
-        print("Subscribed: \(subscribed!)")
+        NSLog("**** Subscribed: \(subscribed!)")
         
         if let fromLanguage = defaults.value(forKey: "fromLanguage") as? String {
-            print("From language: \(fromLanguage)")
+            NSLog("**** From language: \(fromLanguage)")
             self.fromLanguage = fromLanguage
         } else {
-            print("No 'from' language set; setting default from device")
+            NSLog("**** No 'from' language set; setting default from device")
             if var language = NSLocale.preferredLanguages.first {
-                print("Detected device language: \(language)")
+                NSLog("**** Detected device language: \(language)")
                 if language.contains("-Hans") {
-                    print("Language is Chinese Simplified")
+                    NSLog("**** Language is Chinese Simplified")
                     self.fromLanguage = "zh"
                 } else if language.contains("-Hant") {
-                    print("Language is Chinese Traditional")
+                    NSLog("**** Language is Chinese Traditional")
                     self.fromLanguage = "zh-TW"
                     
                 } else {
                     switch language {
                     case "zh-TW":
-                        print("Language is zh-TW")
+                        NSLog("**** Language is zh-TW")
                         self.fromLanguage = language
                     case "zh-CN":
-                        print("Language is zh-CN")
+                        NSLog("**** Language is zh-CN")
                         self.fromLanguage = language
                     case nil:
-                        print("There doesn't appear to be a device language set? Setting to English...")
+                        NSLog("**** There doesn't appear to be a device language set? Setting to English...")
                         self.fromLanguage = "en"
                     default:
                         // For all other language cases
@@ -329,7 +328,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                     }
                 }
                 
-                print("From language set to: \(self.fromLanguage!)")
+                NSLog("**** From language set to: \(self.fromLanguage!)")
             }
         }
 
