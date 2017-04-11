@@ -39,6 +39,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     var scrollWasInitiatedByIndicator = false
     var shouldPresentSettings = false
     var stackViewFontColour: UIColor?
+    var savedText: String?
     
     //Views
     var topIndicator: Indicators?
@@ -271,6 +272,10 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                     } else {
                         NSLog("**** No record of conversation defaults for this identifier")
                     }
+                    
+                    if let savedText = conversationDefaults["savedText"] as? String {
+                        self.savedText = savedText
+                    }
                 } else {
                     NSLog("**** No record of this conversation's identifier; must be a new conversation")
                 }
@@ -499,6 +504,13 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         // Use this method to prepare for the change in presentation style.
     }
     
+    override func willResignActive(with conversation: MSConversation) {
+        // send a notification 
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "WILL_RESIGN")))
+        // in the other VC, save text to defaults
+        // on load, if there is saved text, set textView.text to it
+    }
+    
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
         switch presentationStyle {
@@ -523,6 +535,8 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             IVC.conversationIdentifier = identifier
             IVC.developerMode = self.developerMode
             IVC.theme = self.themeToApply
+            IVC.subscribed = self.subscribed
+            IVC.savedText = self.savedText
             
             if shouldPresentSettings {
                 IVC.shouldPresentSettings = true 

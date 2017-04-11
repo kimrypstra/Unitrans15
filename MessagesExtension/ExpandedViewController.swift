@@ -10,6 +10,7 @@ import UIKit
 import Messages
 import WebKit
 import SafariServices
+import AudioToolbox
 
 class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, UIPopoverPresentationControllerDelegate, UIPopoverControllerDelegate {
 
@@ -58,7 +59,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     let separationGap: CGFloat = 20
     var developerMode: Bool?
     var theme: Theme?
+    var subscribed: Bool!
     var shouldPresentSettings = false
+    var maxLength = 320
+    var subscriptionPromptPresented = false
+    var savedText: String?
     
     //Enums & Structs
     enum Mode {
@@ -96,17 +101,22 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Uncomment "WILL_RESIGN" notification to start working on state saving. Commented out because I don't want unexpected behaviour if the call suddenly starts to work for some reason. 
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.willResign), name: .init(rawValue: "WILL_RESIGN"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.handleKeyboard), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.errorHandler), name: NSNotification.Name(rawValue: "ERROR"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.goToWeb), name: NSNotification.Name(rawValue: "GO_TO_SITE"), object: nil)
         setUpInterface()
     
         self.view.frame.origin.y += 65
-        
+        print("Screen height: \(UIScreen.main.bounds.height)")
+        if UIScreen.main.bounds.height < 667  {
+            topBarHeight = 65
+        }
+
+        print("Vertical height: \(backgroundVertical.constant)")
         //background.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
     }
-    
-
     
     func goToWeb(sender: Notification) {
         if let mail = sender.userInfo?["mail"] as? Bool {
@@ -123,6 +133,17 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
+    func willResign() {
+        // This currently doesn't work
+        if composerMode != nil && textView.text != nil && textView.text != "" {
+            print("***** WILL RESIGN")
+            switch composerMode! {
+            case .Reply, .Compose: setDefaultsForConversation(toLanguage: composerMode.get().0, text: textView.text)
+            default: break
+            }
+        }
+    }
+    
     func respondToNotification(notification: Notification) {
         // This is called when a theme is applied - we're responding to the notification that contains the theme information
         if !respondToNotificationCalled {
@@ -131,6 +152,10 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 applyTheme(theme: theme, notification: nil)
             } else {
                 NSLog("**** No theme at respondToNotification")
+            }
+            if subscribed == false && notification.userInfo!["subscribed"] as? Bool == true {
+                subscribed = true
+                maxLength = 1000
             }
         }
     }
@@ -184,7 +209,11 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     override func viewWillAppear(_ animated: Bool) {
         // apply the theme 
         applyTheme(theme: theme!, notification: nil)
-
+        
+        if subscribed! {
+            maxLength = 1000
+        }
+        
         //Here we'll check the composer mode
         switch composerMode! {
         case .View:
@@ -216,7 +245,12 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         case .Compose:
             NSLog("**** Compose mode")
             // get rid of swap button, rate button, and shift the two remaining buttons over by shifting the goButton (which the other two are tied to) to the right by half the separation of goButton and settingsButton
-            textView.text = ""
+            if savedText != nil {
+                textView.text = savedText
+            } else {
+                textView.text = ""
+            }
+            
             rateButton.isHidden = true
             swapButton.isHidden = true
             desiredVerticalOffsetForTextView = 25
@@ -227,9 +261,18 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         case .Reply:
             fatalError("Error - should not ever be in reply mode unless goButton is hit within view mode")
         }
+        
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if UIScreen.main.bounds.height < 667 && !settingsIsPresented {
+            backgroundVertical.constant = 65
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("Background vertical \(backgroundVertical.constant)")
         if shouldPresentSettings {
             didTapSettings(nil)
         } else {
@@ -395,11 +438,24 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         var shouldReturn = true
-        if textView.text.characters.count + (text.characters.count - range.length) <= 1000 {
+        if textView.text.characters.count + (text.characters.count - range.length) <= maxLength {
             return true
         } else {
             textView.shake()
             bubble.shake()
+            AudioServicesPlaySystemSound(1521)
+            // present subscription dialog 
+            if !subscriptionPromptPresented && !subscribed {
+                let alert = UIAlertController(title: "Subscribe!", message: "Subscribe to send messages up to 1000 characters", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let subAction = UIAlertAction(title: "Subscribe", style: .default, handler: { (action) in
+                    self.didTapSettings(nil)
+                })
+                alert.addAction(okAction)
+                alert.addAction(subAction)
+                self.subscriptionPromptPresented = true 
+                self.present(alert, animated: true, completion: nil)
+            }
             return false
         }
     }
@@ -468,7 +524,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 goButton.setImage(UIImage(named: "blankButton"), for: .normal)
                 goButton.isEnabled = false
                 toggleSpinner()
-                setDefaultsForConversation(toLanguage: composerMode.get().0)
+                setDefaultsForConversation(toLanguage: composerMode.get().0, text: nil)
                 textView.resignFirstResponder()
                 let fromRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "FromLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().1!, localized: false))", value: 0)
                 let toRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "ToLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().0, localized: false))", value: 0)
@@ -508,16 +564,20 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             }, completion: nil)
             
             // Change composer to .Reply, setting the 'to' language to the original language
-            
             self.composerMode = .Reply(message.originalLanguage, message.translatedLanguage)
             
             // Present keyboard etc. 
-            self.textView.isEditable = true 
-            self.textView.text = ""
+            self.textView.isEditable = true
+            if savedText != nil {
+                textView.text = savedText
+            } else {
+                self.textView.text = ""
+            }
+            
             self.textView.becomeFirstResponder()
         case .Reply:
             toggleSpinner()
-            setDefaultsForConversation(toLanguage: composerMode.get().0)
+            setDefaultsForConversation(toLanguage: composerMode.get().0, text: nil)
             textView.resignFirstResponder()
             NSLog("**** Looks like google bool is: \(composerMode.get().1!)")
             messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: message.translatedLanguage, google: true)
@@ -612,7 +672,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     
     func dismissSettings() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
-        
+        self.settingsIsPresented = false
         if backgroundVertical.constant != topBarHeight {
             backgroundVertical.constant = topBarHeight
         } else {
@@ -629,7 +689,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             self.swapButton.isEnabled = true
             self.rateButton.isEnabled = true
             self.goButton.isEnabled = true
-            self.settingsIsPresented = false
+            
             self.textView.becomeFirstResponder()
         })
     }
@@ -680,15 +740,19 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
   
-    func setDefaultsForConversation(toLanguage: String) {
+    func setDefaultsForConversation(toLanguage: String, text: String?) {
         var conversationDefaults = [String: String]()
         conversationDefaults["toLanguage"] = LanguageManager().nameFromCode(toLanguage, localized: true)
+        if text != nil {
+            conversationDefaults["savedText"] = text
+        }
         let defaults = UserDefaults()
         if conversationIdentifier != nil {
             defaults.setValue(conversationDefaults, forKey: conversationIdentifier!)
         }
 
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

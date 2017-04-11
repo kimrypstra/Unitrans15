@@ -78,7 +78,7 @@ class Settings: UIView {
         let defaults = UserDefaults()
         if let themeName = defaults.value(forKey: "theme") as? String {
             // If there is, post a notification to restore it
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RELOAD"), object: nil, userInfo: ["theme":ThemeManager().returnThemeOfName(name: themeName)])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "RELOAD"), object: nil, userInfo: ["theme":ThemeManager().returnThemeOfName(name: themeName), "subscribed":true])
             themeLabel.text = themeName
         } else {
             themeLabel.text = "Classic"

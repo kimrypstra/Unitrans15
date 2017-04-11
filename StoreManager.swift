@@ -287,5 +287,6 @@ class StoreManager: NSObject, SKPaymentTransactionObserver, SKProductsRequestDel
         
         // Send a notification to update the store UI
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "REFRESH_UI"), object: nil, userInfo: nil))
+        NotificationCenter.default.post(Notification(name: .init(rawValue: "DISMISS_SETTINGS")))
     }
 }
