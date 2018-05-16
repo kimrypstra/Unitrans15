@@ -73,7 +73,7 @@ class MessageManager: NSObject, URLSessionDelegate {
         //layout.caption = String(htmlEncodedString: text)
         layout.caption = text.decodingHTMLEntities()
         // text is already encoded as it's been received from the server
-        var baseURL = URLComponents(string: "http://www.disordersoftware.com/message")
+        var baseURL = URLComponents(string: BASE_URL_COMPOSE)
         baseURL?.query = "text=\(text)&&from=\(fromCode)&&to=\(toCode)&&original=\(originalText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)"
         message?.url = baseURL?.url
         message?.layout = layout
@@ -90,7 +90,7 @@ class MessageManager: NSObject, URLSessionDelegate {
     }
     
     func getTranslation(_ text: String, fromLanguage: String, toLanguage: String, google: Bool, completion: @escaping (String?) -> ()) {
-        let baseURL = "http://api.disordersoftware.com/unitrans/api3.php?action=translate"
+        let baseURL = BASE_URL_TRANSLATE
 
         // Set up the payload
         let textToTranslate = text.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)

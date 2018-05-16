@@ -14,6 +14,7 @@
 		2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122EB041DBBA3C100D5B2B2 /* Rater.swift */; };
 		2135D81C1E4F0AEB009648DE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2135D81B1E4F0AEB009648DE /* StoreKit.framework */; };
 		213AA4BE1DA8F80F005C1187 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */; };
+		21456A8720AC497D00F61772 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21456A8620AC497D00F61772 /* Constants.swift */; };
 		214AFE581DABBEC500CE63FF /* UILabel + Kerning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */; };
 		2155B38B1DADC621002E08D0 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155B38A1DADC621002E08D0 /* Indicators.swift */; };
 		2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2155B38C1DADC631002E08D0 /* Indicators.xib */; };
@@ -75,6 +76,7 @@
 		2122EB041DBBA3C100D5B2B2 /* Rater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rater.swift; sourceTree = "<group>"; };
 		2135D81B1E4F0AEB009648DE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		213AA4BD1DA8F80F005C1187 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		21456A8620AC497D00F61772 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Kerning.swift"; sourceTree = "<group>"; };
 		2155B38A1DADC621002E08D0 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
 		2155B38C1DADC631002E08D0 /* Indicators.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Indicators.xib; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		21EBEA911DA8E614000C744A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				21456A8620AC497D00F61772 /* Constants.swift */,
 				214AFE571DABBEC500CE63FF /* UILabel + Kerning.swift */,
 				21EBEA921DA8E62A000C744A /* UIView+Shake.swift */,
 				21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */,
@@ -423,6 +426,7 @@
 				216B751D1DDFF9A6009A6A3E /* Settings.swift in Sources */,
 				216B75201DE00AA0009A6A3E /* ThemeCell.swift in Sources */,
 				216B75251DE00BC5009A6A3E /* Theme.swift in Sources */,
+				21456A8720AC497D00F61772 /* Constants.swift in Sources */,
 				21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */,
 				2122EB051DBBA3C100D5B2B2 /* Rater.swift in Sources */,
 				2185A1BD1DC4602900DD0647 /* Language.swift in Sources */,
