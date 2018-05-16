@@ -21,6 +21,10 @@ extension String {
             NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue
         ]
         
+        let attrOpt: [String: Any] = [
+            
+        ]
+        
         do {
             let attributedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
             self = attributedString.string

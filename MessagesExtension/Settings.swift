@@ -119,6 +119,7 @@ class Settings: UIView {
                 NSLog("**** SUBSCRIBED!!!")
                 // subscribed; remove storefront and add theme section
                 stackView.removeArrangedSubview(storeFrontView)
+                storeFrontView.isHidden = true 
  
             } else {
                 // not subscribed, but was; add storefront and remove theme section

@@ -526,13 +526,6 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
                 toggleSpinner()
                 setDefaultsForConversation(toLanguage: composerMode.get().0, text: nil)
                 textView.resignFirstResponder()
-                let fromRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "FromLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().1!, localized: false))", value: 0)
-                let toRecord = GAIDictionaryBuilder.createEvent(withCategory: "Language", action: "ToLanguage", label: "\(LanguageManager().nameFromCode(composerMode.get().0, localized: false))", value: 0)
-                let countRecord = GAIDictionaryBuilder.createEvent(withCategory: "Translation", action: "Count", label: "", value: textView.text.characters.count as NSNumber!)
-                let tracker = GAI.sharedInstance().defaultTracker
-                tracker?.send(countRecord!.build() as [NSObject : AnyObject])
-                tracker?.send(fromRecord!.build() as [NSObject : AnyObject])
-                tracker?.send(toRecord!.build() as [NSObject : AnyObject])
                 messageManager.requestTranslation(textToTranslate: textView.text, toCode: composerMode.get().0, fromCode: composerMode.get().1!, google: true)
             } else {
                 textView.shake()
@@ -636,8 +629,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             
             // remove the rater view
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RATED"), object: nil)
-            if backgroundVertical.constant != topBarHeight {
-                backgroundVertical.constant = topBarHeight
+            if backgroundVertical.constant != 0{
+                backgroundVertical.constant = 0
             } else {
                 backgroundVertical.constant = topBarHeight + raterContainerHeight.constant
             }
@@ -673,8 +666,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
     func dismissSettings() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
         self.settingsIsPresented = false
-        if backgroundVertical.constant != topBarHeight {
-            backgroundVertical.constant = topBarHeight
+        if backgroundVertical.constant != 0 {
+            backgroundVertical.constant = 0
         } else {
             backgroundVertical.constant = topBarHeight + settingsContainerHeight.constant
         }
@@ -722,8 +715,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             settingsContainer.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":settingsView! as Settings]))
             
             self.view.layoutIfNeeded()
-            if backgroundVertical.constant == topBarHeight {
-                backgroundVertical.constant = topBarHeight + /*settingsContainerHeight.constant*/ 488
+            if backgroundVertical.constant == 0 {
+                backgroundVertical.constant = /* topBarHeight + *//*settingsContainerHeight.constant*/ 488
             } else {
                 backgroundVertical.constant = topBarHeight
             }

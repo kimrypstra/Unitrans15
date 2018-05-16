@@ -32,8 +32,6 @@
 		21C36EFA1E416CDB00EFE590 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36EFC1E416CDB00EFE590 /* InfoPlist.strings */; };
 		21C36EFF1E416CDB00EFE590 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F011E416CDB00EFE590 /* Localizable.strings */; };
 		21C36F041E416CDC00EFE590 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F061E416CDC00EFE590 /* InfoPlist.strings */; };
-		21C36F271E42CE6000EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
-		21C36F281E44BB3700EFE590 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */; };
 		21C36F2B1E45CB1E00EFE590 /* String + HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */; };
 		21CA31781DD7348300CA2EF5 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CA31771DD7348300CA2EF5 /* StoreManager.swift */; };
 		21D818851DD93A9F0079F4B8 /* List.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D818841DD93A9F0079F4B8 /* List.xib */; };
@@ -43,8 +41,6 @@
 		21EBEA931DA8E62A000C744A /* UIView+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA921DA8E62A000C744A /* UIView+Shake.swift */; };
 		21EBEA951DA8E664000C744A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA941DA8E664000C744A /* LanguageManager.swift */; };
 		21EBEA991DA8E701000C744A /* DSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EBEA981DA8E701000C744A /* DSError.swift */; };
-		E02D02DB1709187114B19061 /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325249521F8DA8E0180673B5 /* Pods_MessagesExtension.framework */; };
-		F902CAAF1C3624776D8BA381 /* Pods_Unitrans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D62E5ED41E3D7C854F04031 /* Pods_Unitrans.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,8 +148,6 @@
 		21C36F221E416E2900EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		21C36F231E416E2A00EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
 		21C36F241E416E2A00EFE590 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		21C36F251E42CDC600EFE590 /* Unitrans-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unitrans-Bridging-Header.h"; sourceTree = "<group>"; };
-		21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		21C36F291E44C4E700EFE590 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
 		21C36F2A1E45CB1E00EFE590 /* String + HTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + HTML.swift"; sourceTree = "<group>"; };
 		21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "../../../Library/Developer/Xcode/DerivedData/Unitrans-eqpisnafkiewfrdtjbenlyskwdxm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<group>"; };
@@ -165,12 +159,6 @@
 		21EBEA921DA8E62A000C744A /* UIView+Shake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shake.swift"; sourceTree = "<group>"; };
 		21EBEA941DA8E664000C744A /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		21EBEA981DA8E701000C744A /* DSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DSError.swift; sourceTree = "<group>"; };
-		2542D1E73BCA18FF4D533024 /* Pods-Unitrans.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.debug.xcconfig"; sourceTree = "<group>"; };
-		325249521F8DA8E0180673B5 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47E8AD33A4B9827BAA27C6BD /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
-		64240FF4445333FB794FBE50 /* Pods-Unitrans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unitrans.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans.release.xcconfig"; sourceTree = "<group>"; };
-		9D62E5ED41E3D7C854F04031 /* Pods_Unitrans.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unitrans.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF64C25E4975E189ACD5BFCF /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +168,6 @@
 			files = (
 				2135D81C1E4F0AEB009648DE /* StoreKit.framework in Frameworks */,
 				216BFAAF1DA8E4D50041FA8F /* Messages.framework in Frameworks */,
-				E02D02DB1709187114B19061 /* Pods_MessagesExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F902CAAF1C3624776D8BA381 /* Pods_Unitrans.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,13 +184,10 @@
 		216BFA981DA8E4D40041FA8F = {
 			isa = PBXGroup;
 			children = (
-				21C36F251E42CDC600EFE590 /* Unitrans-Bridging-Header.h */,
-				21C36F261E42CE6000EFE590 /* GoogleService-Info.plist */,
 				216BFAA11DA8E4D50041FA8F /* Unitrans */,
 				216BFAB01DA8E4D50041FA8F /* MessagesExtension */,
 				216BFAAD1DA8E4D50041FA8F /* Frameworks */,
 				216BFAA01DA8E4D50041FA8F /* Products */,
-				259E56F2358D04B143ACD288 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,8 +216,6 @@
 				2135D81B1E4F0AEB009648DE /* StoreKit.framework */,
 				21C7942D1E09745C00A7F307 /* GoogleToolboxForMac.framework */,
 				216BFAAE1DA8E4D50041FA8F /* Messages.framework */,
-				325249521F8DA8E0180673B5 /* Pods_MessagesExtension.framework */,
-				9D62E5ED41E3D7C854F04031 /* Pods_Unitrans.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -293,17 +274,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		259E56F2358D04B143ACD288 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CF64C25E4975E189ACD5BFCF /* Pods-MessagesExtension.debug.xcconfig */,
-				47E8AD33A4B9827BAA27C6BD /* Pods-MessagesExtension.release.xcconfig */,
-				2542D1E73BCA18FF4D533024 /* Pods-Unitrans.debug.xcconfig */,
-				64240FF4445333FB794FBE50 /* Pods-Unitrans.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,12 +281,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 216BFABF1DA8E4D50041FA8F /* Build configuration list for PBXNativeTarget "Unitrans" */;
 			buildPhases = (
-				F385758AF6697F9917C87341 /* [CP] Check Pods Manifest.lock */,
 				216BFA9D1DA8E4D50041FA8F /* Resources */,
 				216BFABE1DA8E4D50041FA8F /* Embed App Extensions */,
 				DFCF6E5B8F847A5D88597D15 /* Frameworks */,
-				C1008A82BF931C5165C42271 /* [CP] Copy Pods Resources */,
-				B72C58A186E19D5978D1642B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -332,11 +299,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 216BFABB1DA8E4D50041FA8F /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
-				490CA2FA6ABE19DDD166F043 /* [CP] Check Pods Manifest.lock */,
 				216BFAA51DA8E4D50041FA8F /* Sources */,
 				216BFAA61DA8E4D50041FA8F /* Frameworks */,
 				216BFAA71DA8E4D50041FA8F /* Resources */,
-				369E22D6653019A845F8EC9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -416,7 +381,6 @@
 			files = (
 				216BFAA31DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				21C36F041E416CDC00EFE590 /* InfoPlist.strings in Resources */,
-				21C36F271E42CE6000EFE590 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,91 +396,12 @@
 				21C36EFF1E416CDB00EFE590 /* Localizable.strings in Resources */,
 				216BFAB71DA8E4D50041FA8F /* Assets.xcassets in Resources */,
 				2155B38D1DADC631002E08D0 /* Indicators.xib in Resources */,
-				21C36F281E44BB3700EFE590 /* GoogleService-Info.plist in Resources */,
 				21C36EFA1E416CDB00EFE590 /* InfoPlist.strings in Resources */,
 				216BFAB51DA8E4D50041FA8F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		369E22D6653019A845F8EC9B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		490CA2FA6ABE19DDD166F043 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B72C58A186E19D5978D1642B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1008A82BF931C5165C42271 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unitrans/Pods-Unitrans-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F385758AF6697F9917C87341 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		216BFAA51DA8E4D50041FA8F /* Sources */ = {
@@ -698,7 +583,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Unitrans-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -742,7 +627,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Unitrans-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -750,7 +635,6 @@
 		};
 		216BFABC1DA8E4D50041FA8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF64C25E4975E189ACD5BFCF /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CURRENT_PROJECT_VERSION = 8;
@@ -768,7 +652,6 @@
 		};
 		216BFABD1DA8E4D50041FA8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47E8AD33A4B9827BAA27C6BD /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				CURRENT_PROJECT_VERSION = 8;
@@ -786,7 +669,6 @@
 		};
 		216BFAC01DA8E4D50041FA8F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2542D1E73BCA18FF4D533024 /* Pods-Unitrans.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -795,6 +677,7 @@
 				INFOPLIST_FILE = Unitrans/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -803,7 +686,6 @@
 		};
 		216BFAC11DA8E4D50041FA8F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64240FF4445333FB794FBE50 /* Pods-Unitrans.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -813,6 +695,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimrypstra.unitrans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
