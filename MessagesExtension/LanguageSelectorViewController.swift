@@ -44,8 +44,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     //Views
     var topIndicator: Indicators?
     var bottomIndicator: Indicators?
-    
-    var gai = GAI.sharedInstance()
+
     
     var developerMode = false 
     
@@ -62,19 +61,6 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         designIndicators()
         setUpStackView()
         NotificationCenter.default.addObserver(self, selector: #selector(self.insertMessage), name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
-        
-        // Configure tracker from GoogleService-Info.plist.
-        
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        // Optional: configure GAI options.
-        gai = GAI.sharedInstance()
-        gai?.trackUncaughtExceptions = true  // report uncaught exceptions
-        //gai?.logger.logLevel = GAILogLevel.error  // remove before app release
- 
-        
         super.viewDidLoad()
     }
     
@@ -91,15 +77,12 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     
     
     
-    func insertMessage(notification: Notification) {
+    @objc func insertMessage(notification: Notification) {
         if let message = notification.userInfo?["Message"] as? MSMessage {
             
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "COMPOSED_MESSAGE"), object: nil)
             self.activeConversation?.insert(message, completionHandler: { (error) in
                 if error != nil {
-                    print(error?.localizedDescription)
-                    let error = GAIDictionaryBuilder.createException(withDescription: error.debugDescription, withFatal: 0)
-                    GAI.sharedInstance().defaultTracker.send(error!.build() as [NSObject: AnyObject])
                     NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "ERROR"), object: nil, userInfo: ["error":DSError(domain: "Error inserting message", code: 0)]))
 
                 } else {
@@ -144,7 +127,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
     }
     
     
-    func didTapIndicator(sender: UITapGestureRecognizer) {
+    @objc func didTapIndicator(sender: UITapGestureRecognizer) {
         if shouldScrollOnTap {
             switch sender.accessibilityHint! {
             case "Scroll Up":
@@ -170,7 +153,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         
         for number in 0...languages.count - 1 {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: scrollViewHeight.constant))
-            label.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightHeavy)
+            label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
             
             label.adjustsFontSizeToFitWidth = true
             var textColor: UIColor?
@@ -181,9 +164,9 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             }
             label.textColor = stackViewFontColour
             label.numberOfLines = 2
-            let name = NSMutableAttributedString(string: languages[number].localizedName, attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.8)])
+            let name = NSMutableAttributedString(string: languages[number].localizedName, attributes: [NSAttributedStringKey.foregroundColor: stackViewFontColour!.withAlphaComponent(0.8)])
             if let native = languages[number].nativeName {
-                let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSForegroundColorAttributeName: stackViewFontColour!.withAlphaComponent(0.4)])
+                let nativeName = NSMutableAttributedString(string: "\n\(native)", attributes: [NSAttributedStringKey.foregroundColor: stackViewFontColour!.withAlphaComponent(0.4)])
                 name.append(nativeName)
             }
             
@@ -197,7 +180,7 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
         }
     }
     
-    func applyTheme(notification: Notification?) {
+    @objc func applyTheme(notification: Notification?) {
         
         let defaults = UserDefaults()
         if notification == nil {
@@ -263,11 +246,16 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
                 if let conversationDefaults = defaults.value(forKey: identifier!) as? [String: String] {
                     if let toLanguage = conversationDefaults["toLanguage"] {
                         // set the scrollView to the appropriate page
-                        if let index = languages.index(of: languages.filter{ $0.englishName == toLanguage }.first!) {
-                            scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
-                            
+                        if let language = languages.filter({$0.englishName == toLanguage}).first {
+                            if let index = languages.index(of: language) {
+                                scrollView.contentOffset.y = scrollViewHeight.constant * CGFloat(index)
+                            } else {
+                                print("Index not found")
+                                scrollView.contentOffset.y = 0
+                            }
                         } else {
-                            NSLog("**** No preset 'to' language")
+                            print("toLanguage name not found")
+                            scrollView.contentOffset.y = 0
                         }
                     } else {
                         NSLog("**** No record of conversation defaults for this identifier")
@@ -544,12 +532,20 @@ class LanguageSelectorViewController: MSMessagesAppViewController, UIScrollViewD
             
             if self.activeConversation?.selectedMessage == nil {
                 let pageNumber: Int = Int(scrollView.contentOffset.y / scrollViewHeight.constant)
-                if languages[pageNumber].prefersGoogle == true {
-                    IVC.composerMode = .Compose(languages[pageNumber].googleCode!, fromLanguage!)
-                } else {
-                    IVC.composerMode = .Compose(languages[pageNumber].microsoftCode!, fromLanguage!)
+                print("Page number: \(pageNumber)")
+                print("Lang Code: \(languages[pageNumber])")
+                guard let googleCode = languages[pageNumber].googleCode else {
+                    print("Error: Couldn't get google code")
+                    return
                 }
                 
+                guard fromLanguage != nil else {
+                    print("Error: From language is nil")
+                    return
+                }
+                
+                
+                IVC.composerMode = .Compose(languages[pageNumber].googleCode!, fromLanguage!)
             } else {
                 let messageURL = self.activeConversation?.selectedMessage?.url?.absoluteString
                 IVC.composerMode = .View(messageURL!)

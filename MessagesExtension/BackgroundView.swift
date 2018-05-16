@@ -10,10 +10,10 @@ import UIKit
 
 class BackgroundView: UIView {
 
-    var topColor: UIColor!
-    var bottomColor: UIColor!
-    var top: CGFloat = 0.0
-    var bottom: CGFloat = 1.0
+    @objc var topColor: UIColor!
+    @objc var bottomColor: UIColor!
+    @objc var top: CGFloat = 0.0
+    @objc var bottom: CGFloat = 1.0
     
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()

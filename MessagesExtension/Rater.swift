@@ -62,8 +62,6 @@ class Rater: UIView {
         default: break
         }
         
-        let rating = GAIDictionaryBuilder.createEvent(withCategory: "Rating", action: "Google", label: languageName, value: sender.tag as NSNumber)
-        GAI.sharedInstance().defaultTracker.send(rating!.build() as [NSObject: AnyObject])
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "RATED"), object: nil, userInfo: ["rating" : sender.tag]))
         let timeSep = 0.05
         

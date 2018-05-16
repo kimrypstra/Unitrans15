@@ -118,7 +118,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         //background.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor).isActive = true
     }
     
-    func goToWeb(sender: Notification) {
+    @objc func goToWeb(sender: Notification) {
         if let mail = sender.userInfo?["mail"] as? Bool {
             if let url = sender.userInfo?["url"] as? URL {
                 NSLog("**** Mail...")
@@ -144,7 +144,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
-    func respondToNotification(notification: Notification) {
+    @objc func respondToNotification(notification: Notification) {
         // This is called when a theme is applied - we're responding to the notification that contains the theme information
         if !respondToNotificationCalled {
             respondToNotificationCalled = true
@@ -220,7 +220,8 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
             NSLog("**** View mode")
             if let query = URL(string: composerMode.get().0)?.query?.removingPercentEncoding?.removingPercentEncoding {
                 let sep = query.components(separatedBy: "&&")
-                var text = String(htmlEncodedString: sep[0] as String)
+                //var text = String(htmlEncodedString: sep[0] as String)
+                var text = (sep[0] as String).decodingHTMLEntities()
                 var from = sep[1] as String
                 var to = sep[2] as String
                 var original = sep[3] as String
@@ -353,14 +354,14 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
 
-    func prepareForTransition() {
+    @objc func prepareForTransition() {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 0
         })
         self.dismiss(animated: false, completion: nil)
     }
     
-    func handleKeyboard(notification: Notification) {
+    @objc func handleKeyboard(notification: Notification) {
         guard let keyboardFrame = notification.userInfo?["UIKeyboardFrameEndUserInfoKey"] as? NSValue else {
             fatalError("Keyboard has no frame")
         }
@@ -410,7 +411,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "PRESENT_MESSAGE"), object: nil)
 //    }
     
-    func errorHandler(notification: Notification) {
+    @objc func errorHandler(notification: Notification) {
         NSLog("**** An error has occurred")
         if let error = notification.userInfo?["error"] as? DSError {
             let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Presented when an error has occured"), message: "\(error.domain), Code: \(error.code)", preferredStyle: .alert)
@@ -620,7 +621,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
-    func didExitRatingView(notification: Notification?) {
+    @objc func didExitRatingView(notification: Notification?) {
         if notification != nil {
             // send the rating to analytics from notification user info 
             
@@ -645,7 +646,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         }
     }
     
-    func stopScroll() {
+    @objc func stopScroll() {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "STOP_SCROLL"), object: nil)
         settingsButton.isEnabled = true
@@ -654,7 +655,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         rateButton.isEnabled = true
     }
     
-    func startScroll() {
+    @objc func startScroll() {
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "START_SCROLL"), object: nil)
         settingsButton.isEnabled = true
@@ -663,7 +664,7 @@ class ExpandedViewController: MSMessagesAppViewController, UITextViewDelegate, U
         rateButton.isEnabled = true
     }
     
-    func dismissSettings() {
+    @objc func dismissSettings() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "DISMISS_SETTINGS"), object: nil)
         self.settingsIsPresented = false
         if backgroundVertical.constant != 0 {

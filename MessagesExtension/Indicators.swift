@@ -45,7 +45,7 @@ class Indicators: UIView {
     }
 
 
-    func pulse() {
+    @objc func pulse() {
         innerChevron.alpha = 1
         UIView.animate(withDuration: 0.8, animations: {() -> Void in
             self.innerChevron.alpha = 0.5

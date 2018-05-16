@@ -16,7 +16,8 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
     var themes: [Theme]?
     var nibName: String?
     var selected: String?
-    let checkmarkColor = UIColor(colorLiteralRed: 133/255, green: 133/255, blue: 133/255, alpha: 1)
+    //let checkmarkColor = UIColor(colorLiteralRed: 133/255, green: 133/255, blue: 133/255, alpha: 1)
+    let checkmarkColor = UIColor(displayP3Red: 133/255, green: 133/255, blue: 133/255, alpha: 1)
     func setup(mode: String) {
         print(mode)
         if mode == "languages" {
@@ -58,7 +59,7 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
                 if native == "Amharic" {
                     cell.nativeLabel.font = UIFont(name: "Kefa", size: 17)
                 } else {
-                    cell.nativeLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightMedium)
+                    cell.nativeLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
                 }
                 cell.nativeLabel.text = data?[native!]
      
@@ -107,7 +108,7 @@ class List: UIView, UITableViewDelegate, UITableViewDataSource {
             if native == "Amharic" {
                 cell.nativeLabel.font = UIFont(name: "Kefa", size: 17)
             } else {
-                cell.nativeLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightMedium)
+                cell.nativeLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)
             }
             cell.nativeLabel.text = data?[native!]
             

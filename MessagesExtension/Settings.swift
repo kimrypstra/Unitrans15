@@ -73,7 +73,7 @@ class Settings: UIView {
         
     }
 
-    func refreshAfterPurchase() {
+    @objc func refreshAfterPurchase() {
         // Check user defaults to see if there is a theme saved 
         let defaults = UserDefaults()
         if let themeName = defaults.value(forKey: "theme") as? String {
@@ -93,7 +93,7 @@ class Settings: UIView {
         //NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "PRESENT_MESSAGE"), object: nil, userInfo: ["message":NSLocalizedString("Thank you!", comment: "Thank you - thanking the user for their purchase")]))
     }
     
-    func loadDefaults(notification: Notification?) {
+    @objc func loadDefaults(notification: Notification?) {
         storeFrontView.clipsToBounds = true 
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "RELOAD"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshAfterPurchase), name: NSNotification.Name(rawValue: "REFRESH_UI"), object: nil) // This is added here because it's basically the first function that runs when the class is loaded (apart from getView())
@@ -188,7 +188,7 @@ class Settings: UIView {
         // find the other defaults!
     }
     
-    func updateProductInfo(notification: Notification) {
+    @objc func updateProductInfo(notification: Notification) {
         if let product = notification.userInfo?["product"] as? SKProduct {
             priceLabel.text = "\(product.priceLocale.currencySymbol!)\(product.price)"
             priceLabel.isHidden = false
@@ -196,7 +196,7 @@ class Settings: UIView {
         }
     }
     
-    func didTapStoreFront() {
+    @objc func didTapStoreFront() {
         if pricesUpdated && SKPaymentQueue.canMakePayments() && !storeTapped {
             storeTapped = true
             addBlurAndSpinner()
@@ -220,7 +220,7 @@ class Settings: UIView {
         }
     }
     
-    func removeBlurAndSpinner() {
+    @objc func removeBlurAndSpinner() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "REMOVE_BLUR"), object: nil)
         spinner.stopAnimating()
         UIView.animate(withDuration: 0.5, animations: { 
@@ -233,7 +233,7 @@ class Settings: UIView {
         
     }
     
-    func removeList() {
+    @objc func removeList() {
         self.listCenterX.constant = 375
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 5, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.stackView.alpha = 1
