@@ -10,7 +10,7 @@ Unitrans is an iMessage app that allows two parties to communicate in their own 
 
 ### App Availability 
 
-Unitrans is available from the regular iOS App Store, as well as through the iMessage App Store. There is no container app, so nothing appears on your home screen. To run Unitrans, open Messages and scroll the iMessage App bar to find Unitrans. If it's not there, you'll need to tap 'More' and enable it from that menu. 
+Unitrans is available from the regular [iOS App Store](https://appsto.re/au/JaF6db.i?app=messages), as well as through the iMessage App Store. There is no container app, so nothing appears on your home screen. To run Unitrans, open Messages and scroll the iMessage App bar to find Unitrans. If it's not there, you'll need to tap 'More' and enable it from that menu. 
 
 ### Running from XCode
 
